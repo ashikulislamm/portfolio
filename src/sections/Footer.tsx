@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin, FaBehance, FaFacebook } from "react-icons/fa6";
 import logo from "@/app/favicon.ico";
+import Logo from "@/assets/images/Logo.gif"
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -39,7 +40,7 @@ export const Footer = () => {
                 <img
                   className="text-background font-bold text-lg w-10 h-10"
                   alt="Logo"
-                  src={logo.src}
+                  src={Logo.src}
                 />
               </div>
               <div className="text-text-secondary text-sm">

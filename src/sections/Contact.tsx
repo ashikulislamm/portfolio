@@ -153,32 +153,13 @@ export const ContactSection = () => {
                     life with modern, scalable solutions.
                   </p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                   <LoadingLink
                     href="/contact"
                     className="inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-background px-8 py-4 rounded-xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-accent/25 text-lg group-hover:animate-pulse"
                   >
                     <Mail className="w-5 h-5" />
                     Start Your Project
-                  </LoadingLink>
-                  <LoadingLink
-                    href="/projects"
-                    className="inline-flex items-center gap-3 bg-transparent hover:bg-surface/30 text-text-primary border border-accent/20 hover:border-accent/40 px-8 py-4 rounded-xl font-medium transition-all duration-300 hover:scale-105"
-                  >
-                    View My Work
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
                   </LoadingLink>
                 </div>
               </div>

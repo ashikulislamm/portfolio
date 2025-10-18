@@ -57,12 +57,16 @@ export const Header = () => {
     }
   };
 
-  const handleNavClick = (href: string) => {
+  const closeMobileMenu = () => {
     setIsMenuAnimating(true);
     setTimeout(() => {
       setIsMobileMenuOpen(false);
       setIsMenuAnimating(false);
     }, 300);
+  };
+
+  const handleNavClick = (href: string) => {
+    closeMobileMenu();
 
     if (href.includes("#")) {
       // Handle section scrolling
@@ -228,6 +232,7 @@ export const Header = () => {
                       <LoadingLink
                         key={item.name}
                         href={item.href}
+                        onClick={closeMobileMenu}
                         className={`block w-full text-left text-text-secondary hover:text-accent transition-all duration-200 font-medium py-4 px-4 rounded-lg hover:bg-surface/30 hover:scale-105 ${
                           isMenuAnimating
                             ? "opacity-0 transform translate-x-4"
@@ -261,6 +266,7 @@ export const Header = () => {
               >
                 <LoadingLink
                   href="/contact"
+                  onClick={closeMobileMenu}
                   className="block w-full bg-accent hover:bg-accent-hover text-background px-6 py-4 rounded-lg font-medium transition-all duration-200 text-center hover:scale-105"
                 >
                   Let's Connect
