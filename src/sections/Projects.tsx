@@ -65,7 +65,7 @@ export const ProjectsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-accent/20 mb-6">
-            <span className="text-accent text-sm font-medium">
+            <span className="gradient-text text-sm font-medium">
               REAL-WORLD RESULTS
             </span>
           </div>

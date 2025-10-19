@@ -86,7 +86,7 @@ export const AboutSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-accent/20 mb-6">
-            <span className="text-accent text-sm font-medium">ABOUT ME</span>
+            <span className="gradient-text text-sm font-medium">ABOUT ME</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-text-primary mb-4">
             A Glimpse Into My World

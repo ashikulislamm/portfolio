@@ -152,7 +152,9 @@ export default function AboutPage() {
           {/* Page Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center px-4 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-accent/20 mb-6">
-              <span className="text-accent text-sm font-medium">ABOUT ME</span>
+              <span className="gradient-text text-sm font-medium">
+                ABOUT ME
+              </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-6">
               Get to Know Me Better
@@ -214,10 +216,14 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <button className="w-full mt-8 bg-accent hover:bg-accent-hover text-background px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2">
+              <a
+                href="https://drive.google.com/file/d/16OohJwNNFpsTOpvgGH7CWMqry5zlhHt6/view?usp=sharing"
+                target="_blank"
+                className="w-full mt-8 bg-accent hover:bg-accent-hover text-background px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2"
+              >
                 <Download className="w-4 h-4" />
                 Download CV
-              </button>
+              </a>
             </div>
 
             {/* Stats Grid */}
@@ -243,10 +249,25 @@ export default function AboutPage() {
                   My Mission
                 </h3>
                 <p className="text-text-secondary leading-relaxed mb-4">
-                  To revolutionize the digital landscape by creating innovative, scalable, and impactful web solutions that not only meet client requirements but fundamentally transform how businesses operate and users interact with technology. I'm committed to bridging the gap between cutting-edge technology and practical business solutions.
+                  To revolutionize the digital landscape by creating innovative,
+                  scalable, and impactful web solutions that not only meet
+                  client requirements but fundamentally transform how businesses
+                  operate and users interact with technology. I'm committed to
+                  bridging the gap between cutting-edge technology and practical
+                  business solutions.
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-4">
-                  My core philosophy centers around three pillars: <span className="text-accent font-medium">Excellence in Code</span> - writing clean, maintainable, and performant code that stands the test of time; <span className="text-accent font-medium">User-Centric Design</span> - creating intuitive experiences that delight users and drive engagement; and <span className="text-accent font-medium">Continuous Innovation</span> - staying at the forefront of technology to deliver future-ready solutions.
+                  My core philosophy centers around three pillars:{" "}
+                  <span className="text-accent font-medium">
+                    Excellence in Code
+                  </span>{" "}
+                  - writing clean, maintainable, and performant code that stands
+                  the test of time;{" "}
+                  <span className="text-accent font-medium">
+                    User-Centric Design
+                  </span>{" "}
+                  - creating intuitive experiences that delight users and drive
+                  engagement.
                 </p>
                 {/*<p className="text-text-secondary leading-relaxed">
                   I believe in the power of technology to solve real-world problems and create meaningful impact. Whether it's building enterprise applications that streamline operations, developing research solutions that advance scientific knowledge, or crafting user interfaces that make complex tasks simple, every project is an opportunity to make a difference. My ultimate goal is to contribute to a more connected, efficient, and innovative digital future.
@@ -293,16 +314,46 @@ export default function AboutPage() {
                       </h3>
                       <div className="prose prose-invert max-w-none">
                         <p className="text-text-secondary leading-relaxed mb-4">
-                          Hello! I'm Ashikul Islam, a passionate full-stack developer and technology enthusiast based in Dhaka, Bangladesh. With over 2+ years of hands-on experience in web development, I specialize in crafting cutting-edge, scalable, and user-centric digital solutions that bridge the gap between innovative design and robust functionality.
+                          Hello! I'm Ashikul Islam, a passionate full-stack
+                          developer and technology enthusiast based in Dhaka,
+                          Bangladesh. With over 2+ years of hands-on experience
+                          in web development, I specialize in crafting
+                          cutting-edge, scalable, and user-centric digital
+                          solutions that bridge the gap between innovative
+                          design and robust functionality.
                         </p>
                         <p className="text-text-secondary leading-relaxed mb-4">
-                          My journey into the world of programming began during my university years at Ahsanullah University of Science & Technology, where I discovered my love for problem-solving through code. Since then, I've evolved into a versatile developer who thrives on transforming complex business requirements into elegant, maintainable solutions. I have a particular passion for modern JavaScript frameworks, cloud architecture, and emerging technologies like blockchain and AI integration.
+                          My journey into the world of programming began during
+                          my university years at Ahsanullah University of
+                          Science & Technology, where I discovered my love for
+                          problem-solving through code. Since then, I've evolved
+                          into a versatile developer who thrives on transforming
+                          complex business requirements into elegant,
+                          maintainable solutions. I have a particular passion
+                          for modern JavaScript frameworks, cloud architecture,
+                          and emerging technologies like blockchain and AI
+                          integration.
                         </p>
                         <p className="text-text-secondary leading-relaxed mb-4">
-                          Currently serving as a Technical Support and Integration Executive at Chologhuri Limited, I've had the privilege of working on diverse projects ranging from enterprise web applications to innovative research publications. My expertise spans across React.js, Next.js, Node.js, Python, and modern DevOps practices, always with a focus on performance optimization and user experience excellence.
+                          Currently serving as a Technical Support and
+                          Integration Executive at Chologhuri Limited, I've had
+                          the privilege of working on diverse projects ranging
+                          from enterprise web applications to innovative
+                          research publications. My expertise spans across
+                          React.js, Next.js, Node.js, Python, and modern DevOps
+                          practices, always with a focus on performance
+                          optimization and user experience excellence.
                         </p>
                         <p className="text-text-secondary leading-relaxed">
-                          Beyond the screen, I'm an active contributor to the tech community through open-source projects, research publications, and knowledge sharing. When I'm not architecting solutions or debugging code, you'll find me exploring the latest tech trends, experimenting with new frameworks, or mentoring fellow developers. I believe in continuous learning and staying ahead of the technological curve to deliver tomorrow's solutions today.
+                          Beyond the screen, I'm an active contributor to the
+                          tech community through open-source projects, research
+                          publications, and knowledge sharing. When I'm not
+                          architecting solutions or debugging code, you'll find
+                          me exploring the latest tech trends, experimenting
+                          with new frameworks, or mentoring fellow developers. I
+                          believe in continuous learning and staying ahead of
+                          the technological curve to deliver tomorrow's
+                          solutions today.
                         </p>
                       </div>
                     </div>

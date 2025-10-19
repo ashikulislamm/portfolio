@@ -17,7 +17,7 @@ A sleek, interactive portfolio website built with Next.js 14, showcasing full-st
 - Tailwind CSS
 - Framer Motion
 - Lucide React
-- Vercel (deployment)
+- Github Actions
 
 ## 🚀 Live Demo
 [Live Demo](https://ashikulislamm.github.io/portfolio/)

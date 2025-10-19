@@ -62,7 +62,7 @@ export const FAQSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-accent/20 mb-6">
             <HelpCircle className="w-4 h-4 text-accent mr-2" />
-            <span className="text-accent text-sm font-medium">FAQ</span>
+            <span className="gradient-text text-sm font-medium">FAQ</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-text-primary mb-4">
             Frequently Asked Questions

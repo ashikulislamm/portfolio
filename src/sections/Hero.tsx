@@ -162,7 +162,7 @@ export const HeroSection = () => {
           {/* Badge */}
           <div className="inline-flex items-center px-4 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-accent/20 mb-8">
             <div className="w-2 h-2 bg-accent rounded-full mr-3 animate-pulse"></div>
-            <span className="text-text-secondary text-sm font-medium">
+            <span className="gradient-text text-sm font-medium">
               Available for new projects
             </span>
           </div>
