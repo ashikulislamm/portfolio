@@ -112,7 +112,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <link rel="icon" href={Logo.src} sizes="any" />
+      <meta
+        name="google-site-verification"
+        content="a7cc7dZojGpV_FVOhmH1xjA88NpQF7iZQlRdHcwUZ50"
+      />
       <body className={inter.className}>
         <LoadingProvider>
           <Header />

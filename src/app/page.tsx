@@ -9,6 +9,7 @@ import { ContactSection } from "@/sections/Contact";
 export default function Home() {
   return (
     <div className="overflow-hidden">
+      
       <main>
         <HeroSection />
         <ProjectsSection />
