@@ -2,32 +2,24 @@
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!-- Root -->
   <url>
     <loc>https://ashikulislamm.github.io/portfolio/</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- About Page -->
   <url>
     <loc>https://ashikulislamm.github.io/portfolio/about</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Projects Page -->
   <url>
     <loc>https://ashikulislamm.github.io/portfolio/projects</loc>
     <lastmod>2025-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Contact Page -->
   <url>
     <loc>https://ashikulislamm.github.io/portfolio/contact</loc>
     <lastmod>2025-10-16</lastmod>
