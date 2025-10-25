@@ -46,7 +46,7 @@ export default function AboutPage() {
     location: "Dhaka, Bangladesh",
     experience: "2+ Years",
     email: "md.ashiku4040@gmail.com",
-    phone: "+880 123 456 789",
+    phone: "+880 179 462 4361",
   };
 
   const stats = [
@@ -68,7 +68,7 @@ export default function AboutPage() {
     {
       degree: "Higher Secondary Certificate (Science)",
       institution: "National Ideal College",
-      duration: "2015 - 2017",
+      duration: "2018 - 2020",
       grade: "GPA: 5.00/5.00",
       description:
         "Concentrated on Mathematics, Physics, Chemistry, and Information & Communication Technology.",
@@ -76,7 +76,7 @@ export default function AboutPage() {
     {
       degree: "Secondary School Certificate (Science)",
       institution: "National Ideal School",
-      duration: "2013 - 2015",
+      duration: "2016 - 2018",
       grade: "GPA: 5.00/5.00",
       description:
         "Strong foundation in Mathematics, Science subjects, and early exposure to computer programming.",
