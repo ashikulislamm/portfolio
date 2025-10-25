@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter , Montserrat , Saira} from "next/font/google";
 import "./globals.css";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
@@ -8,6 +8,8 @@ import { FloatingAppointmentButton } from "@/components/Appointment";
 import Logo from "@/assets/images/Logo.gif";
 
 const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
+const saira = Saira({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
   },
   description:
     "Experienced fullstack developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies. Creating user-centric digital experiences with exceptional functionality and design.",
+  applicationName: "Ashikul Islam Portfolio",
   keywords: [
     "fullstack developer",
     "web developer",
@@ -42,15 +45,14 @@ export const metadata: Metadata = {
   ],
   creator: "Ashikul Islam",
   publisher: "Ashikul Islam",
+  referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   metadataBase: new URL("https://ashikulislamm.github.io/portfolio/"),
-  alternates: {
-    canonical: "/",
-  },
+  // Set canonical on individual pages/layouts to avoid duplicate canonicals
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -73,6 +75,7 @@ export const metadata: Metadata = {
     title: "Ashikul Islam - Fullstack Developer",
     description:
       "Experienced fullstack developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
+    site: "@ashikul_islam",
     creator: "@ashikul_islam",
     images: ["/og-image.png"],
   },
@@ -88,9 +91,17 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-site-verification-code",
+    google: "a7cc7dZojGpV_FVOhmH1xjA88NpQF7iZQlRdHcwUZ50",
     // yandex: "your-yandex-verification-code",
     // bing: "your-bing-verification-code",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Ashikul Islam",
   },
 };
 
@@ -112,11 +123,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <meta
-        name="google-site-verification"
-        content="a7cc7dZojGpV_FVOhmH1xjA88NpQF7iZQlRdHcwUZ50"
-      />
-      <body className={inter.className}>
+      <body className={saira.className}>
         <LoadingProvider>
           <Header />
           {children}
