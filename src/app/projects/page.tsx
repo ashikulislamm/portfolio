@@ -17,6 +17,8 @@ import OnlineStore from "@/assets/images/OnlineStore.png";
 import TeleHeal from "@/assets/images/TELEHEAL.png";
 import AllyHub from "@/assets/images/AllyHub.png";
 import IPGurdian from "@/assets/images/IPGurdian.png";
+import Eventify from "@/assets/images/Eventify.png";
+import GlobalXchange from "@/assets/images/GlobaXchange.png";
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -197,6 +199,59 @@ export default function ProjectsPage() {
         "ASP.NET MVC architecture with secure authentication",
         "Accessibility-focused design and user experience",
         "Real-time job application tracking and notifications",
+      ],
+    },
+    {
+      id: 8,
+      title: "Eventify - Event Management System",
+      description:
+        "A modern, full-stack event management platform that allows users to discover, create, and manage events seamlessly. Built with Next.js and PostgreSQL for optimal performance and scalability.",
+      image: Eventify,
+      technologies: [
+        "NextJS",
+        "PostgreSQL",
+        "TypeScript",
+        "TailwindCSS",
+        "NodeJS",
+        "ExpressJS",
+      ],
+      category: "web-app",
+      status: "On Progress",
+      year: "2026",
+      liveUrl: "https://eventify-ashik.vercel.app/",
+      githubUrl: "https://github.com/ashikulislamm/Eventify",
+      featured: false,
+      highlights: [
+        "Comprehensive event discovery and management",
+        "Next.js architecture with secure authentication",
+        "Responsive design for all devices",
+        "Real-time event tracking and notifications",
+      ],
+    },
+    {
+      id: 9,
+      title: "GlobalXchange - Currency Exchange Rate Platform",
+      description:
+        "A modern, real-time currency converter and cryptocurrency dashboard built with Next.js 16, React 19, and TypeScript. Track live exchange rates for fiat currencies and cryptocurrencies with an intuitive, responsive interface.",
+      image: GlobalXchange,
+      technologies: [
+        "NextJS",
+        "TypeScript",
+        "TailwindCSS",
+        "Binance API",
+        "ExchangeRate-API",
+      ],
+      category: "web-app",
+      status: "On Progress",
+      year: "2026",
+      liveUrl: "https://globalxchange-currency-converter.vercel.app/",
+      githubUrl: "https://github.com/ashikulislamm/Currency-Converter",
+      featured: true,
+      highlights: [
+        "Real-time currency and cryptocurrency conversion",
+        "Next.js and TailwindCSS for modern UI/UX design",
+        "Responsive design for all devices",
+        "Real-time data fetching from Binance and ExchangeRate-API",
       ],
     },
   ];

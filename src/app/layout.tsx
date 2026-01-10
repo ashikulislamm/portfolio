@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter , Montserrat , Saira} from "next/font/google";
+import { Saira} from "next/font/google";
 import "./globals.css";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
@@ -7,8 +7,6 @@ import { LoadingProvider } from "@/contexts/LoadingContext";
 import { FloatingAppointmentButton } from "@/components/Appointment";
 import Logo from "@/assets/images/Logo.gif";
 
-const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
 const saira = Saira({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
