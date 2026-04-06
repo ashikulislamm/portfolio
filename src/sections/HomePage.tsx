@@ -144,7 +144,7 @@ const Hero = () => (
         </div>
         <div className="flex gap-4">
           <span className="select-none text-text-secondary">9</span>
-          <p className="text-text-secondary">// Output: Full Stack Engineer</p>
+          <p className="text-text-secondary">{"// Output: Full Stack Engineer"}</p>
         </div>
       </div>
     </motion.div>
