@@ -1,59 +1,127 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Header } from "@/sections/Header";
+import { Footer } from "@/sections/Footer";
 import {
-  Download,
   MapPin,
-  Calendar,
   Mail,
-  ExternalLink,
-  User,
+  Briefcase,
   GraduationCap,
-  Heart,
+  Code,
+  Coffee,
   BookOpen,
+  Music,
+  Terminal,
+  Award,
+  Zap,
+  Heart,
+  ExternalLink,
+  Download,
 } from "lucide-react";
-import Avatar from "@/assets/images/memoji-computer.png";
 import Me from "@/assets/images/Me.jpg";
 
 export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
-
-  // Handle smooth tab transitions
-  useEffect(() => {
-    if (isAnimating) {
-      const timer = setTimeout(() => {
-        setIsAnimating(false);
-      }, 150);
-      return () => clearTimeout(timer);
-    }
-  }, [isAnimating]);
-
-  const handleTabChange = (tabId: string) => {
-    if (tabId === activeTab) return;
-
-    setIsAnimating(true);
-    setTimeout(() => {
-      setActiveTab(tabId);
-      setAnimationKey((prev) => prev + 1);
-    }, 75);
-  };
-
   const personalInfo = {
     name: "Ashikul Islam",
     title: "Full Stack Developer",
     location: "Dhaka, Bangladesh",
     experience: "2+ Years",
-    email: "md.ashiku4040@gmail.com",
+    email: "md.ashikul4040@gmail.com",
     phone: "+880 179 462 4361",
   };
 
   const stats = [
-    { number: "20+", label: "Projects Completed" },
-    { number: "2+", label: "Years Experience" },
-    { number: "5+", label: "Happy Clients" },
-    { number: "100%", label: "Client Satisfaction" },
+    { label: "Years of Experience", value: "2+" },
+    { label: "Projects Completed", value: "20+" },
+    { label: "Technologies Mastered", value: "15+" },
+    { label: "Open Source Contributions", value: "50+" },
+  ];
+
+  const skills = [
+    {
+      category: "Frontend",
+      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux"],
+      level: 90,
+    },
+    {
+      category: "Backend",
+      items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "REST APIs"],
+      level: 85,
+    },
+    {
+      category: "Blockchain",
+      items: ["Solidity", "Hyperledger", "Web3.js", "Smart Contracts"],
+      level: 80,
+    },
+    {
+      category: "Tools",
+      items: ["Git", "Docker", "AWS", "CI/CD", "Figma"],
+      level: 85,
+    },
+  ];
+
+  const interests = [
+    {
+      icon: <Code size={24} />,
+      title: "Open Source",
+      description: "Contributing to community projects",
+    },
+    {
+      icon: <Coffee size={24} />,
+      title: "Coffee",
+      description: "Fuel for coding marathons",
+    },
+    {
+      icon: <BookOpen size={24} />,
+      title: "Tech Blogs",
+      description: "Writing about development",
+    },
+    {
+      icon: <Music size={24} />,
+      title: "Music",
+      description: "Lo-fi beats while coding",
+    },
+  ];
+
+  const values = [
+    {
+      icon: <Terminal size={24} />,
+      title: "Clean Code",
+      description: "Writing maintainable, scalable, and elegant solutions",
+    },
+    {
+      icon: <Zap size={24} />,
+      title: "Continuous Learning",
+      description: "Staying updated with latest tech trends and best practices",
+    },
+    {
+      icon: <Award size={24} />,
+      title: "Quality First",
+      description: "Delivering exceptional results that exceed expectations",
+    },
+    {
+      icon: <Heart size={24} />,
+      title: "Collaboration",
+      description: "Building strong relationships and working as a team",
+    },
+  ];
+
+  const milestones = [
+    {
+      year: "2025 - Present",
+      title: "Technical Support and Integration Executive",
+      company: "Chologhuri Limited",
+      description:
+        "Leading development of enterprise web applications using React, Node.js, and cloud technologies.",
+    },
+    {
+      year: "2024 - 2025",
+      title: "Technical Support Intern",
+      company: "Chologhuri Limited",
+      description:
+        "Worked on developing and maintaining their websites and web applications using modern JavaScript frameworks.",
+    },
   ];
 
   const academics = [
@@ -61,7 +129,7 @@ export default function AboutPage() {
       degree: "Bachelor of Science in Computer Science & Engineering",
       institution: "Ahsanullah University of Science & Technology",
       duration: "2021 - 2025",
-      grade: "CGPA: 3.75/4.00",
+      grade: "",
       description:
         "Specialized in Software Engineering, Web Technologies, and Database Management Systems.",
     },
@@ -69,7 +137,7 @@ export default function AboutPage() {
       degree: "Higher Secondary Certificate (Science)",
       institution: "National Ideal College",
       duration: "2018 - 2020",
-      grade: "GPA: 5.00/5.00",
+      grade: "",
       description:
         "Concentrated on Mathematics, Physics, Chemistry, and Information & Communication Technology.",
     },
@@ -77,7 +145,7 @@ export default function AboutPage() {
       degree: "Secondary School Certificate (Science)",
       institution: "National Ideal School",
       duration: "2016 - 2018",
-      grade: "GPA: 5.00/5.00",
+      grade: "",
       description:
         "Strong foundation in Mathematics, Science subjects, and early exposure to computer programming.",
     },
@@ -94,474 +162,512 @@ export default function AboutPage() {
       type: "Conference Paper",
       status: "Published",
       link: "https://ieeexplore.ieee.org/abstract/document/11160067",
-      description:
-        "In this paper, we addressed the ongoing difficulties of managing intellectual property (IP) in the digital era, such as unauthorized usage, forgery, and insufficient global protections.",
     },
-  ];
-
-  const timeline = [
-    {
-      year: "2025 - Present",
-      title: "Technical Support and Integration Executive",
-      company: "Chologhuri Limited.",
-      description:
-        "Leading development of enterprise web applications using React, Node.js, and cloud technologies.",
-    },
-    {
-      year: "2024 - 2025",
-      title: "Technical Support Intern",
-      company: "Chologhuri Limited.",
-      description:
-        "Worked on developing and maintaining their websites and web applications using modern JavaScript frameworks.",
-    },
-  ];
-
-  const hobbies = [
-    { name: "Photography", icon: "📸" },
-    { name: "Gaming", icon: "🎮" },
-    { name: "Reading", icon: "📚" },
-    { name: "Traveling", icon: "✈️" },
-    { name: "Music", icon: "🎵" },
-    { name: "Cooking", icon: "👨‍🍳" },
-  ];
-
-  const tabs = [
-    { id: "overview", label: "Overview", icon: <User className="w-4 h-4" /> },
-    {
-      id: "academics",
-      label: "Academics",
-      icon: <GraduationCap className="w-4 h-4" />,
-    },
-    {
-      id: "research",
-      label: "Research & Publications",
-      icon: <BookOpen className="w-4 h-4" />,
-    },
-    {
-      id: "experience",
-      label: "Experience",
-      icon: <Calendar className="w-4 h-4" />,
-    },
-    { id: "personal", label: "Personal", icon: <Heart className="w-4 h-4" /> },
   ];
 
   return (
-    <div className="min-h-screen bg-background text-text-primary">
-      <main className="py-16 md:py-24 mt-16 md:mt-20">
-        <div className="container mx-auto px-4">
-          {/* Page Header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-surface/50 backdrop-blur-sm rounded-full border border-accent/20 mb-6">
-              <span className="gradient-text text-sm font-medium">
-                ABOUT ME
-              </span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-6">
-              Get to Know Me Better
-            </h1>
-            <p className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              I'm a passionate full-stack developer who loves creating digital
-              experiences that make a difference.
-            </p>
-          </div>
-
-          {/* Hero Section */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto mb-16">
-            {/* Profile Card */}
-            <div className="bg-surface/30 backdrop-blur-sm rounded-2xl p-8 border border-accent/10">
-              <div className="text-center mb-8">
-                <div className="w-40 h-40 mx-auto mb-6 bg-surface rounded-full flex items-center justify-center border border-accent/20">
-                  <img
-                    src={Me.src}
-                    alt="Profile Picture"
-                    className="w-28 h-28 rounded-full"
-                  />
-                </div>
-                <h2 className="text-2xl font-bold text-text-primary mb-2">
-                  {personalInfo.name}
-                </h2>
-                <p className="text-accent text-lg font-medium mb-4">
-                  {personalInfo.title}
-                </p>
-                <div className="flex items-center justify-center gap-2 text-text-secondary mb-6">
-                  <MapPin className="w-4 h-4" />
-                  <span>{personalInfo.location}</span>
-                </div>
+    <div
+      className="min-h-screen bg-background"
+      style={{ backgroundColor: "#0A0A0A" }}
+    >
+      <Header />
+      {/* Hero Section */}
+      <section className="pt-32 pb-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left - Profile */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Profile Image */}
+              <div className="w-64 h-64 rounded-full bg-[#1A1A1A] border-2 border-[#2A2A2A] mb-8 flex items-center justify-center mx-auto lg:mx-0 overflow-hidden">
+                <img
+                  src={Me.src}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-3 bg-background/50 rounded-lg">
-                  <span className="text-text-secondary">Experience</span>
-                  <span className="text-text-primary font-medium">
-                    {personalInfo.experience}
+              <h1
+                className="text-6xl font-bold text-white mb-4"
+                style={{ fontFamily: "Space Grotesk, sans-serif" }}
+              >
+                About Me
+              </h1>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3 text-[#A1A1A1]">
+                  <MapPin size={18} />
+                  <span style={{ fontFamily: "Inter, sans-serif" }}>
+                    {personalInfo.location}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-background/50 rounded-lg">
-                  <span className="text-text-secondary">Email</span>
+                <div className="flex items-center gap-3 text-[#A1A1A1]">
+                  <Mail size={18} />
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="text-accent hover:underline"
+                    className="hover:text-white transition-colors"
                   >
                     {personalInfo.email}
                   </a>
                 </div>
-                <div className="flex justify-between items-center p-3 bg-background/50 rounded-lg">
-                  <span className="text-text-secondary">Phone</span>
-                  <a
-                    href={`tel:${personalInfo.phone}`}
-                    className="text-accent hover:underline"
-                  >
-                    {personalInfo.phone}
-                  </a>
+                <div className="flex items-center gap-3 text-[#A1A1A1]">
+                  <Briefcase size={18} />
+                  <span style={{ fontFamily: "Inter, sans-serif" }}>
+                    {personalInfo.title}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-[#A1A1A1]">
+                  <GraduationCap size={18} />
+                  <span style={{ fontFamily: "Inter, sans-serif" }}>
+                    Computer Science & Engineering
+                  </span>
                 </div>
               </div>
 
               <a
                 href="https://drive.google.com/file/d/16OohJwNNFpsTOpvgGH7CWMqry5zlhHt6/view?usp=sharing"
                 target="_blank"
-                className="w-full mt-8 bg-accent hover:bg-accent-hover text-background px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-200 transition-colors"
               >
-                <Download className="w-4 h-4" />
+                <Download size={18} />
                 Download CV
               </a>
-            </div>
+            </motion.div>
 
-            {/* Stats Grid */}
-            <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <div
-                    key={index}
-                    className="bg-surface/30 backdrop-blur-sm rounded-xl p-6 border border-accent/10 text-center"
-                  >
-                    <div className="text-3xl font-bold text-accent mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-text-secondary text-sm">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-surface/30 backdrop-blur-sm rounded-2xl p-8 border border-accent/10">
-                <h3 className="text-xl font-bold text-text-primary mb-4">
-                  My Mission
-                </h3>
-                <p className="text-text-secondary leading-relaxed mb-4">
-                  To revolutionize the digital landscape by creating innovative,
-                  scalable, and impactful web solutions that not only meet
-                  client requirements but fundamentally transform how businesses
-                  operate and users interact with technology. I'm committed to
-                  bridging the gap between cutting-edge technology and practical
-                  business solutions.
-                </p>
-                <p className="text-text-secondary leading-relaxed mb-4">
-                  My core philosophy centers around three pillars:{" "}
-                  <span className="text-accent font-medium">
-                    Excellence in Code
-                  </span>{" "}
-                  - writing clean, maintainable, and performant code that stands
-                  the test of time;{" "}
-                  <span className="text-accent font-medium">
-                    User-Centric Design
-                  </span>{" "}
-                  - creating intuitive experiences that delight users and drive
-                  engagement.
-                </p>
-                {/*<p className="text-text-secondary leading-relaxed">
-                  I believe in the power of technology to solve real-world problems and create meaningful impact. Whether it's building enterprise applications that streamline operations, developing research solutions that advance scientific knowledge, or crafting user interfaces that make complex tasks simple, every project is an opportunity to make a difference. My ultimate goal is to contribute to a more connected, efficient, and innovative digital future.
-                </p>*/}
-              </div>
-            </div>
-          </div>
-
-          {/* Tabbed Content */}
-          <div className="max-w-6xl mx-auto">
-            {/* Tab Navigation */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => handleTabChange(tab.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 ${
-                    activeTab === tab.id
-                      ? "bg-accent text-background shadow-lg shadow-accent/25"
-                      : "bg-surface/30 text-text-secondary hover:text-accent hover:bg-surface/50"
-                  }`}
+            {/* Right - Bio */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6"
+            >
+              <div className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-8">
+                <h2
+                  className="text-3xl font-bold text-white mb-6"
+                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
                 >
-                  {tab.icon}
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Tab Content */}
-            <div className="bg-surface/30 backdrop-blur-sm rounded-2xl p-8 border border-accent/10">
-              <div
-                key={animationKey}
-                className={`transition-all duration-300 ease-out ${
-                  isAnimating
-                    ? "opacity-0 transform translate-y-4"
-                    : "opacity-100 transform translate-y-0"
-                }`}
-              >
-                {activeTab === "overview" && (
-                  <div className="space-y-8">
-                    <div>
-                      <h3 className="text-2xl font-bold text-text-primary mb-4">
-                        About Me
-                      </h3>
-                      <div className="prose prose-invert max-w-none">
-                        <p className="text-text-secondary leading-relaxed mb-4">
-                          Hello! I'm Ashikul Islam, a passionate full-stack
-                          developer and technology enthusiast based in Dhaka,
-                          Bangladesh. With over 2+ years of hands-on experience
-                          in web development, I specialize in crafting
-                          cutting-edge, scalable, and user-centric digital
-                          solutions that bridge the gap between innovative
-                          design and robust functionality.
-                        </p>
-                        <p className="text-text-secondary leading-relaxed mb-4">
-                          My journey into the world of programming began during
-                          my university years at Ahsanullah University of
-                          Science & Technology, where I discovered my love for
-                          problem-solving through code. Since then, I've evolved
-                          into a versatile developer who thrives on transforming
-                          complex business requirements into elegant,
-                          maintainable solutions. I have a particular passion
-                          for modern JavaScript frameworks, cloud architecture,
-                          and emerging technologies like blockchain and AI
-                          integration.
-                        </p>
-                        <p className="text-text-secondary leading-relaxed mb-4">
-                          Currently serving as a Technical Support and
-                          Integration Executive at Chologhuri Limited, I've had
-                          the privilege of working on diverse projects ranging
-                          from enterprise web applications to innovative
-                          research publications. My expertise spans across
-                          React.js, Next.js, Node.js, Python, and modern DevOps
-                          practices, always with a focus on performance
-                          optimization and user experience excellence.
-                        </p>
-                        <p className="text-text-secondary leading-relaxed">
-                          Beyond the screen, I'm an active contributor to the
-                          tech community through open-source projects, research
-                          publications, and knowledge sharing. When I'm not
-                          architecting solutions or debugging code, you'll find
-                          me exploring the latest tech trends, experimenting
-                          with new frameworks, or mentoring fellow developers. I
-                          believe in continuous learning and staying ahead of
-                          the technological curve to deliver tomorrow's
-                          solutions today.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "academics" && (
-                  <div className="space-y-8">
-                    <h3 className="text-2xl font-bold text-text-primary mb-6">
-                      Educational Background
-                    </h3>
-                    <div className="space-y-6">
-                      {academics.map((academic, index) => (
-                        <div
-                          key={index}
-                          className="bg-background/50 p-6 rounded-lg border border-accent/10"
-                        >
-                          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                            <div className="flex-1">
-                              <h4 className="text-text-primary font-bold text-lg mb-2">
-                                {academic.degree}
-                              </h4>
-                              <div className="text-accent font-medium mb-2">
-                                {academic.institution}
-                              </div>
-                              <div className="text-text-secondary text-sm mb-3">
-                                {academic.duration}
-                              </div>
-                            </div>
-                            {/*<div className="bg-accent/10 px-4 py-2 rounded-lg">
-                            <span className="text-accent font-medium text-sm">
-                              {academic.grade}
-                            </span>
-                          </div>*/}
-                          </div>
-                          <p className="text-text-secondary leading-relaxed">
-                            {academic.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "research" && (
-                  <div className="space-y-8">
-                    <h3 className="text-2xl font-bold text-text-primary mb-6">
-                      Research & Publications
-                    </h3>
-                    <div className="space-y-6">
-                      {publications.map((publication, index) => (
-                        <div
-                          key={index}
-                          className="bg-background/50 p-6 rounded-lg border border-accent/10"
-                        >
-                          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                            <div className="flex-1">
-                              <h4 className="text-text-primary font-bold text-lg mb-2">
-                                {publication.title}
-                              </h4>
-                              <div className="text-text-secondary text-sm mb-2">
-                                <span className="font-medium">Authors:</span>{" "}
-                                {publication.authors}
-                              </div>
-                              <div className="text-text-secondary text-sm mb-2">
-                                <span className="font-medium">Publisher:</span>{" "}
-                                {publication.publisher}
-                              </div>
-                              <div className="flex items-center gap-4 mb-3">
-                                <span className="text-text-secondary text-sm">
-                                  <span className="font-medium">Year:</span>{" "}
-                                  {publication.year}
-                                </span>
-                                <span className="bg-surface px-3 py-1 rounded-full text-xs text-text-secondary">
-                                  {publication.type}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <div
-                                className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                                  publication.status === "Published"
-                                    ? "bg-green-500/10 text-green-400 border border-green-500/20"
-                                    : "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20"
-                                }`}
-                              >
-                                {publication.status}
-                              </div>
-                              <a
-                                href={publication.link}
-                                className="text-accent hover:text-accent-hover transition-colors duration-200"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <ExternalLink className="w-4 h-4" />
-                              </a>
-                            </div>
-                          </div>
-                          <p className="text-text-secondary leading-relaxed">
-                            {publication.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="bg-accent/5 rounded-2xl p-6 border border-accent/10">
-                      <h4 className="text-lg font-semibold text-text-primary mb-3">
-                        Research Interests
-                      </h4>
-                      <ul className="space-y-2 text-text-secondary">
-                        <li>• Blockchain Technology</li>
-                        <li>• Web Performance Optimization and Scalability</li>
-                        <li>
-                          • Machine Learning Integration in Web Applications
-                        </li>
-                        <li>• Machine Learning</li>
-                        <li>• Deep Learning</li>
-                        <li>
-                          • Cloud Computing and Microservices Architecture
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "experience" && (
-                  <div className="space-y-8">
-                    <h3 className="text-2xl font-bold text-text-primary mb-6">
-                      Professional Journey
-                    </h3>
-                    <div className="space-y-6">
-                      {timeline.map((item, index) => (
-                        <div
-                          key={index}
-                          className="relative pl-8 pb-8 border-l-2 border-accent/20 last:border-l-0"
-                        >
-                          <div className="absolute left-[-9px] top-0 w-4 h-4 bg-accent rounded-full border-4 border-background"></div>
-                          <div className="bg-background/50 p-6 rounded-lg ml-4">
-                            <div className="text-accent text-sm font-medium mb-2">
-                              {item.year}
-                            </div>
-                            <h4 className="text-text-primary font-bold text-lg mb-1">
-                              {item.title}
-                            </h4>
-                            <div className="text-text-secondary font-medium mb-3">
-                              {item.company}
-                            </div>
-                            <p className="text-text-secondary leading-relaxed">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "personal" && (
-                  <div className="space-y-8">
-                    <div>
-                      <h3 className="text-2xl font-bold text-text-primary mb-6">
-                        When I'm Not Coding
-                      </h3>
-                      <p className="text-text-secondary leading-relaxed mb-6">
-                        I believe in maintaining a healthy work-life balance.
-                        Here are some of the things I enjoy doing in my free
-                        time:
-                      </p>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {hobbies.map((hobby, index) => (
-                          <div
-                            key={index}
-                            className="bg-background/50 p-4 rounded-lg text-center"
-                          >
-                            <div className="text-3xl mb-2">{hobby.icon}</div>
-                            <div className="text-text-primary font-medium">
-                              {hobby.name}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="bg-accent/5 rounded-2xl p-6 border border-accent/10">
-                      <h4 className="text-lg font-semibold text-text-primary mb-3">
-                        Fun Facts About Me
-                      </h4>
-                      <ul className="space-y-2 text-text-secondary">
-                        <li>
-                          • I've built over 20 websites and web applications
-                        </li>
-                        <li>
-                          • I can't solve a Rubik's cube in under 2 minutes
-                        </li>
-                        <li>
-                          • I'm a coffee enthusiast and I grind my own beans
-                        </li>
-                        <li>• I love contributing to open-source projects</li>
-                        <li>• I'm always learning something new in tech</li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
+                  Hello, I'm Ashikul Islam
+                </h2>
+                <div
+                  className="space-y-4 text-[#A1A1A1]"
+                  style={{ fontFamily: "Inter, sans-serif", lineHeight: "1.8" }}
+                >
+                  <p>
+                    A passionate full-stack developer specializing in building
+                    exceptional digital experiences. With over 2+ years of
+                    hands-on experience in web development, I've worked on
+                    everything from sleek web applications to complex blockchain
+                    systems.
+                  </p>
+                  <p>
+                    I believe in writing clean, maintainable code and creating
+                    solutions that not only work well but also provide an
+                    excellent user experience. My approach combines technical
+                    expertise with a deep understanding of user needs and modern
+                    best practices.
+                  </p>
+                  <p>
+                    When I'm not coding, you'll find me contributing to open
+                    source projects, writing technical blog posts, or exploring
+                    the latest developments in web3, AI, and blockchain
+                    technologies.
+                  </p>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </main>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 border-y border-[#2A2A2A]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div
+                  className="text-5xl font-bold text-white mb-2"
+                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                >
+                  {stat.value}
+                </div>
+                <div
+                  className="text-sm text-[#A1A1A1]"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Career Journey */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-bold text-white mb-16 text-center"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            Career Journey
+          </motion.h2>
+
+          <div className="max-w-4xl mx-auto">
+            {milestones.map((milestone, index) => (
+              <motion.div
+                key={milestone.year}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative pl-8 pb-12 border-l-2 border-[#2A2A2A] last:pb-0"
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white"></div>
+
+                <div className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all">
+                  <div
+                    className="text-sm text-[#A1A1A1] mb-2"
+                    style={{ fontFamily: "JetBrains Mono, monospace" }}
+                  >
+                    {milestone.year}
+                  </div>
+                  <h3
+                    className="text-2xl font-bold text-white mb-1"
+                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                  >
+                    {milestone.title}
+                  </h3>
+                  <div
+                    className="text-[#A1A1A1] mb-3"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    {milestone.company}
+                  </div>
+                  <p
+                    className="text-[#A1A1A1]"
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                  >
+                    {milestone.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section className="py-20 bg-[#050505]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-bold text-white mb-16 text-center"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            Education
+          </motion.h2>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            {academics.map((academic, index) => (
+              <motion.div
+                key={academic.degree}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all"
+              >
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                  <div className="flex-1">
+                    <h3
+                      className="text-xl font-bold text-white mb-2"
+                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                    >
+                      {academic.degree}
+                    </h3>
+                    <div
+                      className="text-white mb-1"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {academic.institution}
+                    </div>
+                    <div
+                      className="text-sm text-[#A1A1A1]"
+                      style={{ fontFamily: "JetBrains Mono, monospace" }}
+                    >
+                      {academic.duration} • {academic.grade}
+                    </div>
+                  </div>
+                </div>
+                <p
+                  className="text-[#A1A1A1]"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {academic.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-bold text-white mb-16 text-center"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            Technical Expertise
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {skills.map((skill, index) => (
+              <motion.div
+                key={skill.category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6"
+              >
+                <h3
+                  className="text-xl font-bold text-white mb-4"
+                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                >
+                  {skill.category}
+                </h3>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {skill.items.map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1 bg-[#1A1A1A] text-[#A1A1A1] text-sm rounded border border-[#2A2A2A]"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Progress bar */}
+                <div className="relative h-2 bg-[#1A1A1A] rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: index * 0.1 }}
+                    className="absolute top-0 left-0 h-full bg-white"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Research & Publications */}
+      <section className="py-20 bg-[#050505]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-bold text-white mb-16 text-center"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            Research & Publications
+          </motion.h2>
+
+          <div className="max-w-4xl mx-auto space-y-6">
+            {publications.map((publication, index) => (
+              <motion.div
+                key={publication.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all"
+              >
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                  <div className="flex-1">
+                    <h3
+                      className="text-xl font-bold text-white mb-2"
+                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                    >
+                      {publication.title}
+                    </h3>
+                    <div
+                      className="text-sm text-[#A1A1A1] mb-3 space-y-1"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      <div>
+                        <span className="font-medium text-white">Authors:</span>{" "}
+                        {publication.authors}
+                      </div>
+                      <div>
+                        <span className="font-medium text-white">
+                          Publisher:
+                        </span>{" "}
+                        {publication.publisher}
+                      </div>
+                      <div>
+                        <span className="font-medium text-white">Year:</span>{" "}
+                        {publication.year}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="bg-green-500/10 text-green-400 px-3 py-1 rounded text-sm border border-green-500/20">
+                      {publication.status}
+                    </span>
+                    <a
+                      href={publication.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-gray-300 transition-colors mt-1"
+                    >
+                      <ExternalLink size={20} />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-bold text-white mb-16 text-center"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            What I Value
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all text-center"
+              >
+                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mx-auto mb-4">
+                  <div className="text-black">{value.icon}</div>
+                </div>
+                <h3
+                  className="text-xl font-bold text-white mb-3"
+                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                >
+                  {value.title}
+                </h3>
+                <p
+                  className="text-[#A1A1A1] text-sm"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interests Section */}
+      <section className="py-20 bg-[#050505]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl font-bold text-white mb-16 text-center"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            Beyond Code
+          </motion.h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {interests.map((interest, index) => (
+              <motion.div
+                key={interest.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all"
+              >
+                <div className="text-white mb-3">{interest.icon}</div>
+                <h3
+                  className="text-lg font-bold text-white mb-2"
+                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                >
+                  {interest.title}
+                </h3>
+                <p
+                  className="text-[#A1A1A1] text-sm"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  {interest.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Philosophy Quote */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-[#111111] border-2 border-white rounded-lg p-12 text-center"
+          >
+            <div
+              className="text-3xl font-bold text-white mb-4 leading-relaxed"
+              style={{ fontFamily: "Space Grotesk, sans-serif" }}
+            >
+              "Code is like humor. When you have to explain it, it's bad."
+            </div>
+            <div
+              className="text-[#A1A1A1]"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              — Cory House
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }

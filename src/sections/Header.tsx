@@ -1,30 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { X, Menu, User } from "lucide-react";
-import logo from "@/app/favicon.ico";
-import Logo from "@/assets/images/Logo.gif"
-import { LoadingLink } from "@/components/LoadingLink";
-import { useLoading } from "@/contexts/LoadingContext";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Github, Menu, X } from "lucide-react";
+
+type NavItem = {
+  label: string;
+  sectionId: string;
+  href: string;
+};
 
 export const Header = () => {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMenuAnimating, setIsMenuAnimating] = useState(false);
-  const { startLoading } = useLoading();
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 12);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
+    if (isMobileOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -33,244 +37,248 @@ export const Header = () => {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isMobileMenuOpen]);
+  }, [isMobileOpen]);
 
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const toggleMobileMenu = () => {
-    if (isMobileMenuOpen) {
-      setIsMenuAnimating(true);
-      setTimeout(() => {
-        setIsMobileMenuOpen(false);
-        setIsMenuAnimating(false);
-      }, 300);
-    } else {
-      setIsMobileMenuOpen(true);
-      setIsMenuAnimating(true);
-      setTimeout(() => setIsMenuAnimating(false), 50);
+  useEffect(() => {
+    if (!isHome) {
+      setActiveSection("home");
+      return;
     }
-  };
 
-  const closeMobileMenu = () => {
-    setIsMenuAnimating(true);
-    setTimeout(() => {
-      setIsMobileMenuOpen(false);
-      setIsMenuAnimating(false);
-    }, 300);
-  };
+    const sectionIds = [
+      "home",
+      "tech-stack",
+      "projects",
+      "experience",
+      "research",
+      "about",
+      "contact",
+    ];
 
-  const handleNavClick = (href: string) => {
-    closeMobileMenu();
+    const updateActiveSection = () => {
+      const anchor = window.innerHeight * 0.38;
+      let fallbackSection = "home";
 
-    if (href.includes("#")) {
-      // Handle section scrolling
-      const [path, hash] = href.split("#");
+      for (const sectionId of sectionIds) {
+        const element = document.getElementById(sectionId);
+        if (!element) {
+          continue;
+        }
 
-      if (path === "/" || path === "") {
-        // We're navigating to home page sections
-        if (window.location.pathname !== "/") {
-          // Not on home page, navigate to home first then scroll
-          // Let LoadingLink handle the loading state
-          window.location.href = href;
-        } else {
-          // On home page, just scroll
-          const element = document.querySelector(`#${hash}`);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top <= anchor) {
+          fallbackSection = sectionId;
+        }
+
+        if (rect.top <= anchor && rect.bottom > anchor) {
+          setActiveSection(sectionId);
+          return;
         }
       }
+
+      setActiveSection(fallbackSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [isHome, pathname]);
+
+  const navItems: NavItem[] = [
+    {
+      label: "Home",
+      sectionId: "home",
+      href: "/",
+    },
+    {
+      label: "Tech Stack",
+      sectionId: "tech-stack",
+      href: "/#tech-stack",
+    },
+    {
+      label: "Projects",
+      sectionId: "projects",
+      href: "/#projects",
+    },
+    {
+      label: "Experience",
+      sectionId: "experience",
+      href: "/#experience",
+    },
+    {
+      label: "Research",
+      sectionId: "research",
+      href: "/#research",
+    },
+    {
+      label: "About",
+      sectionId: "about",
+      href: "/#about",
+    },
+    {
+      label: "Contact",
+      sectionId: "contact",
+      href: "/#contact",
+    },
+  ] as const;
+
+  const handleSectionClick = (sectionId: string) => {
+    if (isHome) {
+      setActiveSection(sectionId);
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-    // For regular page navigation, let LoadingLink handle it
+    setIsMobileOpen(false);
+  };
+
+  const isItemActive = (item: NavItem) => {
+    if (isHome) {
+      return activeSection === item.sectionId;
+    }
+
+    return false;
   };
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled || isMobileMenuOpen
-            ? "bg-background/95 backdrop-blur-md border-b border-surface"
-            : "bg-transparent border-b border-transparent"
-        }`}
-      >
-        <div className="container mx-auto px-4 ">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <LoadingLink
+      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+        <div
+          className={`mx-auto max-w-7xl rounded-full bg-background/80 px-4 py-3 backdrop-blur-xl transition-all duration-300 ${
+            isScrolled || isMobileOpen ? "shadow-[0_18px_60px_rgba(0,0,0,0.45)]" : "shadow-[0_8px_30px_rgba(0,0,0,0.22)]"
+          }`}
+        >
+          <div className="hidden items-center gap-6 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center">
+            <Link
               href="/"
-              className="flex items-center hover:opacity-80 transition-opacity duration-200"
+              className="justify-self-start text-lg font-bold tracking-tight text-white"
+              style={{ fontFamily: "var(--font-display)" }}
             >
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-                <img
-                  className="text-background font-bold text-lg w-10 h-10"
-                  alt="Logo"
-                  src={Logo.src}
-                />
-              </div>
-              <span className="ml-3 text-text-primary font-semibold text-lg">
-                Ashikul Islam
-              </span>
-            </LoadingLink>
+              Ashikul Islam
+            </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              {navItems.map((item) => {
-                // Handle section scrolling vs page navigation
-                if (item.href.includes("#")) {
+            <nav aria-label="Primary navigation" className="nav-shell justify-self-center">
+              <div className="flex items-center gap-1">
+                {navItems.map((item) => {
+                  const isActive = isItemActive(item);
+
+                  if (isHome) {
+                    return (
+                      <button
+                        key={item.label}
+                        onClick={() => handleSectionClick(item.sectionId)}
+                        className={`nav-item ${isActive ? "nav-item-active" : ""}`}
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        {item.label}
+                      </button>
+                    );
+                  }
+
                   return (
-                    <button
-                      key={item.name}
-                      onClick={() => handleNavClick(item.href)}
-                      className="text-text-secondary hover:text-accent transition-colors duration-200 font-medium"
-                    >
-                      {item.name}
-                    </button>
-                  );
-                } else {
-                  return (
-                    <LoadingLink
-                      key={item.name}
+                    <Link
+                      key={item.label}
                       href={item.href}
-                      className="text-text-secondary hover:text-accent transition-colors duration-200 font-medium"
+                      aria-current={isActive ? "page" : undefined}
+                      className={`nav-item ${isActive ? "nav-item-active" : ""}`}
                     >
-                      {item.name}
-                    </LoadingLink>
+                      {item.label}
+                    </Link>
                   );
-                }
-              })}
+                })}
+              </div>
             </nav>
 
-            {/* CTA Button */}
-            <div className="hidden md:flex items-center">
-              <LoadingLink
-                href="/contact"
-                className="bg-accent hover:bg-accent-hover text-background px-6 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105"
+            <div className="justify-self-end text-text-secondary">
+              <a
+                href="https://github.com/ashikulislamm"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-text-secondary transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white"
+                aria-label="GitHub profile"
               >
-                Let's Connect
-              </LoadingLink>
+                <Github size={18} />
+              </a>
             </div>
+          </div>
 
-            {/* Mobile Menu Button */}
+          <div className="flex items-center justify-between md:hidden">
+            <Link
+              href="/"
+              className="text-base font-bold tracking-tight text-white"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Ashikul Islam
+            </Link>
+
             <button
-              className="md:hidden p-2 text-text-primary z-60 relative hover:scale-110 transition-transform duration-200"
-              onClick={toggleMobileMenu}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-text-primary transition-colors hover:border-white/20 hover:bg-white/10"
+              onClick={() => setIsMobileOpen((prev) => !prev)}
               aria-label="Toggle mobile menu"
             >
-              <div className="relative w-6 h-6">
-                <Menu
-                  className={`w-6 h-6 absolute transition-all duration-300 ${
-                    isMobileMenuOpen
-                      ? "rotate-90 opacity-0"
-                      : "rotate-0 opacity-100"
-                  }`}
-                />
-                <X
-                  className={`w-6 h-6 absolute transition-all duration-300 ${
-                    isMobileMenuOpen
-                      ? "rotate-0 opacity-100"
-                      : "-rotate-90 opacity-0"
-                  }`}
-                />
+              <div className="relative h-6 w-6">
+                <Menu className={`absolute h-6 w-6 transition ${isMobileOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"}`} />
+                <X className={`absolute h-6 w-6 transition ${isMobileOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} />
               </div>
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
-            isMenuAnimating ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <div
-            className={`fixed inset-0 bg-background/95 backdrop-blur-md transition-all duration-300 ${
-              isMenuAnimating
-                ? "bg-background/0 backdrop-blur-none"
-                : "bg-background/95 backdrop-blur-md"
-            }`}
-          >
-            <div
-              className={`flex flex-col h-full pt-20 px-4 transition-transform duration-300 ease-out ${
-                isMenuAnimating
-                  ? "transform -translate-y-4"
-                  : "transform translate-y-0"
-              }`}
-            >
-              {/* Navigation */}
-              <nav className="flex-1 space-y-1">
-                {navItems.map((item, index) => {
-                  // Handle section scrolling vs page navigation
-                  if (item.href.includes("#")) {
-                    return (
-                      <button
-                        key={item.name}
-                        onClick={() => handleNavClick(item.href)}
-                        className={`block w-full text-left text-text-secondary hover:text-accent transition-all duration-200 font-medium py-4 px-4 rounded-lg hover:bg-surface/30 hover:scale-105 ${
-                          isMenuAnimating
-                            ? "opacity-0 transform translate-x-4"
-                            : "opacity-100 transform translate-x-0"
-                        }`}
-                        style={{
-                          transitionDelay: isMenuAnimating
-                            ? "0ms"
-                            : `${index * 50}ms`,
-                        }}
-                      >
-                        {item.name}
-                      </button>
-                    );
-                  } else {
-                    return (
-                      <LoadingLink
-                        key={item.name}
-                        href={item.href}
-                        onClick={closeMobileMenu}
-                        className={`block w-full text-left text-text-secondary hover:text-accent transition-all duration-200 font-medium py-4 px-4 rounded-lg hover:bg-surface/30 hover:scale-105 ${
-                          isMenuAnimating
-                            ? "opacity-0 transform translate-x-4"
-                            : "opacity-100 transform translate-x-0"
-                        }`}
-                        style={{
-                          transitionDelay: isMenuAnimating
-                            ? "0ms"
-                            : `${index * 50}ms`,
-                        }}
-                      >
-                        {item.name}
-                      </LoadingLink>
-                    );
-                  }
-                })}
-              </nav>
+      {isMobileOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div className="absolute inset-0 bg-background/95 backdrop-blur-md">
+            <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pb-8 pt-24 text-base text-text-secondary">
+              {navItems.map((item) => {
+                const isActive = isItemActive(item);
 
-              {/* CTA Button */}
-              <div
-                className={`pb-8 transition-all duration-300 ${
-                  isMenuAnimating
-                    ? "opacity-0 transform translate-y-4"
-                    : "opacity-100 transform translate-y-0"
-                }`}
-                style={{
-                  transitionDelay: isMenuAnimating
-                    ? "0ms"
-                    : `${navItems.length * 50}ms`,
-                }}
+                if (isHome) {
+                  return (
+                    <button
+                      key={item.label}
+                      onClick={() => handleSectionClick(item.sectionId)}
+                      className={`rounded-2xl border px-4 py-3 text-left transition-colors ${
+                        isActive
+                          ? "border-[var(--color-nav-active)] bg-[var(--color-nav-active)] text-black"
+                          : "border-white/5 bg-white/5 hover:border-white/10 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className={`rounded-2xl border px-4 py-3 transition-colors ${
+                      isActive
+                        ? "border-[var(--color-nav-active)] bg-[var(--color-nav-active)] text-black"
+                        : "border-white/5 bg-white/5 hover:border-white/10 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              <a
+                href="https://github.com/ashikulislamm"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white"
               >
-                <LoadingLink
-                  href="/contact"
-                  onClick={closeMobileMenu}
-                  className="block w-full bg-accent hover:bg-accent-hover text-background px-6 py-4 rounded-lg font-medium transition-all duration-200 text-center hover:scale-105"
-                >
-                  Let's Connect
-                </LoadingLink>
-              </div>
+                <Github size={18} /> GitHub
+              </a>
             </div>
           </div>
         </div>

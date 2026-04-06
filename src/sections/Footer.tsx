@@ -1,71 +1,22 @@
-import { FaGithub, FaLinkedin, FaBehance, FaFacebook } from "react-icons/fa6";
-import logo from "@/app/favicon.ico";
-import Logo from "@/assets/images/Logo.gif"
-
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const socialLinks = [
-    {
-      name: "Facebook",
-      href: "https://www.facebook.com/ashikulislam.me/",
-      icon: <FaFacebook />,
-    },
-    {
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/in/ashikulislammm/",
-      icon: <FaLinkedin />,
-    },
-    {
-      name: "GitHub",
-      href: "https://github.com/ashikulislamm",
-      icon: <FaGithub />,
-    },
-    {
-      name: "Behance",
-      href: "https://www.behance.net/ashikulislam5",
-      icon: <FaBehance />,
-    },
-  ];
-
   return (
-    <footer className="relative">
-      {/* Footer Section */}
-      <div className="border-t border-surface">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            {/* Logo and Copyright */}
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-                <img
-                  className="text-background font-bold text-lg w-10 h-10"
-                  alt="Logo"
-                  src={Logo.src}
-                />
-              </div>
-              <div className="text-text-secondary text-sm">
-                <div>
-                  &copy; {currentYear} Ashikul Islam. All rights reserved.
-                </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <nav className="flex items-center gap-6">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-text-secondary hover:text-accent transition-colors duration-200 text-xl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.name}
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </nav>
-          </div>
+    <footer className="border-t border-border-subtle px-6 py-12">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
+        <div className="text-sm text-text-secondary">
+          &copy; {currentYear} Ashikul Islam. Built with Next.js & Tailwind.
+        </div>
+        <div className="flex gap-8 text-xs font-medium uppercase tracking-widest text-text-secondary">
+          <a href="https://github.com/ashikulislamm" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/ashikulislammm/" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
+            LinkedIn
+          </a>
+          <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=fFdckfgAAAAJ" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
+            Google Scholar
+          </a>
         </div>
       </div>
     </footer>

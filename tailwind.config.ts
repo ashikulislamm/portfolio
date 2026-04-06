@@ -21,17 +21,27 @@ const config: Config = {
     },
     extend: {
       colors: {
-        //F4E9D7 ,
-        background: "#0f1419",
-        surface: "#1a2332",
-        accent: "#91ADC8",
-        "accent-hover": "#6c84a1ff",
-        "text-primary": "#ffffff",
-        "text-secondary": "#94a3b8",
-        "text-muted": "#64748b",
+        background: "#0A0A0A",
+        "secondary-bg": "#111111",
+        "card-bg": "#1A1A1A",
+        "border-subtle": "#2A2A2A",
+        "text-primary": "#FFFFFF",
+        "text-secondary": "#A1A1A1",
+        // Legacy aliases kept for existing pages/components.
+        surface: "#111111",
+        accent: "#FFFFFF",
+        "accent-hover": "#E5E5E5",
+        "text-muted": "#737373",
       },
       fontFamily: {
-        sans: ["Archivo Black", "sans-serif"],
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: [
+          "JetBrains Mono",
+          "ui-monospace",
+          "SFMono-Regular",
+          "monospace",
+        ],
+        display: ["Space Grotesk", "sans-serif"],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",

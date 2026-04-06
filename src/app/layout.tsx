@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Saira} from "next/font/google";
 import "./globals.css";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { LoadingProvider } from "@/contexts/LoadingContext";
-import { FloatingAppointmentButton } from "@/components/Appointment";
-import Logo from "@/assets/images/Logo.gif";
-
-const saira = Saira({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -94,7 +88,9 @@ export const metadata: Metadata = {
     // bing: "your-bing-verification-code",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
   appleWebApp: {
     capable: true,
@@ -121,13 +117,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={saira.className}>
-        <LoadingProvider>
-          <Header />
-          {children}
-          <Footer />
-          <FloatingAppointmentButton />
-        </LoadingProvider>
+      <body>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
