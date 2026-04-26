@@ -232,57 +232,102 @@ export const Header = () => {
         </div>
       </header>
 
-      {isMobileOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-background/95 backdrop-blur-md">
-            <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 pb-8 pt-24 text-base text-text-secondary">
-              {navItems.map((item) => {
-                const isActive = isItemActive(item);
+      <div
+        className={`fixed inset-0 z-40 overflow-hidden md:hidden transition-all duration-500 ${
+          isMobileOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+      >
+        <div
+          className={`absolute inset-0 bg-[#050608] transition-opacity duration-500 ${
+            isMobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setIsMobileOpen(false)}
+        />
 
-                if (isHome) {
-                  return (
-                    <button
-                      key={item.label}
-                      onClick={() => handleSectionClick(item.sectionId)}
-                      className={`rounded-2xl border px-4 py-3 text-left transition-colors ${
-                        isActive
-                          ? "border-[var(--color-nav-active)] bg-[var(--color-nav-active)] text-black"
-                          : "border-white/5 bg-white/5 hover:border-white/10 hover:bg-white/10 hover:text-white"
-                      }`}
+        <div
+          className={`absolute -right-16 top-16 h-56 w-56 rounded-full bg-[radial-gradient(circle,_rgba(229,231,235,0.24),_transparent_70%)] blur-2xl transition-all duration-700 ${
+            isMobileOpen ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
+          }`}
+        />
+        <div
+          className={`absolute -left-20 bottom-8 h-72 w-72 rounded-full bg-[radial-gradient(circle,_rgba(245,158,11,0.22),_transparent_68%)] blur-3xl transition-all duration-700 ${
+            isMobileOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+          }`}
+        />
+
+        <div
+          className={`relative mx-auto flex h-full w-full max-w-lg flex-col px-6 pb-8 pt-28 transition-all duration-500 ${
+            isMobileOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+          }`}
+          onClick={(event) => event.stopPropagation()}
+        >
+          
+
+          <div className="flex flex-1 flex-col justify-center gap-1">
+            {navItems.map((item, index) => {
+              const isActive = isItemActive(item);
+              const order = String(index + 1).padStart(2, "0");
+
+              if (isHome) {
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => handleSectionClick(item.sectionId)}
+                    className={`group flex w-full items-center justify-between border-b py-4 text-left transition-all duration-500 ${
+                      isActive
+                        ? "border-[var(--color-nav-active)] text-[var(--color-nav-active)]"
+                        : "border-white/10 text-white/82 hover:border-white/35 hover:text-white"
+                    }`}
+                    style={{ transitionDelay: `${140 + index * 55}ms` }}
+                  >
+                    <span className="text-[11px] tracking-[0.22em] text-white/35 group-hover:text-white/55">{order}</span>
+                    <span
+                      className="text-[clamp(1.35rem,7.1vw,2rem)] leading-none"
+                      style={{ fontFamily: "var(--font-display)" }}
                     >
                       {item.label}
-                    </button>
-                  );
-                }
+                    </span>
+                  </button>
+                );
+              }
 
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsMobileOpen(false)}
-                    className={`rounded-2xl border px-4 py-3 transition-colors ${
-                      isActive
-                        ? "border-[var(--color-nav-active)] bg-[var(--color-nav-active)] text-black"
-                        : "border-white/5 bg-white/5 hover:border-white/10 hover:bg-white/10 hover:text-white"
-                    }`}
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMobileOpen(false)}
+                  className={`group flex w-full items-center justify-between border-b py-4 transition-all duration-500 ${
+                    isActive
+                      ? "border-[var(--color-nav-active)] text-[var(--color-nav-active)]"
+                      : "border-white/10 text-white/82 hover:border-white/35 hover:text-white"
+                  }`}
+                  style={{ transitionDelay: `${140 + index * 55}ms` }}
+                >
+                  <span className="text-[11px] tracking-[0.22em] text-white/35 group-hover:text-white/55">{order}</span>
+                  <span
+                    className="text-[clamp(1.35rem,7.1vw,2rem)] leading-none"
+                    style={{ fontFamily: "var(--font-display)" }}
                   >
                     {item.label}
-                  </Link>
-                );
-              })}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
 
-              <a
-                href="https://github.com/ashikulislamm"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-2 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white"
-              >
-                <Github size={18} /> GitHub
-              </a>
-            </div>
+          <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-5">
+            <p className="text-sm text-white/55">@ashikulislamm</p>
+            <a
+              href="https://github.com/ashikulislamm"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-sm text-white transition-colors hover:border-white/40 hover:bg-white/10"
+            >
+              <Github size={16} /> GitHub
+            </a>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
