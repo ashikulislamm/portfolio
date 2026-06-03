@@ -613,7 +613,6 @@ export const HomePage = () => {
       <div className="space-y-20">
         <TechStack />
         <Projects />
-        <Experience />
         <Research />
         <About />
         <ContactSection />

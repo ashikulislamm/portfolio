@@ -279,34 +279,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-1">
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="rounded-2xl border border-white/10 bg-card-bg p-5"
-                >
-                  <div className="mb-3 inline-flex rounded-xl border border-white/10 bg-white/5 p-2 text-white">
-                    <Clock3 size={18} />
-                  </div>
-                  <h3 className="mb-2 font-semibold text-white">Response Window</h3>
-                  <p className="text-sm leading-relaxed text-text-secondary">
-                    I usually reply within 24 hours, often sooner for project-related requests.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="rounded-2xl border border-white/10 bg-card-bg p-5"
-                >
-                  <div className="mb-3 inline-flex rounded-xl border border-white/10 bg-white/5 p-2 text-white">
-                    <ShieldCheck size={18} />
-                  </div>
-                  <h3 className="mb-2 font-semibold text-white">Clear Process</h3>
-                  <p className="text-sm leading-relaxed text-text-secondary">
-                    I keep the first response practical, direct, and focused on scope, timeline, and next steps.
-                  </p>
-                </motion.div>
-              </div>
-
               <div className="rounded-3xl border border-white/10 bg-card-bg p-6">
                 <h3 className="mb-5 text-xl font-semibold text-white">Contact details</h3>
                 <div className="space-y-3">

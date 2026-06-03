@@ -49,24 +49,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://ashikulislamm.github.io/portfolio/",
-    title: "Ashikul Islam - Fullstack Developer",
+    title: "Ashikul Islam - Software Developer",
     description:
-      "Experienced fullstack developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
-    siteName: "Ashikul Islam Portfolio",
+      "Result driven software developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
+    siteName: "Ashikul Islam",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ashikul Islam - Fullstack Developer",
+        alt: "Ashikul Islam - Software Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ashikul Islam - Fullstack Developer",
+    title: "Ashikul Islam - Software Developer",
     description:
-      "Experienced fullstack developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
+      "Result driven software developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
     site: "@ashikul_islam",
     creator: "@ashikul_islam",
     images: ["/og-image.png"],

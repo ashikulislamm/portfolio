@@ -107,11 +107,6 @@ export const Header = () => {
       href: "/#projects",
     },
     {
-      label: "Experience",
-      sectionId: "experience",
-      href: "/#experience",
-    },
-    {
       label: "Research",
       sectionId: "research",
       href: "/#research",
