@@ -2,74 +2,54 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
+import { personalInfo, siteMetadata } from "@/data/portfolioData";
 
 export const metadata: Metadata = {
   title: {
-    default: "Ashikul Islam - Fullstack Developer",
-    template: "%s | Ashikul Islam",
+    default: siteMetadata.titleDefault,
+    template: siteMetadata.titleTemplate,
   },
-  description:
-    "Experienced fullstack developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies. Creating user-centric digital experiences with exceptional functionality and design.",
-  applicationName: "Ashikul Islam Portfolio",
-  keywords: [
-    "fullstack developer",
-    "web developer",
-    "React developer",
-    "Next.js developer",
-    "Node.js developer",
-    "JavaScript expert",
-    "TypeScript developer",
-    "Frontend developer",
-    "Backend developer",
-    "Bangladesh developer",
-    "Dhaka developer",
-    "portfolio website",
-    "web applications",
-    "responsive design",
-    "modern web development",
-    "Ashikul Islam",
-  ],
+  description: siteMetadata.description,
+  applicationName: siteMetadata.applicationName,
+  keywords: siteMetadata.keywords,
   authors: [
     {
-      name: "Ashikul Islam",
-      url: "https://ashikulislamm.github.io/portfolio/",
+      name: personalInfo.name,
+      url: siteMetadata.siteUrl,
     },
   ],
-  creator: "Ashikul Islam",
-  publisher: "Ashikul Islam",
+  creator: personalInfo.name,
+  publisher: personalInfo.name,
   referrer: "origin-when-cross-origin",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ashikulislamm.github.io/portfolio/"),
-  // Set canonical on individual pages/layouts to avoid duplicate canonicals
+  metadataBase: new URL(siteMetadata.siteUrl),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ashikulislamm.github.io/portfolio/",
-    title: "Ashikul Islam - Software Developer",
-    description:
-      "Result driven software developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
-    siteName: "Ashikul Islam",
+    url: siteMetadata.siteUrl,
+    title: `${personalInfo.name} - ${personalInfo.role}`,
+    description: siteMetadata.description,
+    siteName: personalInfo.name,
     images: [
       {
-        url: "/og-image.png",
+        url: siteMetadata.ogImage,
         width: 1200,
         height: 630,
-        alt: "Ashikul Islam - Software Developer",
+        alt: `${personalInfo.name} - ${personalInfo.role}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ashikul Islam - Software Developer",
-    description:
-      "Result driven software developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies.",
+    title: `${personalInfo.name} - ${personalInfo.role}`,
+    description: siteMetadata.description,
     site: "@ashikul_islam",
     creator: "@ashikul_islam",
-    images: ["/og-image.png"],
+    images: [siteMetadata.ogImage],
   },
   robots: {
     index: true,
@@ -83,19 +63,20 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "a7cc7dZojGpV_FVOhmH1xjA88NpQF7iZQlRdHcwUZ50",
-    // yandex: "your-yandex-verification-code",
-    // bing: "your-bing-verification-code",
+    google: siteMetadata.googleVerification,
   },
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "favicon.ico" },
+      { url: "logo.png", type: "image/png" },
+    ],
+    shortcut: "favicon.ico",
+    apple: "logo.png",
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Ashikul Islam",
+    title: personalInfo.name,
   },
 };
 

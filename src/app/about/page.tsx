@@ -1,673 +1,323 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
+import { useState } from "react";
+import { SectionHeader } from "@/components/portfolio/SectionHeader";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { Timeline } from "@/components/portfolio/Timeline";
+import { GitHubContributionGraph } from "@/components/portfolio/GitHubContributionGraph";
 import {
   MapPin,
   Mail,
   Briefcase,
   GraduationCap,
+  Download,
+  ExternalLink,
+  Github,
+  Terminal,
   Code,
   Coffee,
   BookOpen,
   Music,
-  Terminal,
-  Award,
-  Zap,
-  Heart,
-  ExternalLink,
-  Download,
+  Cpu,
 } from "lucide-react";
-import Me from "@/assets/images/Me.jpg";
+
+import {
+  personalInfo,
+  aboutStats as stats,
+  aboutSkills as skills,
+  experiences,
+  academics,
+  publications,
+  socialLinks,
+} from "@/data/portfolioData";
 
 export default function AboutPage() {
-  const personalInfo = {
-    name: "Ashikul Islam",
-    title: "Full Stack Developer",
-    location: "Dhaka, Bangladesh",
-    experience: "2+ Years",
-    email: "md.ashikul4040@gmail.com",
-    phone: "+880 179 462 4361",
-  };
-
-  const stats = [
-    { label: "Years of Experience", value: "2+" },
-    { label: "Projects Completed", value: "20+" },
-    { label: "Technologies Mastered", value: "15+" },
-    { label: "Open Source Contributions", value: "50+" },
-  ];
-
-  const skills = [
-    {
-      category: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux"],
-      level: 90,
-    },
-    {
-      category: "Backend",
-      items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "REST APIs"],
-      level: 85,
-    },
-    {
-      category: "Blockchain",
-      items: ["Solidity", "Hyperledger", "Web3.js", "Smart Contracts"],
-      level: 80,
-    },
-    {
-      category: "Tools",
-      items: ["Git", "Docker", "AWS", "CI/CD", "Figma"],
-      level: 85,
-    },
-  ];
+  const [activeTab, setActiveTab] = useState<"overview" | "timeline" | "skills" | "publications">("overview");
 
   const interests = [
     {
-      icon: <Code size={24} />,
+      icon: <Code size={18} />,
       title: "Open Source",
-      description: "Contributing to community projects",
+      description: "Contributing to community packages and developer tools",
     },
     {
-      icon: <Coffee size={24} />,
-      title: "Coffee",
-      description: "Fuel for coding marathons",
+      icon: <Coffee size={18} />,
+      title: "Clean Architecture",
+      description: "Designing modular, testable software systems",
     },
     {
-      icon: <BookOpen size={24} />,
-      title: "Tech Blogs",
-      description: "Writing about development",
+      icon: <BookOpen size={18} />,
+      title: "Tech Writing",
+      description: "Authoring technical docs and architecture guides",
     },
     {
-      icon: <Music size={24} />,
-      title: "Music",
-      description: "Lo-fi beats while coding",
-    },
-  ];
-
-  const values = [
-    {
-      icon: <Terminal size={24} />,
-      title: "Clean Code",
-      description: "Writing maintainable, scalable, and elegant solutions",
-    },
-    {
-      icon: <Zap size={24} />,
-      title: "Continuous Learning",
-      description: "Staying updated with latest tech trends and best practices",
-    },
-    {
-      icon: <Award size={24} />,
-      title: "Quality First",
-      description: "Delivering exceptional results that exceed expectations",
-    },
-    {
-      icon: <Heart size={24} />,
-      title: "Collaboration",
-      description: "Building strong relationships and working as a team",
-    },
-  ];
-
-  const milestones = [
-    {
-      year: "2025 - Present",
-      title: "Technical Support and Integration Executive",
-      company: "Chologhuri Limited",
-      description:
-        "Leading development of enterprise web applications using React, Node.js, and cloud technologies.",
-    },
-    {
-      year: "2024 - 2025",
-      title: "Technical Support Intern",
-      company: "Chologhuri Limited",
-      description:
-        "Worked on developing and maintaining their websites and web applications using modern JavaScript frameworks.",
-    },
-  ];
-
-  const academics = [
-    {
-      degree: "Bachelor of Science in Computer Science & Engineering",
-      institution: "Ahsanullah University of Science & Technology",
-      duration: "2021 - 2025",
-      grade: "",
-      description:
-        "Specialized in Software Engineering, Web Technologies, and Database Management Systems.",
-    },
-    {
-      degree: "Higher Secondary Certificate (Science)",
-      institution: "National Ideal College",
-      duration: "2018 - 2020",
-      grade: "",
-      description:
-        "Concentrated on Mathematics, Physics, Chemistry, and Information & Communication Technology.",
-    },
-    {
-      degree: "Secondary School Certificate (Science)",
-      institution: "National Ideal School",
-      duration: "2016 - 2018",
-      grade: "",
-      description:
-        "Strong foundation in Mathematics, Science subjects, and early exposure to computer programming.",
-    },
-  ];
-
-  const publications = [
-    {
-      title:
-        "Leveraging Hyperledger Besu-Based Private Blockchain, IPFS, and NFTs for Secure and Transparent Intellectual Property Preservation and Trading",
-      authors:
-        "Gazi Maliha Raisa Noor, Md. Ashikul Islam, Saba Al Mukter Mahin, Saha Reno",
-      publisher: "IEEE",
-      year: "2025",
-      type: "Conference Paper",
-      status: "Published",
-      link: "https://ieeexplore.ieee.org/abstract/document/11160067",
+      icon: <Music size={18} />,
+      title: "Focus Music",
+      description: "Ambient lo-fi & synthwave during deep coding sprints",
     },
   ];
 
   return (
-    <div
-      className="min-h-screen bg-background"
-      style={{ backgroundColor: "#0A0A0A" }}
-    >
-      <Header />
-      {/* Hero Section */}
-      <section className="pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left - Profile */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {/* Profile Image */}
-              <div className="w-64 h-64 rounded-full bg-[#1A1A1A] border-2 border-[#2A2A2A] mb-8 flex items-center justify-center mx-auto lg:mx-0 overflow-hidden">
-                <img
-                  src={Me.src}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                />
+    <div className="min-h-screen bg-background text-neutral-100 animate-fade-in">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 pb-24 pt-24 md:pt-32">
+        {/* Header Profile Hero */}
+        <section className="pb-10 border-b border-border-subtle">
+          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 md:gap-10 items-center md:items-start text-left">
+            {/* Avatar image frame */}
+            <div className="mx-auto lg:mx-0 w-44 h-44 sm:w-48 sm:h-48 rounded border border-border-subtle bg-secondary-bg overflow-hidden relative group">
+              <img
+                src={typeof personalInfo.avatarImage === "string" ? personalInfo.avatarImage : personalInfo.avatarImage.src}
+                alt={personalInfo.name}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+              />
+              <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] font-mono text-accent border border-accent/30">
+                [status: active]
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <p className="font-mono text-xs font-medium text-accent mb-1">{"// README.md"}</p>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100">
+                  {personalInfo.name}
+                </h1>
+                <p className="font-mono text-xs sm:text-sm text-neutral-400 mt-1">{personalInfo.title}</p>
               </div>
 
-              <h1
-                className="text-6xl font-bold text-white mb-4"
-                style={{ fontFamily: "Space Grotesk, sans-serif" }}
-              >
-                About Me
-              </h1>
-
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-[#A1A1A1]">
-                  <MapPin size={18} />
-                  <span style={{ fontFamily: "Inter, sans-serif" }}>
-                    {personalInfo.location}
-                  </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs text-neutral-400 max-w-2xl">
+                <div className="flex items-center gap-2">
+                  <MapPin size={14} className="text-accent shrink-0" />
+                  <span>{personalInfo.location}</span>
                 </div>
-                <div className="flex items-center gap-3 text-[#A1A1A1]">
-                  <Mail size={18} />
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="hover:text-white transition-colors"
-                  >
+                <div className="flex items-center gap-2">
+                  <Mail size={14} className="text-accent shrink-0" />
+                  <a href={`mailto:${personalInfo.email}`} className="hover:text-white transition-colors truncate">
                     {personalInfo.email}
                   </a>
                 </div>
-                <div className="flex items-center gap-3 text-[#A1A1A1]">
-                  <Briefcase size={18} />
-                  <span style={{ fontFamily: "Inter, sans-serif" }}>
-                    {personalInfo.title}
-                  </span>
+                <div className="flex items-center gap-2">
+                  <Briefcase size={14} className="text-accent shrink-0" />
+                  <span>{personalInfo.experience} Experience</span>
                 </div>
-                <div className="flex items-center gap-3 text-[#A1A1A1]">
-                  <GraduationCap size={18} />
-                  <span style={{ fontFamily: "Inter, sans-serif" }}>
-                    Computer Science & Engineering
-                  </span>
+                <div className="flex items-center gap-2">
+                  <GraduationCap size={14} className="text-accent shrink-0" />
+                  <span>B.Sc in CSE (AUST)</span>
                 </div>
               </div>
 
-              <a
-                href="https://drive.google.com/file/d/16OohJwNNFpsTOpvgGH7CWMqry5zlhHt6/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-gray-200 transition-colors"
-              >
-                <Download size={18} />
-                Download CV
-              </a>
-            </motion.div>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Button variant="primary" href={personalInfo.resumeUrl} icon={<Download size={15} />} isMono>
+                  download_cv.pdf
+                </Button>
+                <Button variant="secondary" href={socialLinks.github} icon={<Github size={15} />} isMono>
+                  github_profile
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            {/* Right - Bio */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <div className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-8">
-                <h2
-                  className="text-3xl font-bold text-white mb-6"
-                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                >
-                  Hello, I'm Ashikul Islam
-                </h2>
-                <div
-                  className="space-y-4 text-[#A1A1A1]"
-                  style={{ fontFamily: "Inter, sans-serif", lineHeight: "1.8" }}
-                >
+        {/* Navigation Tabs Bar */}
+        <section className="py-6 border-b border-border-subtle sticky top-14 z-30 bg-background/95 backdrop-blur-md">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-2 font-mono text-xs">
+              <button
+                onClick={() => setActiveTab("overview")}
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "overview"
+                    ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
+                    : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
+                }`}
+              >
+                overview.md
+              </button>
+              <button
+                onClick={() => setActiveTab("timeline")}
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "timeline"
+                    ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
+                    : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
+                }`}
+              >
+                career_timeline.git
+              </button>
+              <button
+                onClick={() => setActiveTab("skills")}
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "skills"
+                    ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
+                    : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
+                }`}
+              >
+                skills_matrix.json
+              </button>
+              <button
+                onClick={() => setActiveTab("publications")}
+                className={`px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "publications"
+                    ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
+                    : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
+                }`}
+              >
+                research_papers.pdf
+              </button>
+            </div>
+
+            <span className="hidden sm:inline-block font-mono text-[11px] text-neutral-500">
+              [press tabs to inspect details]
+            </span>
+          </div>
+        </section>
+
+        {/* Tab Content 1: Overview */}
+        {activeTab === "overview" && (
+          <div className="space-y-12 py-8 text-left">
+            {/* Bio Summary */}
+            <section>
+              <SectionHeader comment="// 01 — background" title="Engineering Philosophy" />
+              <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+                <div className="space-y-4 text-sm leading-relaxed text-neutral-300">
                   <p>
-                    A passionate full-stack developer specializing in building
-                    exceptional digital experiences. With over 2+ years of
-                    hands-on experience in web development, I've worked on
-                    everything from sleek web applications to complex blockchain
-                    systems.
+                    I am a software engineer focused on building robust full-stack web applications, scalable backend API ecosystems, and decentralized Web3 systems. I believe software craft is defined by simplicity, performance, and maintainable architecture.
                   </p>
-                  <p>
-                    I believe in writing clean, maintainable code and creating
-                    solutions that not only work well but also provide an
-                    excellent user experience. My approach combines technical
-                    expertise with a deep understanding of user needs and modern
-                    best practices.
+                  <p className="text-neutral-400">
+                    My core expertise spans modern JavaScript/TypeScript frameworks (React, Next.js, Node.js), enterprise frameworks (ASP.NET Core), and distributed databases (PostgreSQL, MongoDB, Redis). I specialize in translating complex system requirements into clean, production-ready code.
                   </p>
-                  <p>
-                    When I'm not coding, you'll find me contributing to open
-                    source projects, writing technical blog posts, or exploring
-                    the latest developments in web3, AI, and blockchain
-                    technologies.
-                  </p>
+                </div>
+
+                <div className="rounded border border-border-subtle bg-secondary-bg p-5 font-mono text-xs space-y-3">
+                  <div className="flex items-center justify-between border-b border-[#202020] pb-2 text-neutral-400">
+                    <span className="flex items-center gap-1.5">
+                      <Terminal size={14} className="text-accent" />
+                      <span>architect.config</span>
+                    </span>
+                    <span className="text-[10px] text-neutral-600">TypeScript</span>
+                  </div>
+                  <div className="space-y-1.5 text-neutral-300">
+                    <p><span className="text-neutral-500">architecture:</span> &quot;Clean / Domain-Driven&quot;</p>
+                    <p><span className="text-neutral-500">testing:</span> &quot;Automated & Unit Verification&quot;</p>
+                    <p><span className="text-neutral-500">ci_cd:</span> &quot;GitHub Actions & Vercel&quot;</p>
+                    <p><span className="text-neutral-500">database_strategy:</span> &quot;PostgreSQL + Prisma / Mongo&quot;</p>
+                  </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* Stats Section */}
-      <section className="py-20 border-y border-[#2A2A2A]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div
-                  className="text-5xl font-bold text-white mb-2"
-                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                >
-                  {stat.value}
+            {/* Quick Metrics Grid */}
+            <section className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+              {stats.map((stat) => (
+                <div key={stat.label} className="rounded border border-border-subtle bg-card-bg p-4 text-left">
+                  <p className="text-neutral-500 text-[10px] uppercase tracking-wider">{stat.label}</p>
+                  <p className="mt-1 text-xl sm:text-2xl font-bold text-accent">{stat.value}</p>
                 </div>
-                <div
-                  className="text-sm text-[#A1A1A1]"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </section>
+
+            {/* Realtime GitHub Contribution Graph */}
+            <section>
+              <GitHubContributionGraph username="ashikulislamm" />
+            </section>
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* Career Journey */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold text-white mb-16 text-center"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Career Journey
-          </motion.h2>
-
-          <div className="max-w-4xl mx-auto">
-            {milestones.map((milestone, index) => (
-              <motion.div
-                key={milestone.year}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative pl-8 pb-12 border-l-2 border-[#2A2A2A] last:pb-0"
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-white"></div>
-
-                <div className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all">
-                  <div
-                    className="text-sm text-[#A1A1A1] mb-2"
-                    style={{ fontFamily: "JetBrains Mono, monospace" }}
-                  >
-                    {milestone.year}
-                  </div>
-                  <h3
-                    className="text-2xl font-bold text-white mb-1"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                  >
-                    {milestone.title}
-                  </h3>
-                  <div
-                    className="text-[#A1A1A1] mb-3"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
-                    {milestone.company}
-                  </div>
-                  <p
-                    className="text-[#A1A1A1]"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
-                    {milestone.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+        {/* Tab Content 2: Career Timeline */}
+        {activeTab === "timeline" && (
+          <div className="py-8">
+            <SectionHeader
+              comment="// 02 — career_timeline"
+              title="Experience & Education Timeline"
+              subtitle="Interactive milestone log tracking professional software engineering roles and academic computer science background."
+            />
+            <Timeline experiences={experiences} academics={academics} />
           </div>
-        </div>
-      </section>
+        )}
 
-      {/* Education Section */}
-      <section className="py-20 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold text-white mb-16 text-center"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Education
-          </motion.h2>
+        {/* Tab Content 3: Skill Matrix */}
+        {activeTab === "skills" && (
+          <div className="py-8 space-y-8 text-left">
+            <SectionHeader
+              comment="// 03 — technical_skills"
+              title="Skill Matrix & Proficiency"
+              subtitle="Engineering stack categorized by frontend, backend, database architectures, and DevOps tooling."
+            />
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            {academics.map((academic, index) => (
-              <motion.div
-                key={academic.degree}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                  <div className="flex-1">
-                    <h3
-                      className="text-xl font-bold text-white mb-2"
-                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                    >
-                      {academic.degree}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {skills.map((skillGroup) => (
+                <div key={skillGroup.category} className="rounded border border-border-subtle bg-card-bg p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-mono text-sm font-semibold text-neutral-200 flex items-center gap-2">
+                      <Cpu size={16} className="text-accent" />
+                      {skillGroup.category}
                     </h3>
-                    <div
-                      className="text-white mb-1"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                      {academic.institution}
-                    </div>
-                    <div
-                      className="text-sm text-[#A1A1A1]"
-                      style={{ fontFamily: "JetBrains Mono, monospace" }}
-                    >
-                      {academic.duration} • {academic.grade}
-                    </div>
+                    <span className="font-mono text-xs text-accent font-bold">{skillGroup.level}%</span>
+                  </div>
+
+                  <div className="w-full bg-[#1c1c1c] h-2 rounded-full overflow-hidden mb-5 border border-[#262626]">
+                    <div className="bg-accent h-full rounded-full transition-all duration-500" style={{ width: `${skillGroup.level}%` }} />
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {skillGroup.items.map((item) => (
+                      <Badge key={item} variant="tech">
+                        {item.toLowerCase()}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
-                <p
-                  className="text-[#A1A1A1]"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  {academic.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold text-white mb-16 text-center"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Technical Expertise
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.category}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6"
-              >
-                <h3
-                  className="text-xl font-bold text-white mb-4"
-                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                >
-                  {skill.category}
-                </h3>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {skill.items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1 bg-[#1A1A1A] text-[#A1A1A1] text-sm rounded border border-[#2A2A2A]"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Progress bar */}
-                <div className="relative h-2 bg-[#1A1A1A] rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                    className="absolute top-0 left-0 h-full bg-white"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Research & Publications */}
-      <section className="py-20 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold text-white mb-16 text-center"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Research & Publications
-          </motion.h2>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            {publications.map((publication, index) => (
-              <motion.div
-                key={publication.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all"
-              >
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                  <div className="flex-1">
-                    <h3
-                      className="text-xl font-bold text-white mb-2"
-                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                    >
-                      {publication.title}
-                    </h3>
-                    <div
-                      className="text-sm text-[#A1A1A1] mb-3 space-y-1"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                      <div>
-                        <span className="font-medium text-white">Authors:</span>{" "}
-                        {publication.authors}
-                      </div>
-                      <div>
-                        <span className="font-medium text-white">
-                          Publisher:
-                        </span>{" "}
-                        {publication.publisher}
-                      </div>
-                      <div>
-                        <span className="font-medium text-white">Year:</span>{" "}
-                        {publication.year}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="bg-green-500/10 text-green-400 px-3 py-1 rounded text-sm border border-green-500/20">
-                      {publication.status}
-                    </span>
-                    <a
-                      href={publication.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-gray-300 transition-colors mt-1"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold text-white mb-16 text-center"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            What I Value
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all text-center"
-              >
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mx-auto mb-4">
-                  <div className="text-black">{value.icon}</div>
-                </div>
-                <h3
-                  className="text-xl font-bold text-white mb-3"
-                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                >
-                  {value.title}
-                </h3>
-                <p
-                  className="text-[#A1A1A1] text-sm"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interests Section */}
-      <section className="py-20 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold text-white mb-16 text-center"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Beyond Code
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {interests.map((interest, index) => (
-              <motion.div
-                key={interest.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#111111] border border-[#2A2A2A] rounded-lg p-6 hover:border-white transition-all"
-              >
-                <div className="text-white mb-3">{interest.icon}</div>
-                <h3
-                  className="text-lg font-bold text-white mb-2"
-                  style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                >
-                  {interest.title}
-                </h3>
-                <p
-                  className="text-[#A1A1A1] text-sm"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  {interest.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophy Quote */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-[#111111] border-2 border-white rounded-lg p-12 text-center"
-          >
-            <div
-              className="text-3xl font-bold text-white mb-4 leading-relaxed"
-              style={{ fontFamily: "Space Grotesk, sans-serif" }}
-            >
-              "Code is like humor. When you have to explain it, it's bad."
+              ))}
             </div>
-            <div
-              className="text-[#A1A1A1]"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              — Cory House
+          </div>
+        )}
+
+        {/* Tab Content 4: Research Papers */}
+        {activeTab === "publications" && (
+          <div className="py-8 space-y-6 text-left">
+            <SectionHeader
+              comment="// 04 — research_publications"
+              title="IEEE Conference Papers"
+              subtitle="Peer-reviewed research contributions in computer science and blockchain applications."
+            />
+
+            <div className="grid grid-cols-1 gap-6">
+              {publications.map((pub, idx) => (
+                <div key={idx} className="rounded border border-border-subtle bg-card-bg p-6">
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <Badge variant="status" statusType="completed">{pub.status}</Badge>
+                    <span className="font-mono text-xs text-neutral-500">{pub.publisher} ({pub.year})</span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-neutral-100 mb-3 leading-snug">{pub.title}</h3>
+
+                  <div className="space-y-2 font-mono text-xs text-neutral-400 mb-6">
+                    <p><span className="text-neutral-500">Authors:</span> {pub.authors}</p>
+                    {pub.doi && <p><span className="text-neutral-500">DOI:</span> {pub.doi}</p>}
+                    {pub.description && <p className="font-sans text-xs text-neutral-400 mt-2">{pub.description}</p>}
+                  </div>
+
+                  <Button variant="secondary" href={pub.link} icon={<ExternalLink size={14} />} isMono>
+                    read_paper_pdf
+                  </Button>
+                </div>
+              ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        )}
+
+        {/* Interests & Beyond Code Section */}
+        <section className="py-12 border-t border-border-subtle text-left">
+          <SectionHeader comment="// 05 — beyond_code" title="Engineering Culture & Hobbies" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {interests.map((item) => (
+              <div key={item.title} className="rounded border border-border-subtle bg-card-bg p-5 transition-colors hover:border-neutral-700">
+                <div className="text-accent mb-3">{item.icon}</div>
+                <h3 className="font-mono text-xs font-bold text-neutral-200 mb-1">{item.title}</h3>
+                <p className="text-xs text-neutral-400 leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

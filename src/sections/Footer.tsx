@@ -1,22 +1,19 @@
+import { personalInfo, socialLinks } from "@/data/portfolioData";
+import { SocialButton } from "@/components/portfolio/SocialButton";
+
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border-subtle px-6 py-12">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
-        <div className="text-sm text-text-secondary">
-          &copy; {currentYear} Ashikul Islam. Built with Next.js & Tailwind.
+    <footer className="border-t border-[#262626] bg-[#0a0a0a] px-6 py-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 font-mono text-xs text-neutral-400 sm:flex-row sm:items-center">
+        <div>
+          &copy; {currentYear} {personalInfo.name}. Built with Next.js & TypeScript.
         </div>
-        <div className="flex gap-8 text-xs font-medium uppercase tracking-widest text-text-secondary">
-          <a href="https://github.com/ashikulislamm" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/ashikulislammm/" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
-            LinkedIn
-          </a>
-          <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=fFdckfgAAAAJ" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
-            Google Scholar
-          </a>
+        <div className="flex items-center gap-6">
+          <SocialButton name="GitHub" href={socialLinks.github} variant="text-link" />
+          <SocialButton name="LinkedIn" href={socialLinks.linkedin} variant="text-link" />
+          <SocialButton name="Scholar" href={socialLinks.googleScholar} variant="text-link" />
         </div>
       </div>
     </footer>
