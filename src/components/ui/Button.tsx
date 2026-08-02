@@ -30,7 +30,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium transition-colors duration-150 focus:outline-none disabled:opacity-50 disabled:pointer-events-none rounded";
+    "inline-flex items-center justify-center font-medium transition-colors duration-150 focus:outline-none disabled:opacity-50 disabled:pointer-events-none rounded-xl";
 
   const variants = {
     primary:
@@ -42,11 +42,11 @@ export const Button = ({
     ghost:
       "text-neutral-400 hover:text-white hover:bg-white/5",
     terminal:
-      "font-mono bg-[#161616] border border-border-subtle text-accent hover:border-accent/50 hover:bg-[#1c1c1c]",
+      "font-mono bg-[#161616] border border-border-subtle/40 text-accent hover:border-accent/40 hover:bg-[#1c1c1c]",
   };
 
   const sizes = {
-    sm: "px-3 py-1 text-xs gap-1.5",
+    sm: "px-3.5 py-1.5 text-xs gap-1.5",
     md: "px-4 py-2 text-sm gap-2",
     lg: "px-6 py-2.5 text-base gap-2.5",
   };

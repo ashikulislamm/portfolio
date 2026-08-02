@@ -110,7 +110,7 @@ export const Header = () => {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b border-border-subtle bg-background/90 backdrop-blur-md px-4 sm:px-6 py-3 transition-shadow ${
+        className={`fixed inset-x-0 top-0 z-50 border-b border-border-subtle bg-background/90 backdrop-blur-md px-4 sm:px-6 py-5 transition-shadow ${
           isScrolled ? "shadow-md shadow-black/40" : ""
         }`}
       >
@@ -149,7 +149,7 @@ export const Header = () => {
                   key={item.label}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`px-3 py-1 font-mono text-xs transition-colors ${
+                  className={`px-3 py-1 font-mono text-sm transition-colors ${
                     isActive
                       ? "text-accent font-semibold"
                       : "text-neutral-400 hover:text-white"
@@ -174,7 +174,7 @@ export const Header = () => {
           </div>
 
           <button
-            className="inline-flex h-9 w-9 items-center justify-center rounded border border-border-subtle bg-secondary-bg text-neutral-300 md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-subtle bg-secondary-bg text-neutral-300 md:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
             aria-label="Toggle mobile menu"
           >

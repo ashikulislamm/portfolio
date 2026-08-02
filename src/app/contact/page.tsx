@@ -1,12 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import {
   Copy,
   Mail,
-  MapPin,
-  Phone,
   Send,
   Terminal,
   Code2,
@@ -93,7 +90,7 @@ export default function ContactPage() {
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] items-start">
           {/* Left Column - Terminal Info Console */}
           <aside className="space-y-6 text-left">
-            <div className="rounded border border-border-subtle bg-secondary-bg p-5 font-mono text-xs">
+            <div className="rounded-xl border border-border-subtle bg-secondary-bg p-5 font-mono text-xs">
               <div className="flex items-center justify-between border-b border-[#202020] pb-3 mb-4 text-neutral-400">
                 <div className="flex items-center gap-2">
                   <Terminal size={14} className="text-accent" />
@@ -121,14 +118,14 @@ export default function ContactPage() {
                 </div>
 
                 {(copyMessage || submitMessage) && (
-                  <p className="mt-3 font-mono text-xs text-accent bg-accent/10 border border-accent/20 p-2 rounded">
+                  <p className="mt-3 font-mono text-xs text-accent bg-accent/10 border border-accent/20 p-2 rounded-lg">
                     {copyMessage || submitMessage}
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="rounded border border-border-subtle bg-[#121212] p-5 text-left font-mono text-xs">
+            <div className="rounded-xl border border-border-subtle bg-[#121212] p-5 text-left font-mono text-xs">
               <p className="text-neutral-400 mb-3">$ list --social-signals</p>
               <div className="grid grid-cols-2 gap-2">
                 <SocialButton name="GitHub" href={globalSocialLinks.github} icon={<FaGithub size={14} />} variant="card" />
@@ -140,7 +137,7 @@ export default function ContactPage() {
           </aside>
 
           {/* Right Column - Terminal Form Console */}
-          <section className="rounded border border-border-subtle bg-secondary-bg p-6 text-left md:p-8">
+          <section className="rounded-xl border border-border-subtle bg-secondary-bg p-6 text-left md:p-8">
             <div className="flex items-center justify-between border-b border-[#202020] pb-4 mb-6">
               <div className="flex items-center gap-2 font-mono text-xs text-neutral-300">
                 <Code2 size={15} className="text-accent" />
@@ -160,7 +157,7 @@ export default function ContactPage() {
                       key={mode.id}
                       type="button"
                       onClick={() => applyMode(mode)}
-                      className={`px-3 py-2 text-left font-mono text-xs rounded border transition-colors ${
+                      className={`px-3 py-2 text-left font-mono text-xs rounded-xl border transition-colors ${
                         isActive
                           ? "border-accent/50 bg-accent/10 text-accent font-semibold"
                           : "border-border-subtle bg-[#161616] text-neutral-400 hover:border-neutral-700 hover:text-white"

@@ -23,7 +23,7 @@ export const SocialButton = ({
         href={href}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noreferrer" : undefined}
-        className={`flex items-center gap-2.5 rounded border border-border-subtle bg-[#121212] px-3.5 py-2.5 font-mono text-xs text-neutral-300 transition-colors hover:border-neutral-700 hover:text-white ${className}`}
+        className={`flex items-center gap-2.5 rounded-xl border border-border-subtle bg-[#121212] px-3.5 py-2.5 font-mono text-xs text-neutral-300 transition-colors hover:border-neutral-700 hover:text-white ${className}`}
       >
         {icon && <span className="shrink-0 text-neutral-400">{icon}</span>}
         <span>{name}</span>
@@ -50,7 +50,7 @@ export const SocialButton = ({
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noreferrer" : undefined}
-      className={`inline-flex h-8 w-8 items-center justify-center rounded border border-border-subtle bg-[#121212] text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white ${className}`}
+      className={`inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-subtle bg-[#121212] text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white ${className}`}
       aria-label={`${name} profile`}
     >
       {icon}

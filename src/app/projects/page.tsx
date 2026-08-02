@@ -48,15 +48,15 @@ export default function ProjectsPage() {
           />
 
           <div className="mt-6 grid max-w-3xl grid-cols-3 gap-3 font-mono text-xs">
-            <div className="rounded border border-border-subtle bg-card-bg p-3">
+            <div className="rounded-xl border border-border-subtle bg-card-bg p-3">
               <p className="text-neutral-500">total_projects</p>
               <p className="mt-1 text-xl font-bold text-neutral-200">{projects.length}</p>
             </div>
-            <div className="rounded border border-border-subtle bg-card-bg p-3">
+            <div className="rounded-xl border border-border-subtle bg-card-bg p-3">
               <p className="text-neutral-500">featured</p>
               <p className="mt-1 text-xl font-bold text-accent">{featuredCount}</p>
             </div>
-            <div className="rounded border border-border-subtle bg-card-bg p-3">
+            <div className="rounded-xl border border-border-subtle bg-card-bg p-3">
               <p className="text-neutral-500">stable_main</p>
               <p className="mt-1 text-xl font-bold text-neutral-200">{completedCount}</p>
             </div>
@@ -72,7 +72,7 @@ export default function ProjectsPage() {
                 <button
                   key={category}
                   onClick={() => setFilter(category)}
-                  className={`px-3 py-1 font-mono text-xs rounded transition-colors ${
+                  className={`px-3.5 py-1.5 font-mono text-xs rounded-xl transition-colors ${
                     isActive
                       ? "border border-accent/40 bg-accent/10 text-accent font-semibold"
                       : "border border-border-subtle bg-card-bg text-neutral-400 hover:border-neutral-700 hover:text-white"

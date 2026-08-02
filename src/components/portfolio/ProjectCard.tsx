@@ -26,10 +26,10 @@ export const ProjectCard = ({
 
   if (mode === "catalog") {
     return (
-      <article className="group flex flex-col justify-between overflow-hidden rounded border border-border-subtle bg-secondary-bg p-5 transition-colors duration-200 hover:border-neutral-700">
+      <article className="group flex flex-col justify-between overflow-hidden rounded-xl border border-border-subtle bg-secondary-bg p-5 transition-colors duration-200 hover:border-neutral-700">
         <div>
           {imageSrc && (
-            <div className="relative mb-4 overflow-hidden rounded border border-border-subtle bg-background">
+            <div className="relative mb-4 overflow-hidden rounded-xl border border-border-subtle bg-background">
               <img
                 src={imageSrc}
                 alt={projectTitle}
@@ -92,7 +92,7 @@ export const ProjectCard = ({
   }
 
   return (
-    <div className="project-card flex flex-col justify-between">
+    <div className="project-card flex flex-col justify-between rounded-xl">
       <div>
         <div className="mb-3 flex items-center justify-between gap-2">
           <h3 className="text-base font-bold text-neutral-100 flex items-center gap-2">

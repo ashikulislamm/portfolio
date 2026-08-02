@@ -151,7 +151,7 @@ export const GitHubContributionGraph = ({
   };
 
   return (
-    <div className="rounded border border-border-subtle bg-card-bg p-6 text-left">
+    <div className="rounded-xl border border-border-subtle bg-card-bg p-6 text-left">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border-subtle pb-4 mb-4">
         <div>
           <div className="flex items-center gap-2 font-mono text-xs text-neutral-200">

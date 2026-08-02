@@ -13,7 +13,7 @@ export const Badge = ({
   className = "",
   children,
 }: BadgeProps) => {
-  const baseStyles = "inline-flex items-center font-mono text-[11px] leading-none transition-colors rounded px-2 py-1";
+  const baseStyles = "inline-flex items-center font-mono text-[11px] leading-none transition-colors rounded-lg px-2.5 py-1";
 
   const isCompleted = statusType?.toLowerCase() === "completed";
 

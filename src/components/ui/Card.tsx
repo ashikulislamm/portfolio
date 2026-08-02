@@ -13,13 +13,13 @@ export const Card = ({
   children,
   ...props
 }: CardProps) => {
-  const baseStyles = "rounded border border-[#262626] bg-[#121212]";
+  const baseStyles = "rounded-xl border border-border-subtle bg-[#121212]";
 
   const variants = {
     default: "p-5",
     project: "project-card flex flex-col justify-between",
     terminal: "terminal-card",
-    code: "p-4 font-mono text-xs bg-[#0d0d0d] border-[#262626]",
+    code: "p-4 font-mono text-xs bg-[#0d0d0d] border-border-subtle",
   };
 
   const hoverStyles = hoverable ? "transition-colors duration-150 hover:border-neutral-700" : "";

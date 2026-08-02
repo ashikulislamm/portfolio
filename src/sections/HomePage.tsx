@@ -32,6 +32,7 @@ import { Badge } from "@/components/ui/Badge";
 import { SectionHeader } from "@/components/portfolio/SectionHeader";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
 import { TerminalCard } from "@/components/portfolio/TerminalCard";
+import { AnimatedTerminal } from "@/components/portfolio/AnimatedTerminal";
 import { SocialButton } from "@/components/portfolio/SocialButton";
 
 const Hero = () => (
@@ -120,7 +121,7 @@ const TechStack = () => {
         {categories.map((cat) => (
           <div
             key={cat.title}
-            className="rounded border border-border-subtle bg-card-bg p-5 transition-colors hover:border-neutral-700"
+            className="rounded border border-border-subtle bg-card-bg p-5 transition-colors hover:border-neutral-700 rounded-xl"
           >
             <div className="mb-4 flex items-center gap-2.5 text-neutral-200">
               <span className="text-accent">{cat.icon}</span>
@@ -201,7 +202,7 @@ const Research = () => {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16" id="research">
       <SectionHeader comment="// 04 — publications" title="IEEE Conference Paper" />
-      <div className="rounded border border-border-subtle bg-card-bg p-6">
+      <div className="rounded-xl border border-border-subtle bg-card-bg p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex-1">
             <div className="mb-2 flex items-center gap-2 font-mono text-xs text-neutral-400">
@@ -254,7 +255,7 @@ const About = () => {
       />
 
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="rounded border border-border-subtle bg-card-bg p-6 text-left">
+          <div className="rounded border border-border-subtle bg-card-bg p-6 text-left rounded-xl">
           <p className="mb-4 text-sm leading-relaxed text-neutral-300">
             I build digital products that are engineered for growth and crafted for humans. From frontend
             polish to backend robustness, I focus on turning complex ideas into experiences users instantly trust.
@@ -280,20 +281,23 @@ const About = () => {
           </div>
         </div>
 
-        <aside className="rounded border border-border-subtle bg-secondary-bg p-6 font-mono text-xs text-left">
-          <div className="mb-3 flex items-center gap-2 border-b border-[#202020] pb-3 text-neutral-400">
-            <Terminal size={14} className="text-accent" />
-            <span>developer.json</span>
-          </div>
+        <div className="space-y-4">
+          <AnimatedTerminal
+            filename="developer.json"
+            language="JSON"
+            lines={[
+              '{',
+              `  "name": "${personalInfo.name}",`,
+              `  "role": "${personalInfo.role}",`,
+              `  "location": "${personalInfo.location}",`,
+              `  "status": "${personalInfo.status}"`,
+              '}',
+            ]}
+            command="npm run dev"
+            outputLines={["✓ [local server active at http://localhost:3000]"]}
+          />
 
-          <div className="space-y-2 text-neutral-300">
-            <p><span className="text-neutral-500">&quot;name&quot;:</span> &quot;{personalInfo.name}&quot;</p>
-            <p><span className="text-neutral-500">&quot;role&quot;:</span> &quot;{personalInfo.role}&quot;</p>
-            <p><span className="text-neutral-500">&quot;location&quot;:</span> &quot;{personalInfo.location}&quot;</p>
-            <p><span className="text-neutral-500">&quot;status&quot;:</span> <span className="text-accent">&quot;{personalInfo.status}&quot;</span></p>
-          </div>
-
-          <div className="mt-6 border-t border-[#202020] pt-4">
+          <div className="rounded-xl border border-border-subtle bg-card-bg p-5 font-mono text-xs text-left">
             <p className="mb-3 text-[10px] uppercase tracking-wider text-neutral-500">
               Profiles
             </p>
@@ -304,7 +308,7 @@ const About = () => {
               <SocialButton name="Email" href={`mailto:${personalInfo.email}`} icon={<Mail size={14} />} variant="card" />
             </div>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
   );
@@ -312,7 +316,7 @@ const About = () => {
 
 const ContactSection = () => (
   <section id="contact" className="mx-auto max-w-7xl scroll-mt-28 px-6 py-16 text-left">
-    <div className="rounded border border-border-subtle bg-card-bg p-8 md:p-12">
+    <div className="rounded-xl border border-border-subtle bg-card-bg p-8 md:p-12">
       <p className="mb-2 font-mono text-xs font-medium text-accent">{"// 06 — initiate_contact"}</p>
       <h2 className="mb-4 text-3xl font-bold tracking-tight text-neutral-100">
         Let&apos;s build something great together.

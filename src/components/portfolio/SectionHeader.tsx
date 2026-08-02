@@ -17,7 +17,7 @@ export const SectionHeader = ({
 }: SectionHeaderProps) => {
   return (
     <div
-      className={`mb-8 border-b border-border-subtle pb-4 ${
+      className={`mb-8 pb-4 ${
         action ? "flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" : ""
       } ${className}`}
     >

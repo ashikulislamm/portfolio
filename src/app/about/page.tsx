@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Timeline } from "@/components/portfolio/Timeline";
 import { GitHubContributionGraph } from "@/components/portfolio/GitHubContributionGraph";
+import { AnimatedTerminal } from "@/components/portfolio/AnimatedTerminal";
 import {
   MapPin,
   Mail,
@@ -65,13 +66,13 @@ export default function AboutPage() {
         <section className="pb-10 border-b border-border-subtle">
           <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 md:gap-10 items-center md:items-start text-left">
             {/* Avatar image frame */}
-            <div className="mx-auto lg:mx-0 w-44 h-44 sm:w-48 sm:h-48 rounded border border-border-subtle bg-secondary-bg overflow-hidden relative group">
+            <div className="mx-auto lg:mx-0 w-44 h-44 sm:w-48 sm:h-48 rounded-xl border border-border-subtle bg-secondary-bg overflow-hidden relative group">
               <img
                 src={typeof personalInfo.avatarImage === "string" ? personalInfo.avatarImage : personalInfo.avatarImage.src}
                 alt={personalInfo.name}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
               />
-              <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] font-mono text-accent border border-accent/30">
+              <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 rounded-md text-[10px] font-mono text-accent border border-accent/30">
                 [status: active]
               </div>
             </div>
@@ -124,7 +125,7 @@ export default function AboutPage() {
             <div className="flex flex-wrap gap-2 font-mono text-xs">
               <button
                 onClick={() => setActiveTab("overview")}
-                className={`px-3 py-1.5 rounded transition-colors ${
+                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "overview"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -134,7 +135,7 @@ export default function AboutPage() {
               </button>
               <button
                 onClick={() => setActiveTab("timeline")}
-                className={`px-3 py-1.5 rounded transition-colors ${
+                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "timeline"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -144,7 +145,7 @@ export default function AboutPage() {
               </button>
               <button
                 onClick={() => setActiveTab("skills")}
-                className={`px-3 py-1.5 rounded transition-colors ${
+                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "skills"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -154,7 +155,7 @@ export default function AboutPage() {
               </button>
               <button
                 onClick={() => setActiveTab("publications")}
-                className={`px-3 py-1.5 rounded transition-colors ${
+                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "publications"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -186,28 +187,27 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                <div className="rounded border border-border-subtle bg-secondary-bg p-5 font-mono text-xs space-y-3">
-                  <div className="flex items-center justify-between border-b border-[#202020] pb-2 text-neutral-400">
-                    <span className="flex items-center gap-1.5">
-                      <Terminal size={14} className="text-accent" />
-                      <span>architect.config</span>
-                    </span>
-                    <span className="text-[10px] text-neutral-600">TypeScript</span>
-                  </div>
-                  <div className="space-y-1.5 text-neutral-300">
-                    <p><span className="text-neutral-500">architecture:</span> &quot;Clean / Domain-Driven&quot;</p>
-                    <p><span className="text-neutral-500">testing:</span> &quot;Automated & Unit Verification&quot;</p>
-                    <p><span className="text-neutral-500">ci_cd:</span> &quot;GitHub Actions & Vercel&quot;</p>
-                    <p><span className="text-neutral-500">database_strategy:</span> &quot;PostgreSQL + Prisma / Mongo&quot;</p>
-                  </div>
-                </div>
+                <AnimatedTerminal
+                  filename="architect.config.ts"
+                  language="TypeScript"
+                  lines={[
+                    'export const architectConfig = {',
+                    '  architecture: "Clean / Domain-Driven",',
+                    '  testing: "Automated & Unit Verification",',
+                    '  ci_cd: "GitHub Actions & Vercel",',
+                    '  database_strategy: "PostgreSQL + Prisma / Mongo",',
+                    '};',
+                  ]}
+                  command="npm run build:check"
+                  outputLines={["✓ [0 system errors]", "✓ [all 8 system checks passing]"]}
+                />
               </div>
             </section>
 
             {/* Quick Metrics Grid */}
             <section className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
               {stats.map((stat) => (
-                <div key={stat.label} className="rounded border border-border-subtle bg-card-bg p-4 text-left">
+                <div key={stat.label} className="rounded-xl border border-border-subtle bg-card-bg p-4 text-left">
                   <p className="text-neutral-500 text-[10px] uppercase tracking-wider">{stat.label}</p>
                   <p className="mt-1 text-xl sm:text-2xl font-bold text-accent">{stat.value}</p>
                 </div>
@@ -244,7 +244,7 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {skills.map((skillGroup) => (
-                <div key={skillGroup.category} className="rounded border border-border-subtle bg-card-bg p-6">
+                <div key={skillGroup.category} className="rounded-xl border border-border-subtle bg-card-bg p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-mono text-sm font-semibold text-neutral-200 flex items-center gap-2">
                       <Cpu size={16} className="text-accent" />
@@ -281,7 +281,7 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-1 gap-6">
               {publications.map((pub, idx) => (
-                <div key={idx} className="rounded border border-border-subtle bg-card-bg p-6">
+                <div key={idx} className="rounded-xl border border-border-subtle bg-card-bg p-6">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <Badge variant="status" statusType="completed">{pub.status}</Badge>
                     <span className="font-mono text-xs text-neutral-500">{pub.publisher} ({pub.year})</span>
@@ -309,7 +309,7 @@ export default function AboutPage() {
           <SectionHeader comment="// 05 — beyond_code" title="Engineering Culture & Hobbies" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {interests.map((item) => (
-              <div key={item.title} className="rounded border border-border-subtle bg-card-bg p-5 transition-colors hover:border-neutral-700">
+              <div key={item.title} className="rounded-xl border border-border-subtle bg-card-bg p-5 transition-colors hover:border-neutral-700">
                 <div className="text-accent mb-3">{item.icon}</div>
                 <h3 className="font-mono text-xs font-bold text-neutral-200 mb-1">{item.title}</h3>
                 <p className="text-xs text-neutral-400 leading-relaxed">{item.description}</p>

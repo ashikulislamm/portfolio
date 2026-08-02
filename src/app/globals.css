@@ -17,7 +17,7 @@
   --color-text-secondary: #9ca3af;
 
   /* Single Accent Color Control - Change this color to update the entire site accent! */
-  --color-accent: #E3F2FD;
+  --color-accent: #B4E1EB;
   --color-nav-active: var(--color-accent);
 }
 
@@ -44,11 +44,11 @@ html {
 
 @layer components {
   .nav-shell {
-    @apply rounded-md border border-border-subtle bg-secondary-bg/90 p-1 backdrop-blur-md;
+    @apply rounded-xl border border-border-subtle bg-secondary-bg/90 p-1 backdrop-blur-md;
   }
 
   .nav-item {
-    @apply inline-flex items-center rounded px-3 py-1.5 font-mono text-xs font-medium text-text-secondary transition-colors duration-150 hover:bg-white/5 hover:text-white;
+    @apply inline-flex items-center rounded-lg px-3 py-1.5 font-mono text-xs font-medium text-text-secondary transition-colors duration-150 hover:bg-white/5 hover:text-white;
   }
 
   .nav-item-active {
@@ -56,24 +56,24 @@ html {
   }
 
   .terminal-card {
-    @apply overflow-hidden rounded-md border border-border-subtle bg-secondary-bg text-xs leading-relaxed;
+    @apply overflow-hidden rounded-xl border border-border-subtle bg-secondary-bg text-xs leading-relaxed;
     font-family: var(--font-mono);
   }
 
   .project-card {
-    @apply rounded-md border border-border-subtle bg-card-bg p-5 transition-colors duration-200 hover:border-neutral-700;
+    @apply rounded-xl border border-border-subtle bg-card-bg p-5 transition-colors duration-200 hover:border-neutral-700;
   }
 
   .tech-pill {
-    @apply rounded border border-border-subtle bg-[#171717] px-2 py-0.5 font-mono text-[11px] text-neutral-300 transition-colors hover:border-neutral-600 hover:text-white;
+    @apply rounded-md border border-border-subtle bg-[#171717] px-2 py-0.5 font-mono text-[11px] text-neutral-300 transition-colors hover:border-neutral-600 hover:text-white;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded bg-accent px-4 py-2 text-sm font-semibold text-black transition-opacity hover:opacity-90 active:opacity-100;
+    @apply inline-flex items-center justify-center rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-black transition-opacity hover:opacity-90 active:opacity-100;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded border border-border-subtle bg-card-bg px-4 py-2 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-700 hover:bg-[#1a1a1a] active:bg-neutral-900;
+    @apply inline-flex items-center justify-center rounded-xl border border-border-subtle bg-card-bg px-4 py-2 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-700 hover:bg-[#1a1a1a] active:bg-neutral-900;
   }
 }
 

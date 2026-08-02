@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ExperienceItem, AcademicItem } from "@/types/portfolio";
 import { Badge } from "@/components/ui/Badge";
-import { Briefcase, GraduationCap, Calendar, ChevronRight, GitCommit } from "lucide-react";
+import { Briefcase, GraduationCap, Calendar, ChevronRight } from "lucide-react";
 
 export interface CombinedTimelineItem {
   id: string;
@@ -65,7 +65,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
         <div className="flex flex-wrap gap-2 font-mono text-xs">
           <button
             onClick={() => setFilter("all")}
-            className={`px-3 py-1 rounded transition-colors ${
+            className={`px-3 py-1.5 rounded-xl transition-colors ${
               filter === "all"
                 ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                 : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -75,7 +75,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
           </button>
           <button
             onClick={() => setFilter("experience")}
-            className={`px-3 py-1 rounded transition-colors ${
+            className={`px-3 py-1.5 rounded-xl transition-colors ${
               filter === "experience"
                 ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                 : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -85,7 +85,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
           </button>
           <button
             onClick={() => setFilter("academic")}
-            className={`px-3 py-1 rounded transition-colors ${
+            className={`px-3 py-1.5 rounded-xl transition-colors ${
               filter === "academic"
                 ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                 : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -96,10 +96,10 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
         </div>
 
         {/* View Switcher */}
-        <div className="flex gap-1 font-mono text-xs border border-border-subtle bg-[#121212] p-1 rounded">
+        <div className="flex gap-1 font-mono text-xs border border-border-subtle bg-[#121212] p-1 rounded-xl">
           <button
             onClick={() => setActiveView("timeline")}
-            className={`px-2.5 py-1 rounded transition-colors ${
+            className={`px-2.5 py-1 rounded-lg transition-colors ${
               activeView === "timeline" ? "bg-white/10 text-accent font-semibold" : "text-neutral-400 hover:text-white"
             }`}
           >
@@ -107,7 +107,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
           </button>
           <button
             onClick={() => setActiveView("cards")}
-            className={`px-2.5 py-1 rounded transition-colors ${
+            className={`px-2.5 py-1 rounded-lg transition-colors ${
               activeView === "cards" ? "bg-white/10 text-accent font-semibold" : "text-neutral-400 hover:text-white"
             }`}
           >
@@ -119,7 +119,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
       {/* Render Mode: Timeline Tree */}
       {activeView === "timeline" && (
         <div className="relative pl-6 sm:pl-8 border-l border-border-subtle space-y-10 my-4">
-          {filteredItems.map((item, idx) => (
+          {filteredItems.map((item) => (
             <div key={item.id} className="relative group">
               {/* Git Node Marker */}
               <div className="absolute -left-[31px] sm:-left-[39px] top-1 flex items-center justify-center">
@@ -135,7 +135,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
               </div>
 
               {/* Node Card Container */}
-              <div className="rounded border border-border-subtle bg-card-bg p-5 transition-colors duration-200 hover:border-neutral-700">
+              <div className="rounded-xl border border-border-subtle bg-card-bg p-5 transition-colors duration-200 hover:border-neutral-700">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2 font-mono text-xs text-neutral-400">
                     {item.type === "experience" ? (
@@ -147,7 +147,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
                     <span className="text-neutral-600">•</span>
                     <span>{item.type.toUpperCase()}</span>
                   </div>
-                  <span className="font-mono text-xs text-neutral-400 bg-secondary-bg px-2 py-0.5 rounded border border-border-subtle flex items-center gap-1">
+                  <span className="font-mono text-xs text-neutral-400 bg-secondary-bg px-2.5 py-0.5 rounded-lg border border-border-subtle flex items-center gap-1">
                     <Calendar size={12} />
                     {item.year}
                   </span>
@@ -193,7 +193,7 @@ export const Timeline = ({ experiences, academics }: TimelineProps) => {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="rounded border border-border-subtle bg-card-bg p-5 flex flex-col justify-between"
+              className="rounded-xl border border-border-subtle bg-card-bg p-5 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
