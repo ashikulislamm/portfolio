@@ -18,7 +18,7 @@ export const ProjectCard = ({
     typeof project.image === "string" ? project.image : project.image?.src;
   const projectTitle = project.title || project.name;
   const projectDesc = project.description || project.desc;
-  const techList = project.technologies || project.stack;
+  const techList = project.stack;
   const liveLink = project.liveUrl || project.demo;
   const repoLink = project.githubUrl || project.github;
 
@@ -58,7 +58,7 @@ export const ProjectCard = ({
           <div className="mb-4 flex flex-wrap gap-1.5">
             {techList.map((tech) => (
               <Badge key={tech} variant="tech">
-                {tech.toLowerCase()}
+                {tech.toUpperCase()}
               </Badge>
             ))}
           </div>

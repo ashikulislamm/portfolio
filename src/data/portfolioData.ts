@@ -7,8 +7,8 @@ import AllyHub from "@/assets/images/AllyHub.png";
 import IPGurdian from "@/assets/images/IPGurdian.png";
 import Eventify from "@/assets/images/Eventify.png";
 import GlobalXchange from "@/assets/images/GlobaXchange.png";
-import Planora from "@/assets/images/GlobaXchange.png";
-import EcommerceAdmin from "@/assets/images/GlobaXchange.png";
+import Planora from "@/assets/images/Planora.png";
+import EcommerceAdmin from "@/assets/images/Ecommerce-Admin-Dashboard.png";
 import Me from "@/assets/images/Me.jpg";
 
 import {
@@ -378,22 +378,16 @@ export const projects: Project[] = [
     ],
     technologies: [
       "Next.js 16",
-      "React 19",
-      "Tailwind CSS v4",
+      "Tailwind CSS",
       "Framer Motion",
       "React Query",
       "React Hook Form",
-      "Recharts",
       "Zod",
-      "Axios",
       "Node.js",
-      "Express.js v5",
+      "Express.js",
       "MongoDB",
-      "Mongoose",
       "JWT",
       "Google GenAI",
-      "Helmet",
-      "Winston",
     ],
     category: "web-app",
     status: "in-progress",
@@ -431,23 +425,18 @@ export const projects: Project[] = [
     ],
     technologies: [
       "Next.js 16",
-      "React 19",
       "TypeScript",
-      "TailwindCSS v4",
+      "TailwindCSS",
       "Shadcn UI",
       "TanStack Query",
       "Zustand",
       "React Hook Form",
       "Zod",
       "Node.js",
-      "Express.js v5",
+      "Express.js",
       "PostgreSQL",
       "Prisma ORM",
       "JWT",
-      "Bcrypt",
-      "Helmet",
-      "Sharp",
-      "Pino",
     ],
     category: "web-app",
     status: "in-progress",
