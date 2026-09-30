@@ -1,13 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-display: var(--font-sans);
+  --font-display: var(--font-heading);
 
   --color-background: #0a0a0a;
   --color-secondary-bg: #111111;
@@ -19,6 +18,11 @@
   /* Single Accent Color Control - Change this color to update the entire site accent! */
   --color-accent: #B4E1EB;
   --color-nav-active: var(--color-accent);
+
+  /* Editorial Cream Accents */
+  --color-cream: #F7F2EB;
+  --color-cream-light: #FAF7F2;
+  --color-cream-muted: #D1CBC1;
 }
 
 * {
@@ -35,6 +39,11 @@ html {
   body {
     @apply bg-background text-text-primary antialiased;
     font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
   }
 
   code, pre, kbd, samp {

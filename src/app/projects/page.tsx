@@ -1,104 +1,107 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { projects } from "@/data/portfolioData";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
-import { SectionHeader } from "@/components/portfolio/SectionHeader";
+import { Layers, Sparkles, CheckCircle2 } from "lucide-react";
 
 export default function ProjectsPage() {
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("all");
 
-  const categories = ["All", "Web App", "Blockchain", "Research", "Mobile"];
+  const categories = [
+    { label: "All Systems", value: "all" },
+    { label: "Web Applications", value: "web-app" },
+    { label: "Blockchain & Research", value: "research" },
+    { label: "Mobile Apps", value: "mobile" },
+  ];
 
-  const categoryValue = (label: string) => {
-    if (label === "Web App") return "web-app";
-    if (label === "Research") return "research";
-    if (label === "Mobile") return "mobile";
-    return label;
+  // Latest projects are added to the bottom of the array, so reverse to show newest first at the top
+  const filteredProjects = useMemo(() => {
+    const reversed = [...projects].reverse();
+    if (filter === "all") return reversed;
+    return reversed.filter((project) => project.category === filter);
+  }, [filter]);
+
+  const getCategoryCount = (val: string) => {
+    if (val === "all") return projects.length;
+    return projects.filter((p) => p.category === val).length;
   };
 
-  const filteredProjects =
-    filter === "All"
-      ? projects
-      : projects.filter(
-          (project) => project.category === categoryValue(filter),
-        );
-
-  const displayProjects = [...filteredProjects].reverse();
-
-  const categoryCount = (label: string) => {
-    if (label === "All") return projects.length;
-    const value = categoryValue(label);
-    return projects.filter((project) => project.category === value).length;
-  };
-
-  const featuredCount = projects.filter((project) => project.featured).length;
-  const completedCount = projects.filter(
-    (project) => project.status.toLowerCase() === "completed",
+  const featuredCount = projects.filter((p) => p.featured).length;
+  const completedCount = projects.filter((p) =>
+    p.status.toLowerCase().includes("complete")
   ).length;
 
   return (
     <div className="min-h-screen bg-background text-neutral-100">
-      <main className="mx-auto max-w-7xl px-6 pb-24 pt-28 md:pt-32">
-        <section className="pb-8">
-          <SectionHeader
-            comment="// 02 — projects_repository"
-            title="Projects & Architecture"
-            subtitle="Complete catalog of web applications, blockchain systems, and developer productivity tools engineered with modern tech stacks."
-          />
-
-          <div className="mt-6 grid max-w-3xl grid-cols-3 gap-3 font-mono text-xs">
-            <div className="rounded-xl border border-border-subtle bg-card-bg p-3">
-              <p className="text-neutral-500">total_projects</p>
-              <p className="mt-1 text-xl font-bold text-neutral-200">{projects.length}</p>
-            </div>
-            <div className="rounded-xl border border-border-subtle bg-card-bg p-3">
-              <p className="text-neutral-500">featured</p>
-              <p className="mt-1 text-xl font-bold text-accent">{featuredCount}</p>
-            </div>
-            <div className="rounded-xl border border-border-subtle bg-card-bg p-3">
-              <p className="text-neutral-500">stable_main</p>
-              <p className="mt-1 text-xl font-bold text-neutral-200">{completedCount}</p>
-            </div>
-          </div>
+      <main className="mx-auto max-w-7xl px-6 pb-28 pt-28 md:pt-36">
+        {/* Editorial Section Header */}
+        <section className="mb-12 text-left">
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+            Projects & Architecture
+          </h1>
+          <p className="mt-3 max-w-2xl text-base text-neutral-400 font-sans leading-relaxed">
+            A comprehensive catalog of production web applications, distributed
+            systems, developer productivity suites, and blockchain research.
+          </p>
         </section>
 
-        {/* Filter Bar styled as IDE tabs */}
-        <section className="pb-8">
-          <div className="flex flex-wrap gap-2 border-b border-border-subtle pb-3">
-            {categories.map((category) => {
-              const isActive = filter === category;
+        {/* Minimalist Filter Navigation */}
+        <section className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
+          <div className="flex flex-wrap items-center gap-2">
+            {categories.map((cat) => {
+              const isActive = filter === cat.value;
+              const count = getCategoryCount(cat.value);
+
+              if (count === 0 && cat.value !== "all") return null;
+
               return (
                 <button
-                  key={category}
-                  onClick={() => setFilter(category)}
-                  className={`px-3.5 py-1.5 font-mono text-xs rounded-xl transition-colors ${
+                  key={cat.value}
+                  onClick={() => setFilter(cat.value)}
+                  className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all ${
                     isActive
-                      ? "border border-accent/40 bg-accent/10 text-accent font-semibold"
-                      : "border border-border-subtle bg-card-bg text-neutral-400 hover:border-neutral-700 hover:text-white"
+                      ? "bg-cream/15 text-cream font-semibold shadow-[0_0_20px_rgba(247,242,235,0.15)]"
+                      : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
                   }`}
                 >
-                  [{category.toLowerCase().replace(" ", "_")}] ({categoryCount(category)})
+                  <span>{cat.label}</span>
+                  <span
+                    className={`rounded-md px-1.5 py-0.5 text-[10px] ${
+                      isActive
+                        ? "bg-cream text-black font-bold"
+                        : "bg-white/10 text-white/60"
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
           </div>
+
+          <div className="font-mono text-xs text-white/40">
+            Showing {filteredProjects.length} of {projects.length} systems
+          </div>
         </section>
 
+        {/* Projects Grid */}
         <section>
-          <div className="mb-4 flex items-center justify-between font-mono text-xs text-neutral-400">
-            <span>showing {filteredProjects.length} result{filteredProjects.length > 1 ? "s" : ""}</span>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {displayProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                mode="catalog"
-              />
-            ))}
-          </div>
+          {filteredProjects.length === 0 ? (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-12 text-center text-white/40 font-mono text-xs">
+              No systems found matching this category.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                />
+              ))}
+            </div>
+          )}
         </section>
       </main>
     </div>

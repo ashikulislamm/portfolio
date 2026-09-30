@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Me",
+  title: "About & Background",
   description:
-    "Learn more about Ashikul Islam — a full-stack developer from Dhaka, Bangladesh, specializing in React, Next.js, Node.js, and building performant, user-focused web applications.",
+    "Learn more about Ashikul Islam — System Architect and Software Engineer specializing in resilient distributed systems, scalable web applications, and cloud architecture.",
   alternates: {
     canonical: "/about",
   },
@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     url: "/about",
     title: "About | Ashikul Islam",
     description:
-      "Full‑stack developer passionate about modern web tech, performance, and great UX.",
+      "System Architect and Software Engineer specializing in resilient distributed systems, scalable web applications, and cloud architecture.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ashikul Islam — Fullstack Developer",
+        alt: "Ashikul Islam — System Architect",
       },
     ],
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About | Ashikul Islam",
     description:
-      "Full‑stack developer passionate about modern web tech, performance, and great UX.",
+      "System Architect and Software Engineer specializing in resilient distributed systems, scalable web applications, and cloud architecture.",
     images: ["/og-image.png"],
   },
   robots: {

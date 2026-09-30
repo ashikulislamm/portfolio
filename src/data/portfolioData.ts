@@ -9,6 +9,7 @@ import Eventify from "@/assets/images/Eventify.png";
 import GlobalXchange from "@/assets/images/GlobaXchange.png";
 import Planora from "@/assets/images/Planora.png";
 import EcommerceAdmin from "@/assets/images/Ecommerce-Admin-Dashboard.png";
+import PaperPulse from "@/assets/images/PaperPulse.png";
 import Me from "@/assets/images/Me.jpg";
 
 import {
@@ -29,8 +30,8 @@ export const personalInfo: PersonalInfo = {
   name: "Ashikul Islam",
   firstName: "Ashikul",
   lastName: "Islam",
-  title: "Software Engineer",
-  role: "Software Engineer",
+  title: "System Architect & Software Engineer",
+  role: "System Architect",
   location: "Dhaka, Bangladesh",
   experience: "2+ Years",
   email: "md.ashikul4040@gmail.com",
@@ -405,6 +406,7 @@ export const projects: Project[] = [
       "Structured, documented REST API with standardized success/error response formats",
       "Production monorepo architecture deployed across Vercel (frontend) and Render (backend)",
     ],
+    
   },
   {
     id: 11,
@@ -455,6 +457,54 @@ export const projects: Project[] = [
       "Documented architecture, PRD, and phased development plan (ARCHITECTURE.md, PRD.md, PHASES.md)",
     ],
   },
+  {
+    id: 12,
+    name: "PaperPulse",
+    title: "PaperPulse — Academic Workspace & Assignment Submission Studio",
+    desc: "Multi-tenant assignment authoring, submission, and evaluation platform with role-based workspaces for Admins, Teachers, and Students.",
+    description:
+      "Multi-tenant academic platform with role-differentiated workspaces for Admins, Teachers, and Students. Features real-time deadline countdowns, a drag-and-drop submission studio, multi-version submission history, grading and evaluation, and live role-based analytics. Built on a Clean Architecture .NET backend and a Next.js frontend.",
+    image: PaperPulse,
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "ASP.NET Core (.NET 10)",
+      "Entity Framework Core",
+      "PostgreSQL",
+    ],
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "TanStack Query",
+      "React Hook Form",
+      "Zod",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "PostgreSQL",
+      "JWT",
+      "CQRS",
+      "FluentValidation",
+      "Swagger / OpenAPI",
+    ],
+    category: "web-app",
+    status: "completed",
+    year: "2026",
+    demo: "https://paper-pulse-sigma.vercel.app",
+    liveUrl: "https://paper-pulse-sigma.vercel.app",
+    githubUrl: "https://github.com/ashikulislamm/PaperPulse",
+    featured: true,
+    highlights: [
+      "Three role-differentiated workspaces (Admin, Teacher, Student) enforced with JWT authentication and permission-based authorization guards",
+      "Assignment Authoring Studio for teachers to create, publish, and close submission windows, then evaluate and grade work",
+      "Drag-and-drop Submission Studio with real-time deadline countdowns and multi-version submission history",
+      "Role-based analytics dashboards and admin tooling for user administration, role claims, and audit logs",
+      "Clean Architecture backend (API, Application, Domain, Infrastructure, Persistence) using CQRS and FluentValidation",
+      "Auto-migrating, auto-seeding PostgreSQL database via EF Core for zero-setup local onboarding",
+      "Fully documented REST API with interactive Swagger UI and a dedicated API reference",
+    ],
+},
 ];
 
 // Homepage specific projects list requested as homePageProjects
@@ -467,7 +517,19 @@ export const homePageProjects: Project[] = [
 
 export const experiences: ExperienceItem[] = [
   {
-    year: "2025 - Present",
+    year: "Jul 2026 - Present",
+    title: "Full Stack Developer",
+    company: "AWTOMATIG",
+    description:
+      "Leading development of enterprise web applications using React, Node.js, and cloud technologies.",
+    highlights: [
+      "Optimized system performance by identifying and resolving backend bottlenecks.",
+      "Improved logging and debugging tools, leading to a 30% reduction in issue resolution time.",
+      "Collaborated with the engineering team to deploy critical hotfixes and feature updates.",
+    ],
+  },
+  {
+    year: "Jul 2025 - Present",
     title: "Technical Support and Integration Executive",
     company: "Chologhuri Limited",
     description:
@@ -479,7 +541,7 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    year: "2024 - 2025",
+    year: "Dec 2024 - Jun 2025",
     title: "Technical Support Intern",
     company: "Chologhuri Limited",
     description:
@@ -495,7 +557,7 @@ export const academics: AcademicItem[] = [
   {
     degree: "Bachelor of Science in Computer Science & Engineering",
     institution: "Ahsanullah University of Science & Technology",
-    duration: "2021 - 2025",
+    duration: "Dec 2021 - Jan 2026",
     grade: "",
     description:
       "Specialized in Software Engineering, Web Technologies, and Database Management Systems.",
@@ -604,30 +666,33 @@ export const inquiryModesData: InquiryMode[] = [
 ];
 
 export const siteMetadata: SiteMetadata = {
-  titleDefault: "Ashikul Islam - Fullstack Developer",
+  titleDefault: "Ashikul Islam - System Architect",
   titleTemplate: "%s | Ashikul Islam",
   description:
-    "Experienced fullstack developer from Bangladesh specializing in React, Next.js, Node.js, and modern web technologies. Creating user-centric digital experiences with exceptional functionality and design.",
-  applicationName: "Ashikul Islam Portfolio",
+    "Ashikul Islam is a System Architect and Software Engineer specializing in resilient distributed systems, scalable web applications, and secure cloud infrastructure.",
+  applicationName: "Ashikul Islam — System Architect",
   keywords: [
-    "fullstack developer",
-    "web developer",
-    "React developer",
-    "Next.js developer",
-    "Node.js developer",
-    "JavaScript expert",
-    "TypeScript developer",
-    "Frontend developer",
-    "Backend developer",
-    "Bangladesh developer",
-    "Dhaka developer",
-    "portfolio website",
-    "web applications",
-    "responsive design",
-    "modern web development",
     "Ashikul Islam",
+    "System Architect",
+    "Software Engineer",
+    "Distributed Systems",
+    "Cloud Architecture",
+    "Full Stack Engineer",
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Node.js",
+    "PostgreSQL",
+    "Prisma ORM",
+    "Docker",
+    "Microservices",
+    "Blockchain Architecture",
+    "Hyperledger Besu",
+    "Software Architecture",
+    "Bangladesh Developer",
+    "Dhaka System Architect",
   ],
   siteUrl: "https://ashikulislamm.github.io/portfolio/",
-  ogImage: "og-image.png",
+  ogImage: "/og-image.png",
   googleVerification: "a7cc7dZojGpV_FVOhmH1xjA88NpQF7iZQlRdHcwUZ50",
 };

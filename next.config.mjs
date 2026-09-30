@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    instantInsights: {
+      validationLevel: "warning",
+    },
+  },
   turbopack: {
     rules: {
       "*.svg": {

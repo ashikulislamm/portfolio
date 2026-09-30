@@ -1,26 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
-  Copy,
   Mail,
+  Copy,
+  Check,
   Send,
-  Terminal,
-  Code2,
+  MapPin,
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  GraduationCap,
+  FileText,
 } from "lucide-react";
-import { FaBehance, FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa6";
-
-import {
-  personalInfo,
-  socialLinks as globalSocialLinks,
-  inquiryModesData as inquiryModes,
-} from "@/data/portfolioData";
-import { InquiryMode } from "@/types/portfolio";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
-import { SocialButton } from "@/components/portfolio/SocialButton";
-import { SectionHeader } from "@/components/portfolio/SectionHeader";
+import { personalInfo, socialLinks } from "@/data/portfolioData";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -29,212 +22,320 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
-  const [selectedMode, setSelectedMode] = useState<InquiryMode>(inquiryModes[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState("");
-  const [copyMessage, setCopyMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const applyMode = (mode: InquiryMode) => {
-    setSelectedMode(mode);
-    setFormData((prev) => ({
-      ...prev,
-      subject: mode.subject,
-      message: mode.message,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage("");
-
-    window.setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitMessage("[status 200]: Message queued successfully. Response expected within 24 hours.");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 1200);
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(personalInfo.email);
-      setCopyMessage("[clipboard]: Email copied successfully.");
-      window.setTimeout(() => setCopyMessage(""), 2200);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
     } catch {
-      setCopyMessage("[error]: Copy failed.");
-      window.setTimeout(() => setCopyMessage(""), 2200);
+      // fallback
     }
   };
 
-  const messageLength = formData.message.trim().length;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      const subject = encodeURIComponent(
+        formData.subject || `Message from ${formData.name}`
+      );
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+    }, 600);
+  };
+
+  const bentoLinks = [
+    {
+      name: "GitHub",
+      subtitle: "Code & Repos",
+      href: socialLinks.github,
+      icon: <Github size={18} />,
+    },
+    {
+      name: "LinkedIn",
+      subtitle: "Network & Career",
+      href: socialLinks.linkedin,
+      icon: <Linkedin size={18} />,
+    },
+    {
+      name: "Scholar",
+      subtitle: "IEEE Research",
+      href: socialLinks.googleScholar,
+      icon: <GraduationCap size={18} />,
+    },
+    {
+      name: "Resume",
+      subtitle: "Curriculum Vitae",
+      href: personalInfo.resumeUrl,
+      icon: <FileText size={18} />,
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background text-neutral-100">
-      <main className="mx-auto max-w-7xl px-6 pb-24 pt-28 md:pt-32">
-        <SectionHeader
-          comment="// 06 — terminal_contact_console"
-          title="Contact & Transmission"
-          subtitle="Send a structured brief or query directly into my inbox. Fast responses guaranteed for software opportunities."
-        />
+      <main className="mx-auto max-w-6xl px-6 pb-28 pt-28 md:pt-36">
+        {/* Editorial Section Header */}
+        <div className="mb-12 text-left">
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+            Get In Touch
+          </h1>
+          <p className="mt-3 max-w-2xl text-base text-neutral-400 font-sans leading-relaxed">
+            Have a project in mind, an engineering role to discuss, or want to
+            connect? Reach out directly or send a message through the form below.
+          </p>
+        </div>
 
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] items-start">
-          {/* Left Column - Terminal Info Console */}
-          <aside className="space-y-6 text-left">
-            <div className="rounded-xl border border-border-subtle bg-secondary-bg p-5 font-mono text-xs">
-              <div className="flex items-center justify-between border-b border-[#202020] pb-3 mb-4 text-neutral-400">
-                <div className="flex items-center gap-2">
-                  <Terminal size={14} className="text-accent" />
-                  <span>contact --info</span>
+        {/* Bento Grid: Aligned 12-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Left Bento Column (5 cols on lg) */}
+          <aside className="lg:col-span-5 flex flex-col justify-between gap-5 text-left">
+            {/* Bento 1: Direct Email Card */}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all hover:border-white/20">
+              <div className="flex items-center gap-3 text-cream mb-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.05] border border-white/10">
+                  <Mail size={18} />
                 </div>
-                <span className="text-[10px] text-neutral-600">bash</span>
+                <div>
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-white/40 block">
+                    Direct Email
+                  </span>
+                  <a
+                    href={`mailto:${personalInfo.email}`}
+                    className="font-sans text-sm font-semibold text-white hover:text-cream transition-colors break-all"
+                  >
+                    {personalInfo.email}
+                  </a>
+                </div>
               </div>
 
-              <div className="space-y-3">
-                <p className="text-neutral-500">$ cat contact.json</p>
-                <div className="pl-2 space-y-1.5 text-neutral-300">
-                  <p><span className="text-neutral-500">&quot;email&quot;:</span> &quot;{personalInfo.email}&quot;</p>
-                  <p><span className="text-neutral-500">&quot;phone&quot;:</span> &quot;{personalInfo.phone}&quot;</p>
-                  <p><span className="text-neutral-500">&quot;location&quot;:</span> &quot;{personalInfo.location}&quot;</p>
-                  <p><span className="text-neutral-500">&quot;status&quot;:</span> <span className="text-accent">&quot;available_for_hire&quot;</span></p>
-                </div>
+              <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] py-2 px-3 font-mono text-xs text-white/80 transition-all hover:border-cream/50 hover:bg-white/[0.06] hover:text-white active:scale-95"
+                >
+                  {isCopied ? (
+                    <>
+                      <Check size={14} className="text-emerald-400" />
+                      <span className="text-emerald-400 font-medium">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={14} />
+                      <span>Copy Email</span>
+                    </>
+                  )}
+                </button>
 
-                <div className="pt-3 border-t border-[#1c1c1c] flex flex-wrap gap-2">
-                  <Button variant="terminal" size="sm" onClick={copyEmail} icon={<Copy size={13} />} isMono>
-                    copy_email
-                  </Button>
-                  <Button variant="secondary" size="sm" href={`mailto:${personalInfo.email}`} icon={<Mail size={13} />} isMono>
-                    open_mail_client
-                  </Button>
-                </div>
-
-                {(copyMessage || submitMessage) && (
-                  <p className="mt-3 font-mono text-xs text-accent bg-accent/10 border border-accent/20 p-2 rounded-lg">
-                    {copyMessage || submitMessage}
-                  </p>
-                )}
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-cream px-4 py-2 font-mono text-xs font-semibold text-black transition-all hover:bg-white active:scale-95 shrink-0"
+                >
+                  <span>Open Client</span>
+                  <ArrowUpRight size={14} />
+                </a>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border-subtle bg-[#121212] p-5 text-left font-mono text-xs">
-              <p className="text-neutral-400 mb-3">$ list --social-signals</p>
-              <div className="grid grid-cols-2 gap-2">
-                <SocialButton name="GitHub" href={globalSocialLinks.github} icon={<FaGithub size={14} />} variant="card" />
-                <SocialButton name="LinkedIn" href={globalSocialLinks.linkedin} icon={<FaLinkedin size={14} />} variant="card" />
-                <SocialButton name="Facebook" href={globalSocialLinks.facebook} icon={<FaFacebook size={14} />} variant="card" />
-                <SocialButton name="Behance" href={globalSocialLinks.behance} icon={<FaBehance size={14} />} variant="card" />
+            {/* Bento 2: Availability & Coordinates */}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm transition-all hover:border-white/20">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2 text-white/80">
+                  <MapPin size={16} className="text-cream" />
+                  <span className="font-sans text-sm font-semibold text-white">
+                    {personalInfo.location}
+                  </span>
+                </div>
+                <span className="font-mono text-xs text-white/40">UTC+06:00</span>
               </div>
+              <p className="font-mono text-xs text-emerald-400 flex items-center gap-2 pt-2 border-t border-white/5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Available for Remote & Hybrid Roles</span>
+              </p>
+            </div>
+
+            {/* Bento 3: 2x2 Grid for Socials & CV */}
+            <div className="grid grid-cols-2 gap-3 flex-1">
+              {bentoLinks.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-4 backdrop-blur-sm transition-all duration-200 hover:border-cream/40 hover:bg-white/[0.04] hover:shadow-[0_0_25px_rgba(247,242,235,0.06)]"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/80 group-hover:text-cream group-hover:border-cream/30 transition-colors">
+                      {item.icon}
+                    </div>
+                    <ArrowUpRight
+                      size={14}
+                      className="text-white/30 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-cream"
+                    />
+                  </div>
+
+                  <div className="mt-3">
+                    <span className="font-heading text-sm font-bold block text-white group-hover:text-cream transition-colors">
+                      {item.name}
+                    </span>
+                    <span className="font-sans text-[11px] text-white/40 block mt-0.5 group-hover:text-white/60 transition-colors">
+                      {item.subtitle}
+                    </span>
+                  </div>
+                </a>
+              ))}
             </div>
           </aside>
 
-          {/* Right Column - Terminal Form Console */}
-          <section className="rounded-xl border border-border-subtle bg-secondary-bg p-6 text-left md:p-8">
-            <div className="flex items-center justify-between border-b border-[#202020] pb-4 mb-6">
-              <div className="flex items-center gap-2 font-mono text-xs text-neutral-300">
-                <Code2 size={15} className="text-accent" />
-                <span>$ send-message --to=ashikul</span>
-              </div>
-              <span className="font-mono text-[10px] text-neutral-500">Form Console</span>
-            </div>
+          {/* Right Bento Column: Contact Form (7 cols on lg) */}
+          <section className="lg:col-span-7 flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-10 backdrop-blur-sm text-left transition-all hover:border-white/20">
+            <div>
+              <h2 className="font-heading text-xl md:text-2xl font-bold uppercase tracking-tight text-white mb-2">
+                Send a Message
+              </h2>
+              <p className="text-xs sm:text-sm text-neutral-400 font-sans mb-6">
+                Fill in your details below and I&apos;ll get back to you promptly.
+              </p>
 
-            {/* Quick intent selector tabs */}
-            <div className="mb-6">
-              <p className="font-mono text-xs text-neutral-400 mb-2">{"// Select Intent Preset:"}</p>
-              <div className="grid grid-cols-3 gap-2">
-                {inquiryModes.map((mode) => {
-                  const isActive = selectedMode.id === mode.id;
-                  return (
-                    <button
-                      key={mode.id}
-                      type="button"
-                      onClick={() => applyMode(mode)}
-                      className={`px-3 py-2 text-left font-mono text-xs rounded-xl border transition-colors ${
-                        isActive
-                          ? "border-accent/50 bg-accent/10 text-accent font-semibold"
-                          : "border-border-subtle bg-[#161616] text-neutral-400 hover:border-neutral-700 hover:text-white"
-                      }`}
-                    >
-                      <span>[{mode.label.toLowerCase()}]</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <Input
-                  label="name"
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="John Doe"
-                />
-                <Input
-                  label="email"
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <Input
-                label="subject"
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleInputChange}
-                required
-                placeholder={selectedMode.subject}
-              />
-
-              <div>
-                <Textarea
-                  label="message_body"
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="min-h-[160px] resize-none"
-                  placeholder={selectedMode.message}
-                />
-                <div className="mt-1.5 flex items-center justify-between font-mono text-[11px] text-neutral-500">
-                  <span>{messageLength} characters</span>
-                  <span>[cmd + enter to submit]</span>
+              {isSubmitted ? (
+                <div className="rounded-2xl border border-cream/30 bg-cream/[0.05] p-8 text-center my-6">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-cream/10 text-cream mb-4">
+                    <Check size={28} />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-white uppercase mb-2">
+                    Message Prepared
+                  </h3>
+                  <p className="text-sm text-neutral-300 font-sans max-w-md mx-auto">
+                    Thank you, {formData.name}. Your email message has been
+                    composed. If your email client didn&apos;t open automatically,
+                    you can reach me directly at{" "}
+                    <span className="text-cream">{personalInfo.email}</span>.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setFormData({
+                        name: "",
+                        email: "",
+                        subject: "",
+                        message: "",
+                      });
+                    }}
+                    className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs text-cream hover:underline"
+                  >
+                    Send another message
+                  </button>
                 </div>
-              </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="block font-sans text-xs font-medium text-neutral-300 mb-1.5"
+                      >
+                        Your Name <span className="text-cream">*</span>
+                      </label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Jane Doe"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2.5 font-sans text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-cream focus:bg-white/[0.05]"
+                      />
+                    </div>
 
-              <Button
-                type="submit"
-                isLoading={isSubmitting}
-                variant="primary"
-                size="lg"
-                isMono
-                className="w-full"
-                icon={<Send size={15} />}
-              >
-                {isSubmitting ? "transmitting..." : "send_message()"}
-              </Button>
-            </form>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="block font-sans text-xs font-medium text-neutral-300 mb-1.5"
+                      >
+                        Your Email <span className="text-cream">*</span>
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="jane@example.com"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2.5 font-sans text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-cream focus:bg-white/[0.05]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="subject"
+                      className="block font-sans text-xs font-medium text-neutral-300 mb-1.5"
+                    >
+                      Subject
+                    </label>
+                    <input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      placeholder="Project Inquiry / Engineering Role / Collaboration"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2.5 font-sans text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-cream focus:bg-white/[0.05]"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block font-sans text-xs font-medium text-neutral-300 mb-1.5"
+                    >
+                      Your Message <span className="text-cream">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      placeholder="Tell me about your project, timeline, or open role..."
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2.5 font-sans text-sm text-white placeholder-white/20 outline-none transition-colors focus:border-cream focus:bg-white/[0.05] resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-cream py-3.5 px-6 font-mono text-xs font-bold uppercase tracking-wider text-black transition-all hover:bg-white hover:shadow-[0_0_30px_rgba(247,242,235,0.25)] active:scale-[0.99] disabled:opacity-50 mt-2"
+                  >
+                    <Send
+                      size={14}
+                      className="transition-transform duration-200 group-hover:translate-x-1"
+                    />
+                    <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                  </button>
+                </form>
+              )}
+            </div>
           </section>
         </div>
       </main>

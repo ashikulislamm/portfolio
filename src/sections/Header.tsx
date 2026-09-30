@@ -1,40 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Github, Menu, X, Terminal } from "lucide-react";
-import { navItems, socialLinks } from "@/data/portfolioData";
-import { NavItem } from "@/types/portfolio";
+import { Terminal, Github, Linkedin, X, Plus } from "lucide-react";
+import { personalInfo, socialLinks } from "@/data/portfolioData";
+import { StaggeredDrawer } from "@/components/navigation/StaggeredDrawer";
 
 export const Header = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 12);
+      setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMobileOpen]);
 
   useEffect(() => {
     if (!isHome) {
@@ -44,180 +31,86 @@ export const Header = () => {
 
     const sectionIds = [
       "home",
+      "capabilities",
       "tech-stack",
-      "projects",
+      "history",
       "experience",
+      "projects",
       "research",
       "about",
       "contact",
     ];
 
     const updateActiveSection = () => {
-      const anchor = window.innerHeight * 0.38;
-      let fallbackSection = "home";
+      const anchor = window.innerHeight * 0.35;
+      let current = "home";
 
-      for (const sectionId of sectionIds) {
-        const element = document.getElementById(sectionId);
-        if (!element) {
-          continue;
-        }
-
-        const rect = element.getBoundingClientRect();
-
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
         if (rect.top <= anchor) {
-          fallbackSection = sectionId;
-        }
-
-        if (rect.top <= anchor && rect.bottom > anchor) {
-          setActiveSection(sectionId);
-          return;
+          current = id;
         }
       }
-
-      setActiveSection(fallbackSection);
+      setActiveSection(current);
     };
 
     updateActiveSection();
     window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
-
-    return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
-    };
+    return () => window.removeEventListener("scroll", updateActiveSection);
   }, [isHome, pathname]);
-
-  const handleNavClick = (item: NavItem) => {
-    setIsMobileOpen(false);
-    if (isHome && item.sectionId) {
-      setActiveSection(item.sectionId);
-      const section = document.getElementById(item.sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
-    }
-    router.push(item.href);
-  };
-
-  const isItemActive = (item: NavItem) => {
-    if (isHome) {
-      return activeSection === item.sectionId;
-    }
-    return pathname === item.href;
-  };
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b border-border-subtle bg-background/90 backdrop-blur-md px-4 sm:px-6 py-5 transition-shadow ${
-          isScrolled ? "shadow-md shadow-black/40" : ""
+        className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+          isScrolled
+            ? "border-b border-white/10 bg-[#070709]/85 backdrop-blur-md py-3.5 shadow-lg shadow-black/40"
+            : "bg-transparent py-5"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           <Link
             href="/"
-            className="flex items-center gap-2 font-mono text-sm font-bold tracking-tight text-neutral-100 transition-colors hover:text-accent"
+            className="group flex items-center gap-3 font-mono text-sm tracking-tight text-white"
           >
-            <Terminal size={16} className="text-accent shrink-0" />
-            <span>ashikul.dev</span>
+            <div className="flex flex-col">
+              <span className="font-heading font-bold text-sm text-neutral-100 group-hover:text-cream transition-colors">
+                {personalInfo.name}
+              </span>
+            </div>
           </Link>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-1 md:flex">
-            {navItems.map((item) => {
-              const isActive = isItemActive(item);
-
-              if (isHome) {
-                return (
-                  <button
-                    key={item.label}
-                    onClick={() => handleNavClick(item)}
-                    className={`px-3 py-1 font-mono text-xs transition-colors ${
-                      isActive
-                        ? "text-accent font-semibold"
-                        : "text-neutral-400 hover:text-white"
-                    }`}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    {item.label}
-                  </button>
-                );
-              }
-
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`px-3 py-1 font-mono text-sm transition-colors ${
-                    isActive
-                      ? "text-accent font-semibold"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="hidden items-center gap-4 md:flex">
-            <a
-              href={socialLinks.github}
-              target="_blank"
-              rel="noreferrer"
-              className="text-neutral-400 transition-colors hover:text-white"
-              aria-label="GitHub profile"
+          {/* Right: Quick Socials & Animated Menu Toggle */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsDrawerOpen((prev) => !prev)}
+              className="group relative inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs uppercase tracking-wider text-neutral-200 backdrop-blur-sm transition-all duration-200 hover:border-cream/60 hover:bg-cream/10 hover:text-cream active:scale-95"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isDrawerOpen}
             >
-              <Github size={18} />
-            </a>
+              <span className="font-semibold">
+                {isDrawerOpen ? "Close" : "Menu"}
+              </span>
+              <span className="flex h-4 w-4 items-center justify-center text-cream transition-transform duration-300 group-hover:rotate-90">
+                {isDrawerOpen ? (
+                  <X size={14} className="text-cream" />
+                ) : (
+                  <Plus size={14} className="text-cream" />
+                )}
+              </span>
+            </button>
           </div>
-
-          <button
-            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-border-subtle bg-secondary-bg text-neutral-300 md:hidden"
-            onClick={() => setIsMobileOpen((prev) => !prev)}
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      {isMobileOpen && (
-        <div className="fixed inset-0 z-40 bg-background pt-20 px-6 md:hidden flex flex-col justify-between pb-8">
-          <nav className="flex flex-col gap-3 font-mono text-sm">
-            {navItems.map((item) => {
-              const isActive = isItemActive(item);
-              return (
-                <button
-                  key={item.label}
-                  onClick={() => handleNavClick(item)}
-                  className={`text-left py-2.5 border-b border-[#1c1c1c] transition-colors flex items-center justify-between ${
-                    isActive ? "text-accent font-semibold" : "text-neutral-300 hover:text-accent"
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {isActive && <span className="text-xs text-accent">[active]</span>}
-                </button>
-              );
-            })}
-          </nav>
-
-          <div className="pt-6 border-t border-border-subtle flex items-center justify-between text-xs font-mono text-neutral-400">
-            <span>ashikul.dev</span>
-            <a
-              href={socialLinks.github}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1 text-neutral-300 hover:text-white"
-            >
-              <Github size={14} />
-              <span>GitHub</span>
-            </a>
-          </div>
-        </div>
-      )}
+      {/* Staggered Navigation Drawer */}
+      <StaggeredDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        activeSection={activeSection}
+      />
     </>
   );
 };

@@ -3,6 +3,26 @@ import "./globals.css";
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { personalInfo, siteMetadata } from "@/data/portfolioData";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -27,13 +47,16 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL(siteMetadata.siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteMetadata.siteUrl,
     title: `${personalInfo.name} - ${personalInfo.role}`,
     description: siteMetadata.description,
-    siteName: personalInfo.name,
+    siteName: `${personalInfo.name} - ${personalInfo.role}`,
     images: [
       {
         url: siteMetadata.ogImage,
@@ -97,8 +120,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(
+        "scroll-smooth",
+        inter.variable,
+        spaceGrotesk.variable,
+        jetbrainsMono.variable
+      )}
+    >
+      <body
+        suppressHydrationWarning
+        className="font-sans bg-background text-text-primary antialiased selection:bg-cream/20 selection:text-cream"
+      >
         <Header />
         {children}
         <Footer />
