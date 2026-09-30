@@ -57,14 +57,6 @@ export const metadata: Metadata = {
     title: `${personalInfo.name} - ${personalInfo.role}`,
     description: siteMetadata.description,
     siteName: `${personalInfo.name} - ${personalInfo.role}`,
-    images: [
-      {
-        url: siteMetadata.ogImage,
-        width: 1200,
-        height: 630,
-        alt: `${personalInfo.name} - ${personalInfo.role}`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -72,7 +64,6 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     site: "@ashikul_islam",
     creator: "@ashikul_islam",
-    images: [siteMetadata.ogImage],
   },
   robots: {
     index: true,

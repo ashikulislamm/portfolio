@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+export const dynamic = "force-static";
+export const runtime = "nodejs";
 export const alt = "Ashikul Islam - System Architect";
 export const size = {
   width: 1200,
@@ -39,41 +40,6 @@ export default async function Image() {
               "radial-gradient(circle, rgba(247, 242, 235, 0.08) 0%, transparent 70%)",
           }}
         />
-
-        {/* Top Tag */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            padding: "8px 18px",
-            borderRadius: "999px",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
-            backgroundColor: "rgba(255, 255, 255, 0.03)",
-            width: "fit-content",
-          }}
-        >
-          <div
-            style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              backgroundColor: "#F7F2EB",
-            }}
-          />
-          <span
-            style={{
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.15em",
-              color: "#F7F2EB",
-              textTransform: "uppercase",
-            }}
-          >
-            Ashikul Islam // System Architect
-          </span>
-        </div>
-
         {/* Center Main Headline */}
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <div
@@ -126,12 +92,16 @@ export default async function Image() {
         >
           <div style={{ display: "flex", gap: "10px" }}>
             {[
-              "Next.js 16",
-              "React 19",
+              "Next.js",
+              "Cloudflare",
               "TypeScript",
               "PostgreSQL",
               "Docker",
-              "Besu",
+              "ASP.NET",
+              "Tailwind CSS",
+              "Redis",
+              "Nginx",
+              "CI/CD",
             ].map((tech) => (
               <div
                 key={tech}

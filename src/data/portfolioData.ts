@@ -693,6 +693,6 @@ export const siteMetadata: SiteMetadata = {
     "Dhaka System Architect",
   ],
   siteUrl: "https://ashikulislamm.github.io/portfolio/",
-  ogImage: "/og-image.png",
+  ogImage: "/opengraph-image",
   googleVerification: "a7cc7dZojGpV_FVOhmH1xjA88NpQF7iZQlRdHcwUZ50",
 };
