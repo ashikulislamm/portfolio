@@ -520,6 +520,8 @@ export const experiences: ExperienceItem[] = [
     year: "Jul 2026 - Present",
     title: "Full Stack Developer",
     company: "AWTOMATIG",
+    location: "Dhaka, BD",
+    workMode: "Onsite",
     description:
       "Leading development of enterprise web applications using React, Node.js, and cloud technologies.",
     highlights: [
@@ -532,6 +534,8 @@ export const experiences: ExperienceItem[] = [
     year: "Jul 2025 - Present",
     title: "Technical Support and Integration Executive",
     company: "Chologhuri Limited",
+    location: "Dhaka, BD",
+    workMode: "Hybrid",
     description:
       "Leading development of enterprise web applications using React, Node.js, and cloud technologies.",
     highlights: [
@@ -544,6 +548,8 @@ export const experiences: ExperienceItem[] = [
     year: "Dec 2024 - Jun 2025",
     title: "Technical Support Intern",
     company: "Chologhuri Limited",
+    location: "Dhaka, BD",
+    workMode: "On-site",
     description:
       "Worked on developing and maintaining websites and web applications using modern JavaScript frameworks.",
     highlights: [

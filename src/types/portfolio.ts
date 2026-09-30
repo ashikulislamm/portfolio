@@ -61,6 +61,8 @@ export interface ExperienceItem {
   company: string;
   description?: string;
   highlights?: string[];
+  location?: string;
+  workMode?: "Hybrid" | "Remote" | "On-site" | string;
 }
 
 export interface AcademicItem {

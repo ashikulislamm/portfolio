@@ -135,7 +135,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-heading text-[clamp(3.6rem,9.5vw,8.5rem)] font-black tracking-[-0.04em] text-white uppercase leading-[0.92] select-none"
+          className="font-heading text-[clamp(2.6rem,9.5vw,8.5rem)] font-black tracking-[-0.04em] text-white uppercase leading-[0.92] select-none break-words"
         >
           {personalInfo.name}
         </motion.h1>

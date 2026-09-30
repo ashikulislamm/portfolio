@@ -9,6 +9,7 @@ interface CompanyGroup {
   company: string;
   roles: ExperienceItem[];
   location: string;
+  workMode?: string;
   period: string;
 }
 
@@ -30,7 +31,7 @@ type ChronologyCardData =
     };
 
 export const ChronologyFlow: React.FC = () => {
-  // 1. Dynamically group experiences by company (adding a new company spawns an identical full-screen card)
+  // 1. Dynamically group experiences by company and extract location and work mode
   const companyGroups = useMemo(() => {
     const map = new Map<string, ExperienceItem[]>();
     experiences.forEach((exp) => {
@@ -47,10 +48,15 @@ export const ChronologyFlow: React.FC = () => {
       const startYear = allYears[allYears.length - 1]?.split("-")[0]?.trim() || "";
       const period = isPresent ? `${startYear} – PRESENT` : roles[0]?.year || "";
 
+      // Derive location and work mode from newest role or fallback
+      const primaryLoc = roles[0]?.location || "Dhaka, BD";
+      const primaryMode = roles[0]?.workMode || "Hybrid";
+
       groups.push({
         company,
         roles,
-        location: "DHAKA, BD · HYBRID",
+        location: primaryLoc,
+        workMode: primaryMode,
         period,
       });
     });
@@ -111,82 +117,98 @@ export const ChronologyFlow: React.FC = () => {
   ];
 
   return (
-    <div id="history" className="relative w-full">
+    <div id="history" className="relative w-full pb-36 sm:pb-48 md:pb-64">
       {allCards.map((card, index) => {
         const formattedIndex = String(index + 1).padStart(2, "0");
         const bgClass = cardBgColors[index % cardBgColors.length];
-
-        // Progressive top sticky offset for full-width stacking
-        const stickyTopStyle = {
-          top: `calc(${index * 24}px)`,
-          zIndex: 10 + index,
-        };
 
         return (
           <div
             key={card.id}
             className="sticky w-full"
-            style={stickyTopStyle}
+            style={{
+              top: `calc(56px + ${index * 16}px)`,
+              zIndex: 10 + index,
+            }}
           >
             <section
               aria-label={`${card.type} section`}
-              className={`relative min-h-[90vh] w-full flex flex-col justify-between p-8 md:p-16 lg:p-20 text-white transition-colors border-t border-white/15 text-left shadow-[0_-25px_60px_rgba(0,0,0,0.95)] backdrop-blur-md ${bgClass}`}
+              className={`relative min-h-[min(540px,78dvh)] md:min-h-[72vh] w-full flex flex-col justify-between rounded-t-3xl border-t border-white/15 p-6 sm:p-10 md:p-12 lg:p-16 pb-8 sm:pb-12 text-white transition-colors text-left shadow-[0_-20px_50px_rgba(0,0,0,0.9)] backdrop-blur-md ${bgClass}`}
             >
               {/* Subtle glowing hairline edge on top */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cream/35 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cream/35 to-transparent rounded-t-3xl" />
 
               {/* 1. EXPERIENCE CARD */}
               {card.type === "experience" && (
                 <>
                   <div>
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-cream">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                      <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-cream">
                         {formattedIndex} — CAREER & INDUSTRY
                       </span>
-                      <span className="font-mono text-xs text-white/50 shrink-0">
-                        {card.companyGroup.location} · {card.companyGroup.period}
-                      </span>
+                      <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] sm:text-xs text-white/50">
+                        <span>{card.companyGroup.location}</span>
+                        {card.companyGroup.workMode && (
+                          <>
+                            <span className="text-white/30">·</span>
+                            <span className="text-cream/80">{card.companyGroup.workMode}</span>
+                          </>
+                        )}
+                        {card.companyGroup.period && (
+                          <>
+                            <span className="text-white/30">·</span>
+                            <span>{card.companyGroup.period}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
 
-                    <hr className="my-6 border-0" />
-
-                    <h2 className="font-heading text-[clamp(2.8rem,9vw,8rem)] font-black tracking-tight uppercase leading-[0.9] text-white">
+                    <h2 className="mt-4 font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[0.98] text-white">
                       {card.companyGroup.company}
                     </h2>
                   </div>
 
-                  <div className="mt-6 flex flex-col gap-8 border-0 pt-16">
+                  <div className="mt-6 md:mt-10 flex flex-col gap-6 md:gap-8 border-t border-white/10 pt-6 md:pt-8">
                     {card.companyGroup.roles.map((role, rIdx) => (
                       <div
                         key={rIdx}
-                        className={`flex flex-col sm:flex-row sm:items-start justify-between gap-4 ${
-                          rIdx > 0 ? "border-0 pt-6" : ""
+                        className={`flex items-start gap-3.5 sm:gap-4 ${
+                          rIdx > 0 ? "border-t border-white/10 pt-6" : ""
                         }`}
                       >
-                        <div className="flex items-start gap-4">
-                          <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-cream">
-                            <Briefcase size={20} />
-                          </div>
-                          <div>
-                            <h3 className="font-heading text-xl md:text-2xl font-bold text-white">
-                              {role.title}
-                            </h3>
-                            <p className="font-mono text-xs text-cream/90">{role.company}</p>
-                            {role.highlights && role.highlights.length > 0 && (
-                              <ul className="mt-3 space-y-1.5 text-xs md:text-sm text-neutral-400 max-w-3xl">
-                                {role.highlights.map((h, hIdx) => (
-                                  <li key={hIdx} className="flex items-start gap-2">
-                                    <span className="text-cream font-mono mt-0.5">›</span>
-                                    <span>{h}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            )}
-                          </div>
+                        <div className="mt-1 flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-cream">
+                          <Briefcase size={18} />
                         </div>
-                        <span className="font-mono text-xs font-semibold text-white/60 sm:text-right shrink-0">
-                          {role.year}
-                        </span>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white leading-snug">
+                            {role.title}
+                          </h3>
+
+                          <div className="mt-1.5 flex flex-wrap items-center gap-2 font-mono text-xs text-white/50">
+                            <span className="text-cream font-medium">{role.company}</span>
+                            {(role.location || role.workMode) && (
+                              <>
+                                <span className="text-white/30">·</span>
+                                <span className="text-white/60">
+                                  {[role.location, role.workMode].filter(Boolean).join(" · ")}
+                                </span>
+                              </>
+                            )}
+                            <span className="text-white/30">·</span>
+                            <span className="text-cream/90 font-semibold">{role.year}</span>
+                          </div>
+
+                          {role.highlights && role.highlights.length > 0 && (
+                            <ul className="mt-3.5 space-y-1.5 text-xs md:text-sm text-neutral-400 max-w-3xl">
+                              {role.highlights.map((h, hIdx) => (
+                                <li key={hIdx} className="flex items-start gap-2">
+                                  <span className="text-cream font-mono mt-0.5 shrink-0">›</span>
+                                  <span className="leading-relaxed">{h}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -197,39 +219,37 @@ export const ChronologyFlow: React.FC = () => {
               {card.type === "publication" && (
                 <>
                   <div>
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-cream">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-cream">
                         {formattedIndex} — RESEARCH
                       </span>
-                      <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 font-mono text-[11px] text-cream shrink-0">
+                      <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[10px] sm:text-[11px] text-cream shrink-0">
                         {card.publication.publisher || "PUBLICATION"} // {card.publication.year}
                       </span>
                     </div>
 
-                    <hr className="my-6 border-0" />
-
-                    <h2 className="font-heading text-[clamp(2.8rem,9vw,8rem)] font-black tracking-tight uppercase leading-[0.9] text-white">
+                    <h2 className="mt-4 font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[0.98] text-white">
                       {card.publication.publisher || "RESEARCH"} PUBLICATION
                     </h2>
 
-                    <p className="mt-4 max-w-3xl text-sm md:text-base text-neutral-300 font-sans leading-relaxed">
+                    <p className="mt-3 sm:mt-4 max-w-3xl text-sm md:text-base text-neutral-300 font-sans leading-relaxed">
                       {card.publication.title}
                     </p>
                   </div>
 
-                  <div className="mt-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-t border-white/15 pt-8">
-                    <div className="space-y-2 font-mono text-xs text-neutral-300">
+                  <div className="mt-8 md:mt-12 flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-t border-white/15 pt-6 md:pt-8">
+                    <div className="space-y-2 font-mono text-xs text-neutral-300 max-w-2xl min-w-0">
                       {card.publication.description && (
-                        <p>
+                        <p className="leading-relaxed">
                           <span className="text-white/50">VENUE:</span>{" "}
                           {card.publication.description.replace(/^Presented at the /i, "")}
                         </p>
                       )}
-                      <p>
+                      <p className="leading-relaxed">
                         <span className="text-white/50">AUTHORS:</span> {card.publication.authors}
                       </p>
                       {card.publication.doi && (
-                        <p>
+                        <p className="leading-relaxed break-all">
                           <span className="text-white/50">DOI:</span> {card.publication.doi}
                         </p>
                       )}
@@ -240,7 +260,7 @@ export const ChronologyFlow: React.FC = () => {
                         href={card.publication.link}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-xl bg-cream px-6 py-3 font-mono text-xs font-bold uppercase text-black hover:bg-white transition-all shrink-0"
+                        className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-cream px-5 py-3 font-mono text-xs font-bold uppercase text-black hover:bg-white transition-all shrink-0 active:scale-95 shadow-md"
                       >
                         <FileText size={15} />
                         <span>Read on IEEE Xplore</span>
@@ -255,47 +275,45 @@ export const ChronologyFlow: React.FC = () => {
               {card.type === "education" && (
                 <>
                   <div>
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-cream">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-cream">
                         {formattedIndex} — ACADEMIC FOUNDATION
                       </span>
-                      {/* Duplicate duration removed — only location kept */}
-                      <span className="font-mono text-xs text-white/50 shrink-0">
+                      <span className="font-mono text-[11px] sm:text-xs text-white/50 shrink-0">
                         DHAKA, BANGLADESH
                       </span>
                     </div>
 
-                    <hr className="my-6 border-0" />
-
-                    {/* Full University Name in Big font, NO short form, NO duplicate paragraph */}
-                    <h2 className="font-heading text-[clamp(2.4rem,7.5vw,7rem)] font-black tracking-tight uppercase leading-[0.92] text-white">
+                    <h2 className="mt-4 font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[0.98] text-white">
                       {card.academic.institution}
                     </h2>
 
-                    <p className="mt-4 max-w-3xl text-sm md:text-base text-neutral-300 font-sans leading-relaxed">
+                    <p className="mt-3 sm:mt-4 max-w-3xl text-sm md:text-base text-neutral-300 font-sans leading-relaxed">
                       {card.academic.description}
                     </p>
                   </div>
 
-                  <div className="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-8">
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-cream">
-                        <GraduationCap size={24} />
+                  {/* Degree & Graduation Info Block */}
+                  <div className="mt-8 md:mt-12 border-t border-white/10 pt-6">
+                    <div className="flex items-start gap-3.5">
+                      <div className="mt-1 flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-cream">
+                        <GraduationCap size={22} />
                       </div>
-                      <div>
-                        <p className="font-heading text-lg md:text-xl font-bold text-white">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white leading-snug">
                           {card.academic.degree}
-                        </p>
-                        <p className="font-mono text-xs text-neutral-400">
+                        </h3>
+                        <p className="mt-1 font-mono text-xs text-neutral-400">
                           Department of Computer Science & Engineering
                         </p>
+                        <div className="mt-3 flex items-center gap-2">
+                          <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-xs font-medium text-cream">
+                            <span className="h-1.5 w-1.5 rounded-full bg-cream animate-pulse" />
+                            Graduated {card.academic.duration}
+                          </span>
+                        </div>
                       </div>
                     </div>
-
-                    {/* Duration shown only once cleanly */}
-                    <span className="font-mono text-xs font-semibold text-cream sm:text-right shrink-0">
-                      Graduated {card.academic.duration}
-                    </span>
                   </div>
                 </>
               )}
