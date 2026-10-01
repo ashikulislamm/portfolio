@@ -89,26 +89,26 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background text-neutral-100">
-      <main className="mx-auto max-w-6xl px-6 pb-28 pt-28 md:pt-36">
+      <main className="mx-auto max-w-6xl px-4 xs:px-6 md:px-12 pb-20 sm:pb-28 pt-24 sm:pt-28 md:pt-36">
         {/* Editorial Section Header */}
-        <div className="mb-12 text-left">
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+        <div className="mb-8 sm:mb-12 text-left">
+          <h1 className="font-heading text-[clamp(2rem,1rem_+_4.5vw,3.75rem)] font-black uppercase tracking-tight text-white leading-[1.05] break-words">
             Get In Touch
           </h1>
-          <p className="mt-3 max-w-2xl text-base text-neutral-400 font-sans leading-relaxed">
+          <p className="mt-3 max-w-2xl text-sm sm:text-base text-neutral-400 font-sans leading-relaxed">
             Have a project in mind, an engineering role to discuss, or want to
             connect? Reach out directly or send a message through the form below.
           </p>
         </div>
 
         {/* Bento Grid: Aligned 12-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-stretch">
           {/* Left Bento Column (5 cols on lg) */}
-          <aside className="lg:col-span-5 flex flex-col justify-between gap-5 text-left">
+          <aside className="min-w-0 lg:col-span-5 flex flex-col justify-between gap-4 sm:gap-5 text-left">
             {/* Bento 1: Direct Email Card */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all hover:border-white/20">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-6 backdrop-blur-sm transition-all hover:border-white/20">
               <div className="flex items-center gap-3 text-cream mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.05] border border-white/10">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.05] border border-white/10">
                   <Mail size={18} />
                 </div>
                 <div>
@@ -124,7 +124,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+              <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-white/10">
                 <button
                   type="button"
                   onClick={copyEmail}
@@ -155,7 +155,7 @@ export default function ContactPage() {
 
             {/* Bento 2: Availability & Coordinates */}
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm transition-all hover:border-white/20">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 mb-2">
                 <div className="flex items-center gap-2 text-white/80">
                   <MapPin size={16} className="text-cream" />
                   <span className="font-sans text-sm font-semibold text-white">
@@ -178,7 +178,7 @@ export default function ContactPage() {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-4 backdrop-blur-sm transition-all duration-200 hover:border-cream/40 hover:bg-white/[0.04] hover:shadow-[0_0_25px_rgba(247,242,235,0.06)]"
+                  className="group flex min-w-0 flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-3.5 xs:p-4 backdrop-blur-sm transition-all duration-200 hover:border-cream/40 hover:bg-white/[0.04] hover:shadow-[0_0_25px_rgba(247,242,235,0.06)]"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-white/80 group-hover:text-cream group-hover:border-cream/30 transition-colors">
@@ -204,7 +204,7 @@ export default function ContactPage() {
           </aside>
 
           {/* Right Bento Column: Contact Form (7 cols on lg) */}
-          <section className="lg:col-span-7 flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-10 backdrop-blur-sm text-left transition-all hover:border-white/20">
+          <section className="min-w-0 lg:col-span-7 flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-8 md:p-10 backdrop-blur-sm text-left transition-all hover:border-white/20">
             <div>
               <h2 className="font-heading text-xl md:text-2xl font-bold uppercase tracking-tight text-white mb-2">
                 Send a Message
@@ -214,7 +214,7 @@ export default function ContactPage() {
               </p>
 
               {isSubmitted ? (
-                <div className="rounded-2xl border border-cream/30 bg-cream/[0.05] p-8 text-center my-6">
+                <div className="rounded-2xl border border-cream/30 bg-cream/[0.05] p-5 sm:p-8 text-center my-6">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-cream/10 text-cream mb-4">
                     <Check size={28} />
                   </div>
@@ -225,7 +225,7 @@ export default function ContactPage() {
                     Thank you, {formData.name}. Your email message has been
                     composed. If your email client didn&apos;t open automatically,
                     you can reach me directly at{" "}
-                    <span className="text-cream">{personalInfo.email}</span>.
+                    <span className="text-cream break-all">{personalInfo.email}</span>.
                   </p>
                   <button
                     type="button"

@@ -27,7 +27,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   const isCompleted = project.status.toLowerCase().includes("complete");
 
   return (
-    <article className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-300 hover:border-cream/40 hover:bg-white/[0.035] hover:shadow-[0_0_35px_rgba(247,242,235,0.06)]">
+    <article className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-5 backdrop-blur-sm transition-all duration-300 hover:border-cream/40 hover:bg-white/[0.035] hover:shadow-[0_0_35px_rgba(247,242,235,0.06)]">
       <div>
         {/* Mockup Preview Container */}
         <div className="relative h-44 w-full overflow-hidden rounded-xl border border-white/10 bg-[#0c0c10]">
@@ -55,13 +55,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Category & Index */}
-        <div className="mt-4 flex items-center justify-between font-mono text-[11px] text-white/40">
+        <div className="mt-4 flex items-center justify-between gap-3 font-mono text-[11px] text-white/40">
           <span>
             {String(index + 1).padStart(2, "0")} —{" "}
             {project.category.replace("-", " ").toUpperCase()}
           </span>
           {techList[0] && (
-            <span className="text-cream/80 font-medium">{techList[0]}</span>
+            <span className="truncate text-cream/80 font-medium">{techList[0]}</span>
           )}
         </div>
 
@@ -107,7 +107,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* Action Links */}
-      <div className="mt-5 flex items-center gap-2.5 pt-3.5 border-t border-white/10">
+      <div className="mt-5 flex flex-wrap items-center gap-2.5 pt-3.5 border-t border-white/10">
         {liveLink && liveLink !== "#" ? (
           <a
             href={liveLink}

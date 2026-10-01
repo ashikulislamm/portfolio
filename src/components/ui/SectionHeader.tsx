@@ -54,10 +54,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           : "flex flex-col items-start gap-2"
       } ${align === "center" ? "items-center text-center" : ""} ${className}`}
     >
-      <div className={align === "center" ? "flex flex-col items-center" : ""}>
+      <div className={`min-w-0 ${align === "center" ? "flex flex-col items-center" : ""}`}>
         <h2
-          className={`font-heading font-extrabold uppercase tracking-tight text-white ${
-            isHomepageSize ? "text-4xl md:text-6xl" : "text-2xl md:text-3xl"
+          className={`font-heading font-extrabold uppercase tracking-tight text-white break-words ${
+            isHomepageSize
+              ? "text-[clamp(2rem,1rem_+_4.5vw,3.75rem)] leading-[1.02]"
+              : "text-2xl md:text-3xl"
           }`}
         >
           {title}

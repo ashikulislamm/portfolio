@@ -28,9 +28,22 @@ export const HeroCanvasSlot: React.FC<HeroCanvasSlotProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let animationFrameId = 0;
+    let width = 0;
+    let height = 0;
+
+    // Size the backing store to the canvas' rendered box (not the window) and the
+    // device pixel ratio, so it stays crisp and undistorted at every viewport size.
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = Math.max(1, Math.round(rect.width));
+      height = Math.max(1, Math.round(rect.height));
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resizeCanvas();
 
     // Particle settings for an ambient cyberpunk grid/particle field
     const particleCount = Math.min(Math.floor((width * height) / 14000), 90);
@@ -64,18 +77,27 @@ export const HeroCanvasSlot: React.FC<HeroCanvasSlotProps> = ({
     let targetMouseY = mouseY;
 
     const handleMouseMove = (e: MouseEvent) => {
-      targetMouseX = e.clientX;
-      targetMouseY = e.clientY;
+      const rect = canvas.getBoundingClientRect();
+      targetMouseX = e.clientX - rect.left;
+      targetMouseY = e.clientY - rect.top;
     };
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
+    const resizeObserver = new ResizeObserver(resizeCanvas);
+    resizeObserver.observe(canvas);
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("resize", handleResize);
+
+    // Pause the animation loop while the hero is scrolled out of view
+    let isVisible = true;
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      const wasVisible = isVisible;
+      isVisible = entry.isIntersecting;
+      if (isVisible && !wasVisible) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(render);
+      }
+    });
+    visibilityObserver.observe(canvas);
 
     // Read theme color from CSS variables dynamically
     const parseColorToRgb = (str: string): string => {
@@ -174,15 +196,18 @@ export const HeroCanvasSlot: React.FC<HeroCanvasSlotProps> = ({
         }
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", handleResize);
     };
   }, [children]);
 

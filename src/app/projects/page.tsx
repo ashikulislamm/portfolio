@@ -34,13 +34,13 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-background text-neutral-100">
-      <main className="mx-auto max-w-7xl px-6 pb-28 pt-28 md:pt-36">
+      <main className="mx-auto max-w-7xl px-4 xs:px-6 md:px-12 pb-20 sm:pb-28 pt-24 sm:pt-28 md:pt-36">
         {/* Editorial Section Header */}
-        <section className="mb-12 text-left">
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">
+        <section className="mb-8 sm:mb-12 text-left">
+          <h1 className="font-heading text-[clamp(2rem,1rem_+_4.5vw,3.75rem)] font-black uppercase tracking-tight text-white leading-[1.05] break-words">
             Projects & Architecture
           </h1>
-          <p className="mt-3 max-w-2xl text-base text-neutral-400 font-sans leading-relaxed">
+          <p className="mt-3 max-w-2xl text-sm sm:text-base text-neutral-400 font-sans leading-relaxed">
             A comprehensive catalog of production web applications, distributed
             systems, developer productivity suites, and blockchain research.
           </p>
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
                 <button
                   key={cat.value}
                   onClick={() => setFilter(cat.value)}
-                  className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all ${
+                  className={`inline-flex items-center gap-2 rounded-xl px-3 sm:px-4 py-2 font-mono text-[11px] sm:text-xs uppercase tracking-wider transition-all ${
                     isActive
                       ? "bg-cream/15 text-cream font-semibold shadow-[0_0_20px_rgba(247,242,235,0.15)]"
                       : "border border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:text-white"
@@ -92,7 +92,7 @@ export default function ProjectsPage() {
               No systems found matching this category.
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.id}

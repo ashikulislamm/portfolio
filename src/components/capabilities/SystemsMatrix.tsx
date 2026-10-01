@@ -77,20 +77,20 @@ export const SystemsMatrix: React.FC = () => {
   ];
 
   return (
-    <section id="capabilities" className="relative w-full bg-[#000000] py-24 px-6 md:px-12 text-left">
+    <section id="capabilities" className="relative w-full bg-[#000000] py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 text-left">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <SectionHeader title="CORE EXPERTISE" />
 
-        {/* 4 Cards in One Row with 3D Flip/Hover Interaction */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* 1 → 2 → 4 columns with 3D Flip/Hover Interaction */}
+        <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
           {cards.map((card) => {
             const isFlipped = Boolean(flippedCards[card.index]);
 
             return (
               <div
                 key={card.index}
-                className="group h-[280px] [perspective:1000px] cursor-pointer"
+                className="group h-[260px] sm:h-[290px] [perspective:1000px] cursor-pointer"
                 onClick={() => toggleFlip(card.index)}
               >
                 <div
@@ -99,7 +99,7 @@ export const SystemsMatrix: React.FC = () => {
                   }`}
                 >
                   {/* FRONT FACE (Minimal & Clean) */}
-                  <div className="absolute inset-0 flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 group-hover:border-cream/40 group-hover:bg-white/[0.04] group-hover:shadow-[0_0_30px_rgba(247,242,235,0.06)] [backface-visibility:hidden]">
+                  <div className="absolute inset-0 flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm transition-all duration-300 group-hover:border-cream/40 group-hover:bg-white/[0.04] group-hover:shadow-[0_0_30px_rgba(247,242,235,0.06)] [backface-visibility:hidden] sm:p-6">
                     {/* Top row */}
                     <div className="flex items-center justify-between">
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-cream transition-transform duration-300 group-hover:scale-105">
@@ -122,7 +122,7 @@ export const SystemsMatrix: React.FC = () => {
                   </div>
 
                   {/* BACK FACE (Details on Flip) */}
-                  <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-[#0c0c12] p-6 shadow-[0_0_35px_rgba(247,242,235,0.08)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                  <div className="absolute inset-0 flex flex-col justify-between rounded-2xl bg-[#0c0c12] p-5 sm:p-6 shadow-[0_0_35px_rgba(247,242,235,0.08)] [transform:rotateY(180deg)] [backface-visibility:hidden]">
                     {/* Top row */}
                     <div className="flex items-center justify-between border-b border-white/10 pb-3">
                       <span className="font-heading text-xs font-bold uppercase text-cream tracking-wider">
@@ -131,19 +131,19 @@ export const SystemsMatrix: React.FC = () => {
                     </div>
 
                     {/* Highlights bullet points */}
-                    <ul className="my-auto space-y-2 text-xs text-neutral-300 leading-snug">
+                    <ul className="my-auto space-y-1.5 sm:space-y-2 py-3 text-xs text-neutral-300 leading-snug">
                       {card.highlights.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2">
                           <span className="text-cream text-xs leading-none mt-0.5">›</span>
-                          <span className="line-clamp-1">{item}</span>
+                          <span className="min-w-0">{item}</span>
                         </li>
                       ))}
                     </ul>
 
                     {/* Bottom Tech summary */}
-                    <div className="border-t border-white/10 pt-2.5 flex items-center justify-between font-mono text-[10px]">
-                      <span className="text-white/40">CORE</span>
-                      <span className="text-cream font-medium tracking-wide">
+                    <div className="border-t border-white/10 pt-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-[10px]">
+                      <span className="shrink-0 text-white/40">CORE</span>
+                      <span className="min-w-0 text-cream font-medium tracking-wide">
                         {card.techSummary}
                       </span>
                     </div>
@@ -155,7 +155,7 @@ export const SystemsMatrix: React.FC = () => {
         </div>
 
         {/* Curved Tech Ribbon with exact logos */}
-        <div className="mt-20">
+        <div className="mt-14 sm:mt-20">
           <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-white/40 text-center">
             Tools and Technologies
           </div>

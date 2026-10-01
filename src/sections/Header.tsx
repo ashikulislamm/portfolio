@@ -70,23 +70,23 @@ export const Header = () => {
             : "bg-transparent py-5"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 xs:px-6 md:px-12">
           <Link
             href="/"
-            className="group flex items-center gap-3 font-mono text-sm tracking-tight text-white"
+            className="group flex min-w-0 items-center gap-3 font-mono text-sm tracking-tight text-white"
           >
-            <div className="flex flex-col">
-              <span className="font-heading font-bold text-sm text-neutral-100 group-hover:text-cream transition-colors">
+            <div className="flex min-w-0 flex-col">
+              <span className="truncate font-heading font-bold text-sm text-neutral-100 group-hover:text-cream transition-colors">
                 {personalInfo.name}
               </span>
             </div>
           </Link>
 
           {/* Right: Quick Socials & Animated Menu Toggle */}
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-4">
             <button
               onClick={() => setIsDrawerOpen((prev) => !prev)}
-              className="group relative inline-flex items-center gap-2 rounded-xl px-4 py-2 font-mono text-xs uppercase tracking-wider text-neutral-200 backdrop-blur-sm transition-all duration-200 hover:border-cream/60 hover:bg-cream/10 hover:text-cream active:scale-95"
+              className="group relative inline-flex items-center gap-2 rounded-xl px-3 sm:px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-neutral-200 backdrop-blur-sm transition-all duration-200 hover:border-cream/60 hover:bg-cream/10 hover:text-cream active:scale-95"
               aria-label="Toggle navigation menu"
               aria-expanded={isDrawerOpen}
             >

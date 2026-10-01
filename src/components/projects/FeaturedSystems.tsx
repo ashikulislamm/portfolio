@@ -17,7 +17,7 @@ export const FeaturedSystems: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative w-full bg-[#000000] py-20 px-6 md:px-12 text-left"
+      className="relative w-full bg-[#000000] py-16 sm:py-20 px-4 sm:px-6 md:px-12 text-left"
     >
       <div className="mx-auto max-w-5xl">
         {/* Section Header */}
@@ -38,7 +38,7 @@ export const FeaturedSystems: React.FC = () => {
         />
 
         {/* Compact 2x2 Minimal Showcase Grid */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
           {featuredList.map((project, index) => {
             if (!project) return null;
 
@@ -83,11 +83,11 @@ export const FeaturedSystems: React.FC = () => {
                   </div>
 
                   {/* Meta Tag: Index & Primary Tech */}
-                  <div className="mt-3.5 flex items-center justify-between font-mono text-[11px] text-white/40">
+                  <div className="mt-3.5 flex items-center justify-between gap-3 font-mono text-[11px] text-white/40">
                     <span>
                       0{index + 1} — {project.category.replace("-", " ").toUpperCase()}
                     </span>
-                    <span className="text-cream/80 font-medium">
+                    <span className="truncate text-cream/80 font-medium">
                       {project.stack[0]}
                     </span>
                   </div>
@@ -134,7 +134,7 @@ export const FeaturedSystems: React.FC = () => {
                 </div>
 
                 {/* Action Links */}
-                <div className="mt-5 flex items-center gap-2.5 pt-3.5 border-t border-white/10">
+                <div className="mt-5 flex flex-wrap items-center gap-2.5 pt-3.5 border-t border-white/10">
                   {liveLink && liveLink !== "#" ? (
                     <a
                       href={liveLink}
@@ -168,12 +168,12 @@ export const FeaturedSystems: React.FC = () => {
         <div className="mt-10 flex items-center justify-center">
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-white/80 transition-all duration-200 hover:border-cream/60 hover:bg-cream/10 hover:text-cream active:scale-95"
+            className="group inline-flex max-w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 sm:px-5 py-2.5 text-center font-mono text-[11px] sm:text-xs uppercase tracking-wider text-white/80 transition-all duration-200 hover:border-cream/60 hover:bg-cream/10 hover:text-cream active:scale-95"
           >
             <span>Explore Full Project Catalog ({projects.length})</span>
             <ArrowUpRight
               size={14}
-              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-cream"
+              className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-cream"
             />
           </Link>
         </div>

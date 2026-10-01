@@ -61,12 +61,12 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-background text-neutral-100 animate-fade-in">
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 pb-24 pt-24 md:pt-32">
+      <main className="mx-auto max-w-7xl px-4 xs:px-6 md:px-12 pb-20 sm:pb-24 pt-24 md:pt-32">
         {/* Header Profile Hero */}
         <section className="pb-10 border-b border-border-subtle">
-          <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 md:gap-10 items-center md:items-start text-left">
+          <div className="grid grid-cols-1 md:grid-cols-[200px_minmax(0,1fr)] gap-8 md:gap-10 items-center md:items-start text-left">
             {/* Avatar image frame */}
-            <div className="mx-auto lg:mx-0 w-44 h-44 sm:w-48 sm:h-48 rounded-xl border border-border-subtle bg-secondary-bg overflow-hidden relative group">
+            <div className="mx-auto md:mx-0 w-40 h-40 xs:w-44 xs:h-44 sm:w-48 sm:h-48 rounded-xl border border-border-subtle bg-secondary-bg overflow-hidden relative group">
               <img
                 src={typeof personalInfo.avatarImage === "string" ? personalInfo.avatarImage : personalInfo.avatarImage.src}
                 alt={personalInfo.name}
@@ -77,10 +77,10 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="min-w-0 space-y-4">
               <div>
                 <p className="font-mono text-xs font-medium text-accent mb-1">{"// README.md"}</p>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 break-words">
                   {personalInfo.name}
                 </h1>
                 <p className="font-mono text-xs sm:text-sm text-neutral-400 mt-1">{personalInfo.title}</p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail size={14} className="text-accent shrink-0" />
-                  <a href={`mailto:${personalInfo.email}`} className="hover:text-white transition-colors truncate">
+                  <a href={`mailto:${personalInfo.email}`} className="min-w-0 hover:text-white transition-colors truncate">
                     {personalInfo.email}
                   </a>
                 </div>
@@ -120,12 +120,12 @@ export default function AboutPage() {
         </section>
 
         {/* Navigation Tabs Bar */}
-        <section className="py-6 border-b border-border-subtle sticky top-14 z-30 bg-background/95 backdrop-blur-md">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex flex-wrap gap-2 font-mono text-xs">
+        <section className="-mx-4 xs:-mx-6 md:mx-0 px-4 xs:px-6 md:px-0 py-3 sm:py-6 border-b border-border-subtle sticky top-14 z-30 bg-background/95 backdrop-blur-md">
+          <div className="flex items-center justify-between gap-3">
+            <div className="-my-1 flex min-w-0 gap-2 overflow-x-auto py-1 font-mono text-xs [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:overflow-visible">
               <button
                 onClick={() => setActiveTab("overview")}
-                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
+                className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "overview"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -135,7 +135,7 @@ export default function AboutPage() {
               </button>
               <button
                 onClick={() => setActiveTab("timeline")}
-                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
+                className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "timeline"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -145,7 +145,7 @@ export default function AboutPage() {
               </button>
               <button
                 onClick={() => setActiveTab("skills")}
-                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
+                className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "skills"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -155,7 +155,7 @@ export default function AboutPage() {
               </button>
               <button
                 onClick={() => setActiveTab("publications")}
-                className={`px-3.5 py-1.5 rounded-xl transition-colors ${
+                className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-xl transition-colors ${
                   activeTab === "publications"
                     ? "border border-accent/50 bg-accent/10 text-accent font-semibold"
                     : "border border-border-subtle bg-card-bg text-neutral-400 hover:text-white"
@@ -165,7 +165,7 @@ export default function AboutPage() {
               </button>
             </div>
 
-            <span className="hidden sm:inline-block font-mono text-[11px] text-neutral-500">
+            <span className="hidden lg:inline-block shrink-0 font-mono text-[11px] text-neutral-500">
               [press tabs to inspect details]
             </span>
           </div>
@@ -177,7 +177,7 @@ export default function AboutPage() {
             {/* Bio Summary */}
             <section>
               <SectionHeader comment="// 01 — background" title="Engineering Philosophy" />
-              <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
                 <div className="space-y-4 text-sm leading-relaxed text-neutral-300">
                   <p>
                     I am a software engineer focused on building robust full-stack web applications, scalable backend API ecosystems, and decentralized Web3 systems. I believe software craft is defined by simplicity, performance, and maintainable architecture.
@@ -205,9 +205,9 @@ export default function AboutPage() {
             </section>
 
             {/* Quick Metrics Grid */}
-            <section className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+            <section className="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs">
               {stats.map((stat) => (
-                <div key={stat.label} className="rounded-xl border border-border-subtle bg-card-bg p-4 text-left">
+                <div key={stat.label} className="min-w-0 rounded-xl border border-border-subtle bg-card-bg p-4 text-left">
                   <p className="text-neutral-500 text-[10px] uppercase tracking-wider">{stat.label}</p>
                   <p className="mt-1 text-xl sm:text-2xl font-bold text-accent">{stat.value}</p>
                 </div>
@@ -242,9 +242,9 @@ export default function AboutPage() {
               subtitle="Engineering stack categorized by frontend, backend, database architectures, and DevOps tooling."
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {skills.map((skillGroup) => (
-                <div key={skillGroup.category} className="rounded-xl border border-border-subtle bg-card-bg p-6">
+                <div key={skillGroup.category} className="min-w-0 rounded-xl border border-border-subtle bg-card-bg p-5 sm:p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="font-mono text-sm font-semibold text-neutral-200 flex items-center gap-2">
                       <Cpu size={16} className="text-accent" />
@@ -281,7 +281,7 @@ export default function AboutPage() {
 
             <div className="grid grid-cols-1 gap-6">
               {publications.map((pub, idx) => (
-                <div key={idx} className="rounded-xl border border-border-subtle bg-card-bg p-6">
+                <div key={idx} className="min-w-0 rounded-xl border border-border-subtle bg-card-bg p-5 sm:p-6">
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <Badge variant="status" statusType="completed">{pub.status}</Badge>
                     <span className="font-mono text-xs text-neutral-500">{pub.publisher} ({pub.year})</span>
@@ -291,7 +291,7 @@ export default function AboutPage() {
 
                   <div className="space-y-2 font-mono text-xs text-neutral-400 mb-6">
                     <p><span className="text-neutral-500">Authors:</span> {pub.authors}</p>
-                    {pub.doi && <p><span className="text-neutral-500">DOI:</span> {pub.doi}</p>}
+                    {pub.doi && <p className="break-all"><span className="text-neutral-500">DOI:</span> {pub.doi}</p>}
                     {pub.description && <p className="font-sans text-xs text-neutral-400 mt-2">{pub.description}</p>}
                   </div>
 
