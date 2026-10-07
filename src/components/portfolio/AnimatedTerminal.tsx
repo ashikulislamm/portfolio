@@ -159,7 +159,7 @@ export const AnimatedTerminal = ({
         {displayedLines.map((lineText, idx) => (
           <div key={idx} className="flex gap-3 min-h-[22px]">
             <span className="select-none text-neutral-600 w-4 text-right shrink-0">{idx + 1}</span>
-            <p className="flex-1">{renderSyntaxHighlightedText(lineText)}</p>
+            <p className="min-w-0 flex-1 break-words">{renderSyntaxHighlightedText(lineText)}</p>
           </div>
         ))}
 
@@ -169,7 +169,7 @@ export const AnimatedTerminal = ({
             <span className="select-none text-neutral-600 w-4 text-right shrink-0">
               {currentLineIndex + 1}
             </span>
-            <p className="flex-1">
+            <p className="min-w-0 flex-1 break-words">
               {renderSyntaxHighlightedText(lines[currentLineIndex].substring(0, currentCharIndex))}
               <span className="inline-block h-3.5 w-1.5 bg-accent ml-0.5 animate-cursor-blink" />
             </p>
@@ -183,7 +183,7 @@ export const AnimatedTerminal = ({
               <span className="select-none text-neutral-600 w-4 text-right shrink-0">
                 {lines.length + 1}
               </span>
-              <p className="flex items-center gap-1.5 text-neutral-300">
+              <p className="flex min-w-0 flex-wrap items-center gap-1.5 text-neutral-300">
                 <span className="text-accent font-bold">$</span>
                 <span>{command}</span>
                 {phase === "executing" && (

@@ -1,6 +1,11 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // Only apply hover styles on devices that can actually hover, so taps on
+  // touch screens don't leave elements stuck in their hover state.
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/sections/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,9 +14,12 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      sm: "375px",
+      xs: "400px",
+      sm: "640px",
       md: "768px",
-      lg: "1200px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
     },
     container: {
       center: true,

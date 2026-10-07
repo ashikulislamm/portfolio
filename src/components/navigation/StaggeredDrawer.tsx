@@ -104,7 +104,7 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute right-0 top-0 bottom-0 z-30 flex h-full w-full flex-col justify-between border-l border-white/10 bg-[#0a0a0c] p-8 md:w-[450px] md:p-10 shadow-2xl overflow-y-auto"
+            className="absolute right-0 top-0 bottom-0 z-30 flex h-full w-full flex-col justify-between border-l border-white/10 bg-[#0a0a0c] px-6 py-6 xs:px-8 sm:py-8 md:w-[450px] md:p-10 shadow-2xl overflow-y-auto overscroll-contain"
           >
             {/* Top drawer header */}
             <div className="flex items-center justify-between pb-6 pt-2">
@@ -122,8 +122,8 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
             </div>
 
             {/* Oversized Numbered Nav Links */}
-            <nav className="my-auto py-8">
-              <ul className="flex flex-col space-y-4">
+            <nav className="my-auto py-6 sm:py-8">
+              <ul className="flex flex-col space-y-2 xs:space-y-3 sm:space-y-4">
                 {navLinks.map((item, index) => {
                   const isActive = activeSection === item.id;
                   return (
@@ -138,12 +138,12 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
                         onClick={() => handleLinkClick(item.id)}
                         className="group flex w-full items-baseline justify-between py-1 text-left transition-colors"
                       >
-                        <span className="flex items-baseline gap-3">
+                        <span className="flex min-w-0 items-baseline gap-3">
                           <span className="font-mono text-xs font-semibold text-cream opacity-80 group-hover:opacity-100 transition-opacity">
                             {item.num}
                           </span>
                           <span
-                            className={`font-heading text-3xl font-extrabold tracking-tight uppercase transition-all duration-200 group-hover:translate-x-2 ${
+                            className={`font-heading text-[clamp(1.5rem,7.5vw,1.875rem)] font-extrabold tracking-tight uppercase transition-all duration-200 group-hover:translate-x-2 ${
                               isActive
                                 ? "text-cream"
                                 : "text-white/80 group-hover:text-white"
@@ -154,7 +154,7 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
                         </span>
                         <ArrowUpRight
                           size={18}
-                          className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-cream"
+                          className="shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-cream"
                         />
                       </button>
                     </motion.li>
@@ -167,7 +167,7 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
               <p className="font-mono text-[10px] uppercase tracking-wider text-white/40 mb-3">
                 EXTERNAL CHANNELS
               </p>
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-white/70">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-3 text-xs font-mono text-white/70">
                 <a
                   href={socialLinks.github}
                   target="_blank"

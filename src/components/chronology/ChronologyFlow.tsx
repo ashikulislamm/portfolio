@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Briefcase, GraduationCap, FileText, ExternalLink } from "lucide-react";
 import { experiences, publications, academics } from "@/data/portfolioData";
 import { ExperienceItem, PublicationItem, AcademicItem } from "@/types/portfolio";
@@ -107,6 +107,37 @@ export const ChronologyFlow: React.FC = () => {
     return cards;
   }, [companyGroups, higherAcademics]);
 
+  // 4. Sticky offsets: cards stack 16px apart below the header. A card taller than
+  // the remaining viewport pins by its bottom edge instead (negative top), so its
+  // lower content is fully scrolled into view before the next card covers it.
+  const STACK_BASE = 64;
+  const STACK_STEP = 16;
+  const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const [stickyTops, setStickyTops] = useState<number[]>([]);
+
+  useEffect(() => {
+    const measure = () => {
+      const viewport = window.innerHeight;
+      const next = sectionRefs.current.map((el, i) => {
+        const stackTop = STACK_BASE + i * STACK_STEP;
+        if (!el) return stackTop;
+        return Math.min(stackTop, viewport - el.offsetHeight);
+      });
+      setStickyTops((prev) =>
+        prev.length === next.length && prev.every((v, i) => v === next[i]) ? prev : next
+      );
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    sectionRefs.current.forEach((el) => el && observer.observe(el));
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [allCards.length]);
+
   // Distinct rich dark card surface colors for tactile stacking depth
   const cardBgColors = [
     "bg-[#000000]",
@@ -127,11 +158,14 @@ export const ChronologyFlow: React.FC = () => {
             key={card.id}
             className="sticky w-full pb-[28vh] sm:pb-[32vh] md:pb-[36vh]"
             style={{
-              top: 0,
+              top: `${stickyTops[index] ?? STACK_BASE + index * STACK_STEP}px`,
               zIndex: 10 + index,
             }}
           >
             <section
+              ref={(el) => {
+                sectionRefs.current[index] = el;
+              }}
               aria-label={`${card.type} section`}
               className={`relative min-h-dvh w-full max-w-none border-t border-white/15 text-white transition-colors text-left shadow-[0_-20px_50px_rgba(0,0,0,0.9)] backdrop-blur-md ${bgClass}`}
             >
@@ -143,11 +177,11 @@ export const ChronologyFlow: React.FC = () => {
               {card.type === "experience" && (
                 <>
                   <div>
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                    <div className="flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:gap-y-2">
                       <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-cream">
                         {formattedIndex} — CAREER & INDUSTRY
                       </span>
-                      <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] sm:text-xs text-white/50">
+                      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 font-mono text-[11px] sm:text-xs text-white/50">
                         <span>{card.companyGroup.location}</span>
                         {card.companyGroup.workMode && (
                           <>
@@ -163,8 +197,7 @@ export const ChronologyFlow: React.FC = () => {
                         )}
                       </div>
                     </div>
-
-                    <h2 className="mt-4 font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[0.98] text-white">
+                    <h2 className="mt-4 font-heading text-[clamp(1.75rem,1rem_+_4vw,3.75rem)] font-black tracking-tight uppercase leading-[1] text-white break-words">
                       {card.companyGroup.company}
                     </h2>
                   </div>
@@ -184,20 +217,6 @@ export const ChronologyFlow: React.FC = () => {
                           <h3 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white leading-snug">
                             {role.title}
                           </h3>
-
-                          <div className="mt-1.5 flex flex-wrap items-center gap-2 font-mono text-xs text-white/50">
-                            <span className="text-cream font-medium">{role.company}</span>
-                            {(role.location || role.workMode) && (
-                              <>
-                                <span className="text-white/30">·</span>
-                                <span className="text-white/60">
-                                  {[role.location, role.workMode].filter(Boolean).join(" · ")}
-                                </span>
-                              </>
-                            )}
-                            <span className="text-white/30">·</span>
-                            <span className="text-cream/90 font-semibold">{role.year}</span>
-                          </div>
 
                           {role.highlights && role.highlights.length > 0 && (
                             <ul className="mt-3.5 space-y-1.5 text-xs md:text-sm text-neutral-400 max-w-3xl">
@@ -224,12 +243,12 @@ export const ChronologyFlow: React.FC = () => {
                       <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-cream">
                         {formattedIndex} — RESEARCH
                       </span>
-                      <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[10px] sm:text-[11px] text-cream shrink-0">
+                      <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[10px] sm:text-[11px] text-cream">
                         {card.publication.publisher || "PUBLICATION"} // {card.publication.year}
                       </span>
                     </div>
 
-                    <h2 className="mt-4 font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[0.98] text-white">
+                    <h2 className="mt-4 font-heading text-[clamp(1.75rem,1rem_+_4vw,3.75rem)] font-black tracking-tight uppercase leading-[1] text-white break-words">
                       {card.publication.publisher || "RESEARCH"} PUBLICATION
                     </h2>
 
@@ -285,7 +304,7 @@ export const ChronologyFlow: React.FC = () => {
                       </span>
                     </div>
 
-                    <h2 className="mt-4 font-heading text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[0.98] text-white">
+                    <h2 className="mt-4 font-heading text-[clamp(1.75rem,1rem_+_4vw,3.75rem)] font-black tracking-tight uppercase leading-[1] text-white break-words">
                       {card.academic.institution}
                     </h2>
 
@@ -304,12 +323,12 @@ export const ChronologyFlow: React.FC = () => {
                         <h3 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white leading-snug">
                           {card.academic.degree}
                         </h3>
-                        <p className="mt-1 font-mono text-xs text-neutral-400">
+                        <p className="mt-1 font-mono text-[11px] sm:text-xs text-neutral-400">
                           Department of Computer Science & Engineering
                         </p>
                         <div className="mt-3 flex items-center gap-2">
-                          <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-xs font-medium text-cream">
-                            <span className="h-1.5 w-1.5 rounded-full bg-cream animate-pulse" />
+                          <span className="inline-flex max-w-full items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[11px] sm:text-xs font-medium leading-snug text-cream">
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cream animate-pulse" />
                             Graduated {card.academic.duration}
                           </span>
                         </div>

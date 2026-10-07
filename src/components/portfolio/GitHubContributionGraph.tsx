@@ -151,12 +151,12 @@ export const GitHubContributionGraph = ({
   };
 
   return (
-    <div className="rounded-xl border border-border-subtle bg-card-bg p-6 text-left">
+    <div className="min-w-0 rounded-xl border border-border-subtle bg-card-bg p-4 sm:p-6 text-left">
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border-subtle pb-4 mb-4">
         <div>
           <div className="flex items-center gap-2 font-mono text-xs text-neutral-200">
             <GitBranch size={16} className="text-accent" />
-            <span className="font-bold">realtime_github_contributions</span>
+            <span className="font-bold break-all">realtime_github_contributions</span>
           </div>
           <p className="font-mono text-[11px] text-neutral-400 mt-1">
             Live commit history & contribution velocity for @{username}

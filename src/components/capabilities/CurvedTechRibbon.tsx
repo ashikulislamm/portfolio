@@ -117,16 +117,16 @@ export const CurvedTechRibbon: React.FC = () => {
 
   // Infinite curved marquee loop
   return (
-    <div className="relative w-full overflow-hidden py-12">
+    <div className="relative w-full overflow-hidden py-8 sm:py-12 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
       {/* Subtle guide line */}
       <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-cream/25 to-transparent" />
 
       {/* Infinite Horizontal Glide with Hover Pause */}
-      <div className="flex w-max gap-6 animate-ribbon-glide">
+      <div className="flex w-max gap-3 sm:gap-6 animate-ribbon-glide">
         {[...techs, ...techs].map((tech, idx) => (
           <div
             key={`${tech.name}-${idx}`}
-            className="group relative flex items-center gap-3.5 rounded-2xl px-5 py-3.5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+            className="group relative flex items-center gap-3.5 rounded-2xl px-3 py-3 sm:px-5 sm:py-3.5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 cursor-pointer"
           >
             <div
               className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] transition-all duration-300 group-hover:scale-110 group-hover:border-white/20 group-hover:drop-shadow-[0_0_8px_currentColor]"
@@ -135,7 +135,7 @@ export const CurvedTechRibbon: React.FC = () => {
               {tech.icon}
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-heading text-sm font-bold text-white transition-colors group-hover:text-cream">
+              <span className="whitespace-nowrap font-heading text-sm font-bold text-white transition-colors group-hover:text-cream">
                 {tech.name}
               </span>
             </div>

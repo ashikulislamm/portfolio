@@ -68,7 +68,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#070709] pt-24 pb-16"
+      className="relative flex min-h-screen min-h-svh w-full items-center justify-center overflow-hidden bg-[#070709] px-4 pt-24 pb-24 xs:px-6 md:px-12"
     >
       {/* ReactBits Swappable Canvas Slot */}
       <HeroCanvasSlot />
@@ -90,7 +90,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-6 flex items-center gap-4 text-white"
+          className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4 text-white"
         >
           <a
             href={socialLinks.github}
@@ -135,7 +135,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-heading text-[clamp(2.6rem,9.5vw,8.5rem)] font-black tracking-[-0.04em] text-white uppercase leading-[0.92] select-none break-words"
+          className="max-w-full font-heading text-[clamp(2.4rem,10vw,8.5rem)] font-black tracking-[-0.04em] text-white uppercase leading-[0.92] select-none break-words text-balance"
         >
           {personalInfo.name}
         </motion.h1>
@@ -145,7 +145,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-6 flex items-baseline font-mono text-[clamp(1.2rem,2.8vw,2.2rem)] font-medium text-neutral-300"
+          className="mt-5 sm:mt-6 flex min-h-[1.5em] items-baseline font-mono text-[clamp(1.05rem,1rem_+_1.5vw,2.2rem)] font-medium text-neutral-300"
         >
           <span className="text-cream mr-2"></span>
           <span>{displayText}</span>
