@@ -125,18 +125,19 @@ export const ChronologyFlow: React.FC = () => {
         return (
           <div
             key={card.id}
-            className="sticky w-full"
+            className="sticky w-full pb-[28vh] sm:pb-[32vh] md:pb-[36vh]"
             style={{
-              top: `calc(56px + ${index * 16}px)`,
+              top: 0,
               zIndex: 10 + index,
             }}
           >
             <section
               aria-label={`${card.type} section`}
-              className={`relative min-h-[min(540px,78dvh)] md:min-h-[72vh] w-full flex flex-col justify-between rounded-t-3xl border-t border-white/15 p-6 sm:p-10 md:p-12 lg:p-16 pb-8 sm:pb-12 text-white transition-colors text-left shadow-[0_-20px_50px_rgba(0,0,0,0.9)] backdrop-blur-md ${bgClass}`}
+              className={`relative min-h-dvh w-full max-w-none border-t border-white/15 text-white transition-colors text-left shadow-[0_-20px_50px_rgba(0,0,0,0.9)] backdrop-blur-md ${bgClass}`}
             >
-              {/* Subtle glowing hairline edge on top */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cream/35 to-transparent rounded-t-3xl" />
+              <div className="site-container flex min-h-dvh flex-col justify-between py-6 sm:py-10 md:py-12 lg:py-16">
+                {/* Subtle glowing hairline edge on top */}
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cream/35 to-transparent rounded-t-3xl" />
 
               {/* 1. EXPERIENCE CARD */}
               {card.type === "experience" && (
@@ -317,6 +318,7 @@ export const ChronologyFlow: React.FC = () => {
                   </div>
                 </>
               )}
+              </div>
             </section>
           </div>
         );

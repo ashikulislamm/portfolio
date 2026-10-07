@@ -34,7 +34,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-background text-neutral-100">
-      <main className="mx-auto max-w-7xl px-6 pb-28 pt-28 md:pt-36">
+      <main className="site-container pb-28 pt-28 md:pt-36">
         {/* Editorial Section Header */}
         <section className="mb-12 text-left">
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-white leading-tight">

@@ -56,6 +56,10 @@ html {
 }
 
 @layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-12;
+  }
+
   .nav-shell {
     @apply rounded-xl border border-border-subtle bg-secondary-bg/90 p-1 backdrop-blur-md;
   }

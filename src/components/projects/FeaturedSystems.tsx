@@ -17,9 +17,9 @@ export const FeaturedSystems: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative w-full bg-[#000000] py-20 px-6 md:px-12 text-left"
+      className="relative w-full bg-[#000000] py-20 text-left"
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="site-container">
         {/* Section Header */}
         <SectionHeader
           title="FEATURED SYSTEMS"

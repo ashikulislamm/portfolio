@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin, GraduationCap, FileText, X } from "lucide-react";
 import { personalInfo, socialLinks } from "@/data/portfolioData";
@@ -17,6 +17,10 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
   onClose,
   activeSection = "home",
 }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/";
+
   // Lock body scroll when open
   useEffect(() => {
     if (isOpen) {
@@ -47,15 +51,28 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
     { num: "06", label: "CONTACT", href: "/#contact", id: "contact" },
   ];
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (id: string) => {
     onClose();
-    if (href.startsWith("/#")) {
-      const targetId = href.replace("/#", "");
-      const target = document.getElementById(targetId);
+
+    if (isHome) {
+      const target = document.getElementById(id);
       if (target) {
         target.scrollIntoView({ behavior: "smooth" });
+        return;
       }
     }
+
+    if (id === "projects") {
+      router.push("/projects");
+      return;
+    }
+
+    if (id === "contact") {
+      router.push("/contact");
+      return;
+    }
+
+    router.push(`/#${id}`);
   };
 
   return (
@@ -118,7 +135,7 @@ export const StaggeredDrawer: React.FC<StaggeredDrawerProps> = ({
                       className="overflow-hidden"
                     >
                       <button
-                        onClick={() => handleLinkClick(item.href)}
+                        onClick={() => handleLinkClick(item.id)}
                         className="group flex w-full items-baseline justify-between py-1 text-left transition-colors"
                       >
                         <span className="flex items-baseline gap-3">

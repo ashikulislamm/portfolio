@@ -77,8 +77,8 @@ export const SystemsMatrix: React.FC = () => {
   ];
 
   return (
-    <section id="capabilities" className="relative w-full bg-[#000000] py-24 px-6 md:px-12 text-left">
-      <div className="mx-auto max-w-7xl">
+    <section id="capabilities" className="relative w-full bg-[#000000] py-24 text-left">
+      <div className="site-container">
         {/* Section Header */}
         <SectionHeader title="CORE EXPERTISE" />
 

@@ -68,13 +68,13 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#070709] px-6 pt-24 pb-16 md:px-12"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#070709] pt-24 pb-16"
     >
       {/* ReactBits Swappable Canvas Slot */}
       <HeroCanvasSlot />
 
       {/* Foreground Hero Content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-start justify-center">
+      <div className="site-container relative z-10 flex flex-col items-start justify-center">
         {/* Top telemetry tag */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}

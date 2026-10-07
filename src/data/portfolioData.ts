@@ -598,7 +598,7 @@ export const publications: PublicationItem[] = [
     status: "Published",
     doi: "10.1109/NCIM65934.2025.11160067",
     description:
-      "Presented at the National Conference on Information Management.",
+      "Presented at the NCIM at Dhaka University of Engineering and Technology.",
     link: "https://ieeexplore.ieee.org/abstract/document/11160067",
   },
 ];

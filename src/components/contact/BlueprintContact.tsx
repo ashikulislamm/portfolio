@@ -7,8 +7,9 @@ import { personalInfo } from "@/data/portfolioData";
 
 export const BlueprintContact: React.FC = () => {
   return (
-    <section id="contact" className="relative w-full bg-[#000000] py-28 md:py-36 px-6 md:px-12 text-center">
-      <div className="mx-auto max-w-4xl">
+    <section id="contact" className="relative w-full bg-[#000000] py-28 md:py-36 text-center">
+      <div className="site-container">
+        <div className="mx-auto max-w-4xl">
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-10 md:p-16 backdrop-blur-sm">
           {/* Subtle ambient glow */}
           <div className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 w-72 rounded-full bg-cream/10 blur-[80px]" />
@@ -41,6 +42,7 @@ export const BlueprintContact: React.FC = () => {
               <span>{personalInfo.email}</span>
             </a>
           </div>
+        </div>
         </div>
       </div>
     </section>

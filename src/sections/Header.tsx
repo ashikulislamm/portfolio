@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Terminal, Github, Linkedin, X, Plus } from "lucide-react";
 import { personalInfo, socialLinks } from "@/data/portfolioData";
 import { StaggeredDrawer } from "@/components/navigation/StaggeredDrawer";
@@ -11,17 +11,31 @@ export const Header = () => {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY.current;
+
+      setIsScrolled(currentScrollY > 20);
+
+      if (currentScrollY <= 20 || scrollDelta < 0) {
+        setIsNavVisible(true);
+      } else if (scrollDelta > 0 && !isDrawerOpen) {
+        setIsNavVisible(false);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
 
+    lastScrollY.current = window.scrollY;
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isDrawerOpen]);
 
   useEffect(() => {
     if (!isHome) {
@@ -65,12 +79,16 @@ export const Header = () => {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+          isNavVisible || isDrawerOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0 pointer-events-none"
+        } ${
           isScrolled
             ? "border-b border-white/10 bg-[#070709]/85 backdrop-blur-md py-3.5 shadow-lg shadow-black/40"
             : "bg-transparent py-5"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+        <div className="site-container flex items-center justify-between">
           <Link
             href="/"
             className="group flex items-center gap-3 font-mono text-sm tracking-tight text-white"

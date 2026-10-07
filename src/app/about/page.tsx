@@ -61,7 +61,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-background text-neutral-100 animate-fade-in">
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 pb-24 pt-24 md:pt-32">
+      <main className="site-container pb-24 pt-24 md:pt-32">
         {/* Header Profile Hero */}
         <section className="pb-10 border-b border-border-subtle">
           <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 md:gap-10 items-center md:items-start text-left">

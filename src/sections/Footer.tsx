@@ -13,8 +13,8 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#070709] px-6 py-12 md:px-12 text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8">
+    <footer className="bg-[#070709] py-12 text-white">
+      <div className="site-container flex flex-col gap-8">
         <div className="flex flex-wrap items-center justify-between gap-6">
           <div className="flex flex-col text-left">
             <span className="font-heading text-xl md:text-2xl font-black uppercase text-white">
